@@ -1,4 +1,4 @@
-package com.giftgoapp.jhq;
+package evol.akfakbyvlk.ckjfy;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
@@ -10,6 +10,8 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+
 
 import java.util.UUID;
 
@@ -43,6 +45,11 @@ public class Presenter_Main extends Presenter_Base<View_Main> {
     @Override
     public void onStop() {
         dater.currentState = 0;
+    }
+
+    @Override
+    public Const df() {
+        return null;
     }
 
 

@@ -1,4 +1,4 @@
-package com.giftgoapp.jhq;
+package evol.akfakbyvlk.ckjfy;
 
 public abstract class Presenter_Base<T> implements Presenter_Circle_Life {
 
