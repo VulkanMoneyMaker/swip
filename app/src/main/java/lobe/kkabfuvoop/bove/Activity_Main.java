@@ -17,7 +17,7 @@ import android.webkit.WebResourceResponse;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
-import com.giftgoapp.jhq.R;
+
 
 
 public class Activity_Main extends AppCompatActivity implements View_Main, ActionBar.TabListener {

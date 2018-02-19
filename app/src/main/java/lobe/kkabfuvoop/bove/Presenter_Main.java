@@ -11,7 +11,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.giftgoapp.jhq.R;
+
 
 import java.util.UUID;
 
