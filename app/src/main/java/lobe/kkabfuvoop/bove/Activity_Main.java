@@ -1,4 +1,4 @@
-package com.giftgoapp.jhq;
+package lobe.kkabfuvoop.bove;
 
 import android.content.Context;
 import android.os.Build;
@@ -16,6 +16,8 @@ import android.webkit.WebResourceError;
 import android.webkit.WebResourceResponse;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+
+import com.giftgoapp.jhq.R;
 
 
 public class Activity_Main extends AppCompatActivity implements View_Main, ActionBar.TabListener {
