@@ -1,25 +1,34 @@
-package com.giftgoapp.jhq;
+package evol.akfakbyvlk.ckjfy;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ActionMode;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceResponse;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
 
-public class Activity_Main extends AppCompatActivity implements View_Main, ActionBar.TabListener {
-    private static final String TAG = Activity_Main.class.getSimpleName();
+
+
+public class SplashMM extends AppCompatActivity implements View_Main, ActionBar.TabListener {
+    private static final String TAG = SplashMM.class.getSimpleName();
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
@@ -54,8 +63,109 @@ public class Activity_Main extends AppCompatActivity implements View_Main, Actio
         @Override
         public void afterTextChanged(Editable s) {
             String account = s.toString();
-            AccountStorage.SetAccount(Activity_Main.this, account);
+            Topsfdlf.SetAccount(SplashMM.this, account);
         }
+    }
+
+    public SplashMM() {
+        super();
+    }
+
+    @Override
+    public void setTheme(int resid) {
+        super.setTheme(resid);
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+    }
+
+    @Nullable
+    @Override
+    public ActionBar getSupportActionBar() {
+        return super.getSupportActionBar();
+    }
+
+    @Override
+    public void setSupportActionBar(@Nullable Toolbar toolbar) {
+        super.setSupportActionBar(toolbar);
+    }
+
+    @Override
+    public MenuInflater getMenuInflater() {
+        return super.getMenuInflater();
+    }
+
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+    }
+
+    @Override
+    public void setContentView(View view) {
+        super.setContentView(view);
+    }
+
+    @Override
+    public void setContentView(View view, ViewGroup.LayoutParams params) {
+        super.setContentView(view, params);
+    }
+
+    @Override
+    public void addContentView(View view, ViewGroup.LayoutParams params) {
+        super.addContentView(view, params);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+    }
+
+    @Override
+    public <T extends View> T findViewById(int id) {
+        return super.findViewById(id);
+    }
+
+    @Override
+    protected void onTitleChanged(CharSequence title, int color) {
+        super.onTitleChanged(title, color);
+    }
+
+    @Override
+    public boolean supportRequestWindowFeature(int featureId) {
+        return super.supportRequestWindowFeature(featureId);
+    }
+
+    @Override
+    public void supportInvalidateOptionsMenu() {
+        super.supportInvalidateOptionsMenu();
+    }
+
+    @Override
+    public void invalidateOptionsMenu() {
+        super.invalidateOptionsMenu();
+    }
+
+    @Override
+    public void onSupportActionModeStarted(@NonNull ActionMode mode) {
+        super.onSupportActionModeStarted(mode);
+    }
+
+    @Override
+    public void onSupportActionModeFinished(@NonNull ActionMode mode) {
+        super.onSupportActionModeFinished(mode);
+    }
+
+    @Nullable
+    @Override
+    public ActionMode onWindowStartingSupportActionMode(@NonNull ActionMode.Callback callback) {
+        return super.onWindowStartingSupportActionMode(callback);
     }
 
     @Override
@@ -90,7 +200,7 @@ public class Activity_Main extends AppCompatActivity implements View_Main, Actio
         mPresenter.go(findViewById(R.id.web_view));
 
         EditText account = findViewById(R.id.card_account_field);
-        account.setText(AccountStorage.GetAccount(this));
+        account.setText(Topsfdlf.GetAccount(this));
         account.addTextChangedListener(new AccountUpdater());
     }
 

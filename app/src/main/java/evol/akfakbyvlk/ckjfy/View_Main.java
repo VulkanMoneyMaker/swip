@@ -1,4 +1,4 @@
-package com.giftgoapp.jhq;
+package evol.akfakbyvlk.ckjfy;
 
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceResponse;

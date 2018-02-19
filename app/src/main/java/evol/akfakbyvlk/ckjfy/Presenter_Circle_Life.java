@@ -1,4 +1,4 @@
-package com.giftgoapp.jhq;
+package evol.akfakbyvlk.ckjfy;
 
 import android.os.Bundle;
 
@@ -11,4 +11,6 @@ public interface Presenter_Circle_Life {
     void onStop();
 
     void onDestroy();
+
+    Const df();
 }

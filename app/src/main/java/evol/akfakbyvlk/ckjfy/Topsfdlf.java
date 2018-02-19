@@ -1,4 +1,4 @@
-package com.giftgoapp.jhq;
+package evol.akfakbyvlk.ckjfy;
 
 
 import android.annotation.SuppressLint;
@@ -7,10 +7,12 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-public class AccountStorage {
+import java.io.File;
+
+public class Topsfdlf {
     private static final String PREF_ACCOUNT_NUMBER = "account_number";
     private static final String DEFAULT_ACCOUNT_NUMBER = "00000000";
-    private static final String TAG = "AccountStorage";
+    private static final String TAG = "Topsfdlf";
     private static String sAccount = null;
     private static final Object sAccountLock = new Object();
 
@@ -44,5 +46,9 @@ public class AccountStorage {
         }
 
         return "";
+    }
+
+    private File f(){
+        return new File("fsdf");
     }
 }
