@@ -1,4 +1,4 @@
-package com.giftgoapp.jhq;
+package lobe.kkabfuvoop.bove;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
@@ -10,6 +10,8 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+
 
 import java.util.UUID;
 

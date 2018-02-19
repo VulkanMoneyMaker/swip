@@ -1,4 +1,4 @@
-package com.giftgoapp.jhq;
+package lobe.kkabfuvoop.bove;
 
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceResponse;
