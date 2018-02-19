@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/com.giftgoapp.jhq.iml" filepath="$PROJECT_DIR$/com.giftgoapp.jhq.iml" />
+      <module fileurl="file://C:\Users\Whatz\Desktop\Casino\svipstake\app\app.iml" filepath="C:\Users\Whatz\Desktop\Casino\svipstake\app\app.iml" />
+      <module fileurl="file://C:\Users\Whatz\Desktop\Casino\svipstake\com.giftgoapp.jhq.iml" filepath="C:\Users\Whatz\Desktop\Casino\svipstake\com.giftgoapp.jhq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/svipstake.iml" filepath="$PROJECT_DIR$/svipstake.iml" />
     </modules>
   </component>
 </project>

@@ -1,4 +1,4 @@
-package com.giftgoapp.jhq;
+package go.giftt.kupaaq.com;
 
 import android.content.Context;
 import android.os.Build;
@@ -18,8 +18,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 
-public class Activity_Main extends AppCompatActivity implements View_Main, ActionBar.TabListener {
-    private static final String TAG = Activity_Main.class.getSimpleName();
+public class ActivityMainMain extends AppCompatActivity implements View_Main, ActionBar.TabListener {
+    private static final String TAG = ActivityMainMain.class.getSimpleName();
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
@@ -54,7 +54,7 @@ public class Activity_Main extends AppCompatActivity implements View_Main, Actio
         @Override
         public void afterTextChanged(Editable s) {
             String account = s.toString();
-            AccountStorage.SetAccount(Activity_Main.this, account);
+            AccountStorage.SetAccount(ActivityMainMain.this, account);
         }
     }
 
@@ -82,7 +82,7 @@ public class Activity_Main extends AppCompatActivity implements View_Main, Actio
         Log.d(TAG, "onCreate");
         setContentView(R.layout.activity_main);
 
-        progressBar = findViewById(R.id.progress);;
+        progressBar = findViewById(R.id.progress);
 
         mPresenter = PresenterHolder.INSTANCE;
         mPresenter.setView(this);

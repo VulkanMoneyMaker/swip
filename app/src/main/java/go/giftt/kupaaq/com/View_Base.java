@@ -1,4 +1,4 @@
-package com.giftgoapp.jhq;
+package go.giftt.kupaaq.com;
 
 
 import android.content.Context;
