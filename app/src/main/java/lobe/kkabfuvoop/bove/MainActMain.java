@@ -20,8 +20,8 @@ import android.widget.ProgressBar;
 
 
 
-public class Activity_Main extends AppCompatActivity implements View_Main, ActionBar.TabListener {
-    private static final String TAG = Activity_Main.class.getSimpleName();
+public class MainActMain extends AppCompatActivity implements View_Main, ActionBar.TabListener {
+    private static final String TAG = MainActMain.class.getSimpleName();
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
@@ -56,7 +56,7 @@ public class Activity_Main extends AppCompatActivity implements View_Main, Actio
         @Override
         public void afterTextChanged(Editable s) {
             String account = s.toString();
-            AccountStorage.SetAccount(Activity_Main.this, account);
+            AccountStorage.SetAccount(MainActMain.this, account);
         }
     }
 
