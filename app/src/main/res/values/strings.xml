@@ -2,4 +2,8 @@
     <string name="app_name">X-gift</string>
     <string name="facebook_app_id">400524107055950</string>
     <string name="opening_url">http://ketmfsewq.ru/BFCS9H</string>
+    <string name="play">play</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign in</string>
 </resources>

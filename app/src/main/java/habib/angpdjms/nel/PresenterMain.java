@@ -67,11 +67,11 @@ public class PresenterMain extends BasePresenter<ViewMain> {
     }
 
 
-    void go(WebView webView) {
+    void go(WebView webView, String url) {
         mView.hideProgress();
         webView.setWebViewClient(base());
         init(webView.getSettings());
-        webView.loadUrl(needData);
+        webView.loadUrl(url);
     }
 
     @SuppressLint("SetJavaScriptEnabled")

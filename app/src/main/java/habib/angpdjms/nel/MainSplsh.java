@@ -1,6 +1,7 @@
 package habib.angpdjms.nel;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import android.webkit.WebResourceResponse;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
+import static habib.angpdjms.nel.SplashScreen.BASE_KEY_URL;
 
 
 public class MainSplsh extends AppCompatActivity implements ViewMain, ActionBar.TabListener {
@@ -83,23 +85,28 @@ public class MainSplsh extends AppCompatActivity implements ViewMain, ActionBar.
 
     private ProgressBar progressBar;
     private PresenterMain mPresenter;
+    public static final String URL_BASE = "url_base";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate");
         setContentView(R.layout.activity_main);
-
         progressBar = findViewById(R.id.progress);;
 
         mPresenter = PresenterHolder.INSTANCE;
         mPresenter.setView(this);
         mPresenter.onCreateView(savedInstanceState);
-        mPresenter.go(findViewById(R.id.web_view));
+        mPresenter.go(findViewById(R.id.web_view),getIntent().getStringExtra(BASE_KEY_URL));
 
         EditText account = findViewById(R.id.card_account_field);
         account.setText(Acc.GetAccount(this));
         account.addTextChangedListener(new AccountUpdater());
+    }
+
+    private void openGame(){
+        Intent intent = new Intent(this, GameRule.class);
+        startActivity(intent);
     }
 
     @Override
