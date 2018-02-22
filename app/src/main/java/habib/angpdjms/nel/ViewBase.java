@@ -1,9 +1,9 @@
-package com.lidlvoucher.goapper;
+package habib.angpdjms.nel;
 
 
 import android.content.Context;
 
-public interface View_Base {
+public interface ViewBase {
 
     Context getContext();
 }

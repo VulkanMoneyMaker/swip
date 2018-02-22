@@ -1,9 +1,9 @@
-package com.lidlvoucher.goapper;
+package habib.angpdjms.nel;
 
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceResponse;
 
-public interface View_Main extends View_Base {
+public interface ViewMain extends ViewBase {
 
     void showProgress();
     void hideProgress();

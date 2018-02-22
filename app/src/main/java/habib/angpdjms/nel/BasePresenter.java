@@ -1,6 +1,6 @@
-package com.lidlvoucher.goapper;
+package habib.angpdjms.nel;
 
-public abstract class BasePre<T> implements PresenterJOP {
+public abstract class BasePresenter<T> implements PresenterJOP {
 
     T mView;
 
@@ -8,7 +8,7 @@ public abstract class BasePre<T> implements PresenterJOP {
         this.mView = view;
     }
 
-    BasePre() {
+    BasePresenter() {
     }
 
     @Override

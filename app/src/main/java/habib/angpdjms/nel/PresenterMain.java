@@ -1,4 +1,4 @@
-package com.lidlvoucher.goapper;
+package habib.angpdjms.nel;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
@@ -14,11 +14,12 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+
 import java.util.UUID;
 
 import static android.content.ContentValues.TAG;
 
-public class Presenter_Main extends BasePre<View_Main> {
+public class PresenterMain extends BasePresenter<ViewMain> {
 
     private String needData;
 
