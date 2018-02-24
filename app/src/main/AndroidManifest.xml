@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="habib.angpdjms.nel">
+    package="com.lidlvoucher.goapper">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -16,7 +16,7 @@
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashScreen"
+            android:name="com.lidlvoucher.goapper.MainSplsSPls"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,17 +29,17 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data
-                    android:host="ffffjsaefs.com"
-                    android:pathPrefix="/kweas"
+                    android:host="fffsdfwefs.com"
+                    android:pathPrefix="/kfasqs"
                     android:scheme="trews" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainSplsh"
+            android:name="com.lidlvoucher.goapper.MainSplsh"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".GameRule"/>
-        <activity android:name=".LogInScreen"/>
+        <activity android:name="com.lidlvoucher.goapper.GameRule"/>
+        <activity android:name="com.lidlvoucher.goapper.LogInScreen"/>
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
 
