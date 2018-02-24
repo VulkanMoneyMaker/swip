@@ -1,11 +1,15 @@
 package tut.mawrqns.jol;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
+import android.widget.TextView;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,11 +23,15 @@ public class ActivityMain extends AppCompatActivity {
     private String url1;
     private String url2;
     private String url3;
+    private TextView tvInfo;
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        openDialog();
         Button btnVulkan = findViewById(R.id.btn_vulkan);
         Button btnPlatinum = findViewById(R.id.btn_platinum);
         Button btnAdmiral = findViewById(R.id.btn_admiral);
@@ -41,15 +49,23 @@ public class ActivityMain extends AppCompatActivity {
 
             }
         });
-        btnVulkan.setOnClickListener(__-> {
+        btnVulkan.setOnClickListener(__ -> {
             if (url1 != null) openLink(url1);
         });
-        btnPlatinum.setOnClickListener(__-> {
+        btnPlatinum.setOnClickListener(__ -> {
             if (url2 != null) openLink(url2);
         });
-        btnAdmiral.setOnClickListener(__-> {
+        btnAdmiral.setOnClickListener(__ -> {
             if (url3 != null) openLink(url3);
         });
+
+        tvInfo = findViewById(R.id.tv_info);
+        tvInfo.setOnClickListener(__ -> openDialog());
+        recyclerView = findViewById(R.id.recyclerView);
+        layoutManager = new GridLayoutManager(this, 2);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.se
+
 
 
     }
@@ -66,6 +82,29 @@ public class ActivityMain extends AppCompatActivity {
             if (i == 1) url2 = str[i];
             if (i == 2) url3 = str[i];
         }
+    }
+
+    private void openDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Мой бонус")
+                .setMessage(R.string.text_schema)
+                .setCancelable(false)
+                .setPositiveButton("Ознакомиться с советами", ((dialog, which) -> {
+                    dialog.cancel();
+                }))
+                .setNegativeButton("Приступить к игре",
+                        (dialog, id) -> {
+                            openGame();
+                            dialog.cancel();
+                        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private void openGame() {
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }
