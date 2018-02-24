@@ -1,4 +1,4 @@
-package com.lidlvoucher.goapper.network;
+package com.vouchlidlcom.appfgqq.network;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;

@@ -1,4 +1,4 @@
-package com.lidlvoucher.goapper;
+package com.vouchlidlcom.appfgqq;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.facebook.applinks.AppLinkData;
-import com.lidlvoucher.goapper.network.NetworkDelegat;
-import com.lidlvoucher.goapper.network.model.ModelRequest;
+import com.vouchlidlcom.appfgqq.network.NetworkDelegat;
+import com.vouchlidlcom.appfgqq.network.model.ModelRequest;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

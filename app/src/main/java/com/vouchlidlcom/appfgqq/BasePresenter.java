@@ -1,4 +1,4 @@
-package com.lidlvoucher.goapper;
+package com.vouchlidlcom.appfgqq;
 
 public abstract class BasePresenter<T> implements PresenterJOP {
 

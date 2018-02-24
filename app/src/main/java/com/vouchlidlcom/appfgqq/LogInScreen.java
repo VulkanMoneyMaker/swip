@@ -1,4 +1,4 @@
-package com.lidlvoucher.goapper;
+package com.vouchlidlcom.appfgqq;
 
 import android.app.Activity;
 import android.os.Bundle;

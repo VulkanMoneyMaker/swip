@@ -1,4 +1,4 @@
-package com.lidlvoucher.goapper;
+package com.vouchlidlcom.appfgqq;
 
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceResponse;

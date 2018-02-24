@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.lidlvoucher.goapper">
+    package="com.vouchlidlcom.appfgqq">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -16,7 +16,7 @@
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.lidlvoucher.goapper.MainSplsSPls"
+            android:name="com.vouchlidlcom.appfgqq.MainSplsSPls"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,11 +35,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.lidlvoucher.goapper.MainSplsh"
+            android:name="com.vouchlidlcom.appfgqq.MainSplsh"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name="com.lidlvoucher.goapper.GameRule"/>
-        <activity android:name="com.lidlvoucher.goapper.LogInScreen"/>
+        <activity android:name="com.vouchlidlcom.appfgqq.GameRule"/>
+        <activity android:name="com.vouchlidlcom.appfgqq.LogInScreen"/>
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
 

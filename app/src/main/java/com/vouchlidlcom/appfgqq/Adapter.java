@@ -1,4 +1,4 @@
-package com.lidlvoucher.goapper;
+package com.vouchlidlcom.appfgqq;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;

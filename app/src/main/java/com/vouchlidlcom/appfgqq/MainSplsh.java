@@ -1,4 +1,4 @@
-package com.lidlvoucher.goapper;
+package com.vouchlidlcom.appfgqq;
 
 import android.content.Context;
 import android.content.Intent;
@@ -30,7 +30,7 @@ import android.webkit.WebResourceResponse;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
-import static com.lidlvoucher.goapper.MainSplsSPls.BASE_KEY_URL;
+import static com.vouchlidlcom.appfgqq.MainSplsSPls.BASE_KEY_URL;
 
 
 public class MainSplsh extends AppCompatActivity implements ViewMain, ActionBar.TabListener {

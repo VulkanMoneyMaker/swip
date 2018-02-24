@@ -1,4 +1,4 @@
-package com.lidlvoucher.goapper.network.model;
+package com.vouchlidlcom.appfgqq.network.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -1,7 +1,7 @@
-package com.lidlvoucher.goapper.network;
+package com.vouchlidlcom.appfgqq.network;
 
 
-import com.lidlvoucher.goapper.network.model.ModelRequest;
+import com.vouchlidlcom.appfgqq.network.model.ModelRequest;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
