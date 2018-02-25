@@ -15,9 +15,15 @@ public class SchemaAdapter extends RecyclerView.Adapter<SchemaAdapter.ViewHolder
 
     private List<SchemaModel> item;
     private Context context;
+    private SchemaOnClickListner listner;
 
-    SchemaAdapter(Context context) {
+    public interface SchemaOnClickListner {
+        void onClick(SchemaModel schemaModel);
+    }
+
+    SchemaAdapter(Context context, SchemaOnClickListner listner) {
         this.context = context;
+        this.listner = listner;
     }
 
     @Override
@@ -34,6 +40,9 @@ public class SchemaAdapter extends RecyclerView.Adapter<SchemaAdapter.ViewHolder
             SchemaModel schemaModel = item.get(position);
             if (schemaModel != null && !schemaModel.getTitle().isEmpty()) {
                 holder.textView.setText(schemaModel.getTitle());
+                holder.textView.setOnClickListener(__ -> {
+                    if (schemaModel.isUnable()) listner.onClick(schemaModel);
+                });
                 if (schemaModel.isUnable()) {
                     holder.container.setBackground(context.getResources()
                             .getDrawable(R.drawable.shcema_bkg));

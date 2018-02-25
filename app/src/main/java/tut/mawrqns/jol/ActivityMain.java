@@ -1,13 +1,17 @@
 package tut.mawrqns.jol;
 
+import android.app.Dialog;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -21,21 +25,21 @@ import tut.mawrqns.jol.network.NetworkDelegat;
 import tut.mawrqns.jol.network.model.Model;
 
 
-public class ActivityMain extends AppCompatActivity {
+public class ActivityMain extends AppCompatActivity implements DialogSchema.DialogSchemaOnClick{
 
     private String url1;
     private String url2;
     private String url3;
-    private TextView tvInfo;
-    private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
-    private AlertDialog.Builder builder;
+    private TextView textDialog;
+    private Button btnOk;
+    private Button btnNegative;
+    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        openDialog();
+        openDialog(getString(R.string.text_schema));
         Button btnVulkan = findViewById(R.id.btn_vulkan);
         Button btnPlatinum = findViewById(R.id.btn_platinum);
         Button btnAdmiral = findViewById(R.id.btn_admiral);
@@ -62,18 +66,21 @@ public class ActivityMain extends AppCompatActivity {
         btnAdmiral.setOnClickListener(__ -> {
             if (url3 != null) openLink(url3);
         });
-
-        tvInfo = findViewById(R.id.tv_info);
-        tvInfo.setOnClickListener(__ -> openDialog());
-        recyclerView = findViewById(R.id.recyclerView);
-        layoutManager = new GridLayoutManager(this, 4);
+        SchemaAdapter.SchemaOnClickListner listner = schemaModel -> {
+            openDialog(getMessageForDialog(schemaModel.getNumberSchema()));
+        };
+        TextView tvInfo = findViewById(R.id.tv_info);
+        tvInfo.setOnClickListener(__ -> openDialog(getString(R.string.text_schema)));
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 4);
         recyclerView.setLayoutManager(layoutManager);
-        SchemaAdapter schemaAdapter = new SchemaAdapter(this);
+        SchemaAdapter schemaAdapter = new SchemaAdapter(this, listner);
         List<SchemaModel> schemaItem = new ArrayList<>();
         for (int i = 1; i <= 4; i++) {
             SchemaModel shemaModel = new SchemaModel();
             shemaModel.setTitle("Схема " + i);
-            if (i < 4) shemaModel.setUnable(true);
+            shemaModel.setNumberSchema(i - 1);
+            if (i < 3) shemaModel.setUnable(true);
             else shemaModel.setUnable(false);
 
             schemaItem.add(shemaModel);
@@ -82,8 +89,27 @@ public class ActivityMain extends AppCompatActivity {
         }
         schemaAdapter.setItem(schemaItem);
         recyclerView.setAdapter(schemaAdapter);
+        initDialog();
 
+    }
 
+    private void initDialog() {
+
+    }
+
+    private String getMessageForDialog(int numberSchema) {
+        String schemaString;
+        switch (numberSchema) {
+            case 0:
+                schemaString = getString(R.string.schema1);
+                break;
+            case 1:
+                schemaString = getString(R.string.schema2);
+                break;
+            default:
+                schemaString = "";
+        }
+        return schemaString;
     }
 
     private void openLink(String url) {
@@ -100,34 +126,25 @@ public class ActivityMain extends AppCompatActivity {
         }
     }
 
-    private void openDialog() {
-        if (builder == null) {
-            builder = new AlertDialog.Builder(this);
-            builder.setTitle("Мой бонус")
-                    .setMessage(R.string.text_schema)
-                    .setCancelable(false)
-                    .setPositiveButton("Ознакомиться с советами", ((dialog, which) -> {
-                        dialog.cancel();
-                    }))
-                    .setNegativeButton("Приступить к игре",
-                            (dialog, id) -> {
-                                openGame();
-                                dialog.cancel();
-                            })
-                    .create()
-                    .show();
-
-        } else {
-            builder.show();
+    private void openDialog(String text) {
+        if (text.isEmpty()) return;
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+        if (prev != null) {
+            ft.remove(prev);
         }
-
-
+        ft.addToBackStack(null);
+        DialogSchema dialogFragment = DialogSchema.newInstance(text);
+        dialogFragment.show(ft, "dialog");
     }
 
     private void openGame() {
         Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);
-        finish();
     }
 
+    @Override
+    public void onClickPlay() {
+        openGame();
+    }
 }
