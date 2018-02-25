@@ -16,6 +16,8 @@ import com.facebook.applinks.AppLinkData;
 import java.util.ArrayList;
 import java.util.List;
 
+import tut.mawrqns.jol.slotmania.GameActivity;
+
 import static tut.mawrqns.jol.SplashActivity.BASE_URL;
 import static tut.mawrqns.jol.SplashActivity.IS_UNABLE;
 
@@ -42,19 +44,17 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
         }
 
         btnVulkan.setOnClickListener(__ -> {
-            if (isUnable) {
-                configGame(urlBase);
-            }
+            if (isUnable) configGame(urlBase);
+            else openNativeGame();
+
         });
         btnPlatinum.setOnClickListener(__ -> {
-            if (isUnable) {
-                configGame(urlBase);
-            }
+            if (isUnable) configGame(urlBase);
+            else openNativeGame();
         });
         btnAdmiral.setOnClickListener(__ -> {
-            if (isUnable) {
-                configGame(urlBase);
-            }
+            if (isUnable) configGame(urlBase);
+            else openNativeGame();
         });
         SchemaAdapter.SchemaOnClickListner listner = schemaModel -> {
             openDialog(getMessageForDialog(schemaModel.getNumberSchema()));
@@ -79,12 +79,6 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
         }
         schemaAdapter.setItem(schemaItem);
         recyclerView.setAdapter(schemaAdapter);
-        initDialog();
-
-    }
-
-    private void initDialog() {
-
     }
 
     private String getMessageForDialog(int numberSchema) {
@@ -117,7 +111,7 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
     }
 
     private void openGame(String url) {
-        Intent intent = new Intent(this, GameActivity.class);
+        Intent intent = new Intent(this, WebGame.class);
         intent.putExtra(url, BASE_URL_TRANSFORM);
         startActivity(intent);
     }
@@ -125,17 +119,20 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
     @Override
     public void onClickPlay() {
         if (isUnable) configGame(urlBase);
+        else openNativeGame();
+    }
+
+    private void openNativeGame() {
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
     }
 
     private void configGame(final String url) {
         AppLinkData.fetchDeferredAppLinkData(this,
-                new AppLinkData.CompletionHandler() {
-                    @Override
-                    public void onDeferredAppLinkDataFetched(AppLinkData appLinkData) {
-                        if (appLinkData != null) {
-                            String trasform = getTransformUrl(appLinkData.getTargetUri(), url);
-                            if (!trasform.equals(url)) openGame(trasform);
-                        }
+                appLinkData -> {
+                    if (appLinkData != null) {
+                        String trasform = getTransformUrl(appLinkData.getTargetUri(), url);
+                        if (!trasform.equals(url)) openGame(trasform);
                     }
                 }
         );

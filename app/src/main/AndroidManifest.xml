@@ -11,6 +11,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:screenOrientation="portrait"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -34,9 +35,11 @@
         <activity
             android:name="tut.mawrqns.jol.ActivityMain"
             android:screenOrientation="portrait"/>
-        <activity android:name=".GameActivity"/>
+        <activity
+            android:name=".WebGame"
+            android:screenOrientation="portrait" />
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
-
+        <activity android:name=".slotmania.GameActivity" />
     </application>
 </manifest>

@@ -49,4 +49,5 @@ dependencies {
 
     implementation 'com.facebook.android:facebook-core:4.29.0'
     implementation 'com.facebook.android:facebook-applinks:4.29.0'
+    implementation files('libs/cocos2d-android.jar')
 }
