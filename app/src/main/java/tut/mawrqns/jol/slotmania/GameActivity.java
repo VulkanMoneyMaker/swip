@@ -77,28 +77,25 @@ public class GameActivity extends Activity {
 	public void onBackPressed() {
 //    	if(!G.titleState)
 //    		getInterstitialAd();
-    	DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-    	    @Override
-    	    public void onClick(DialogInterface dialog, int which) {
-    	        switch (which){
-    	        case DialogInterface.BUTTON_POSITIVE:
-    	        	if(G.titleState){
-    					G.titleState = false;
-    					CCDirector.sharedDirector().replaceScene(CCFadeTransition.transition(0.5f, TitleLayer.scene()));
-    				}else{
-    					G.stopSound();    					
-    					CCDirector.sharedDirector().end();
-    			        ScoreManager.releaseScoreManager();
-    			        finish();
-    				}	
-    	            break;
+    	DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
+            switch (which){
+            case DialogInterface.BUTTON_POSITIVE:
+                if(G.titleState){
+                    G.titleState = false;
+                    CCDirector.sharedDirector().replaceScene(CCFadeTransition.transition(0.5f, TitleLayer.scene()));
+                }else{
+                    G.stopSound();
+                    CCDirector.sharedDirector().end();
+                    ScoreManager.releaseScoreManager();
+                    finish();
+                }
+                break;
 
-    	        case DialogInterface.BUTTON_NEGATIVE:
-    	            //No button clicked
-    	            break;
-    	        }
-    	    }
-    	};
+            case DialogInterface.BUTTON_NEGATIVE:
+                //No button clicked
+                break;
+            }
+        };
 
     	AlertDialog.Builder builder = new AlertDialog.Builder(this);
     	builder.setMessage("Are you sure? You may lose all your coins.").setPositiveButton("Yes", dialogClickListener)

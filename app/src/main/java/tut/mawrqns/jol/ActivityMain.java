@@ -85,6 +85,8 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
 
     private void openDetail() {
         Intent intent = new Intent(this, ActivityDetail.class);
+        intent.putExtra(BASE_URL, urlBase);
+        intent.putExtra(IS_UNABLE, isUnable);
         startActivity(intent);
     }
 

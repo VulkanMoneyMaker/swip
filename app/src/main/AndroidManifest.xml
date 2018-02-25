@@ -40,6 +40,8 @@
         <activity android:name=".ActivityDetail"/>
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
-        <activity android:name=".slotmania.GameActivity" />
+        <activity
+            android:screenOrientation="landscape"
+            android:name=".slotmania.GameActivity" />
     </application>
 </manifest>
