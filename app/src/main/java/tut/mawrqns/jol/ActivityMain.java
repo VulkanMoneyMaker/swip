@@ -112,7 +112,7 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
 
     private void openGame(String url) {
         Intent intent = new Intent(this, WebGame.class);
-        intent.putExtra(url, BASE_URL_TRANSFORM);
+        intent.putExtra(BASE_URL_TRANSFORM, url);
         startActivity(intent);
     }
 
