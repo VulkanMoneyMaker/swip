@@ -75,8 +75,6 @@ public class GameActivity extends Activity {
    
     @Override
 	public void onBackPressed() {
-//    	if(!G.titleState)
-//    		getInterstitialAd();
     	DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
             switch (which){
             case DialogInterface.BUTTON_POSITIVE:
