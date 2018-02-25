@@ -57,5 +57,8 @@
     <string name="bnt_ok">Ознакомиться с советами</string>
     <string name="bnt_negative">Приступить к игре</string>
     <string name="title_dialog">Мой бонус</string>
+    <string name="username">Логин</string>
+    <string name="send_comment">Отправить отзыв</string>
+    <string name="toast_commet">Отзыв отправлне</string>
 
 </resources>

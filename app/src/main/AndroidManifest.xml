@@ -37,6 +37,7 @@
         <activity
             android:name=".WebGame"
             android:screenOrientation="portrait" />
+        <activity android:name=".ActivityDetail"/>
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
         <activity android:name=".slotmania.GameActivity" />

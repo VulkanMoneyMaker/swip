@@ -15,7 +15,6 @@ import tut.mawrqns.jol.network.model.Model;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private Disposable disposable;
     public static final String BASE_URL = "BASE_URL";
     public static final String IS_UNABLE = "IS_UNABLE";
 
@@ -50,11 +49,5 @@ public class SplashActivity extends AppCompatActivity {
         }
         startActivity(intent);
         finish();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (disposable != null) disposable.dispose();
     }
 }

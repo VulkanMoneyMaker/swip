@@ -1,5 +1,6 @@
 package tut.mawrqns.jol;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -31,6 +32,7 @@ public class WebGame extends AppCompatActivity {
     }
 
 
+    @SuppressLint("SetJavaScriptEnabled")
     private void onReceice(String url) {
         WebView webView = findViewById(R.id.web_view);
         webView.setWebViewClient(new WebViewClient() {

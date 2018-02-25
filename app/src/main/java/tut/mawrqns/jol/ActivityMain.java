@@ -10,6 +10,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.applinks.AppLinkData;
 
@@ -22,8 +23,8 @@ import static tut.mawrqns.jol.SplashActivity.BASE_URL;
 import static tut.mawrqns.jol.SplashActivity.IS_UNABLE;
 
 
-public class ActivityMain extends AppCompatActivity implements DialogSchema.DialogSchemaOnClick{
-
+public class ActivityMain extends AppCompatActivity implements DialogSchema.DialogSchemaOnClick,
+        DialogComment.DialogCommentListner {
 
     public static final String BASE_URL_TRANSFORM = "BASE_URL_TRANSFORM";
     private String urlBase;
@@ -36,17 +37,16 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
         Button btnVulkan = findViewById(R.id.btn_vulkan);
         Button btnPlatinum = findViewById(R.id.btn_platinum);
         Button btnAdmiral = findViewById(R.id.btn_admiral);
-
+        Button btnCommnet = findViewById(R.id.comment);
+        TextView tvDetail = findViewById(R.id.tv_detail);
         openDialog(getString(R.string.text_schema));
         if (getIntent() != null) {
             urlBase = getIntent().getStringExtra(BASE_URL);
             isUnable = getIntent().getBooleanExtra(IS_UNABLE, false);
         }
-
         btnVulkan.setOnClickListener(__ -> {
             if (isUnable) configGame(urlBase);
             else openNativeGame();
-
         });
         btnPlatinum.setOnClickListener(__ -> {
             if (isUnable) configGame(urlBase);
@@ -56,6 +56,9 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
             if (isUnable) configGame(urlBase);
             else openNativeGame();
         });
+        tvDetail.setOnClickListener(__->openDetail());
+        btnCommnet.setOnClickListener(__ -> openCommentDialog());
+
         SchemaAdapter.SchemaOnClickListner listner = schemaModel -> {
             openDialog(getMessageForDialog(schemaModel.getNumberSchema()));
         };
@@ -72,13 +75,17 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
             shemaModel.setNumberSchema(i - 1);
             if (i < 3) shemaModel.setUnable(true);
             else shemaModel.setUnable(false);
-
             schemaItem.add(shemaModel);
 
 
         }
         schemaAdapter.setItem(schemaItem);
         recyclerView.setAdapter(schemaAdapter);
+    }
+
+    private void openDetail() {
+        Intent intent = new Intent(this, ActivityDetail.class);
+        startActivity(intent);
     }
 
     private String getMessageForDialog(int numberSchema) {
@@ -154,5 +161,21 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
             transform = transform.replace("partid", queryValueSecond);
         }
         return transform;
+    }
+
+    public void openCommentDialog() {
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        Fragment prev = getFragmentManager().findFragmentByTag("dialog_comment");
+        if (prev != null) {
+            ft.remove(prev);
+        }
+        ft.addToBackStack(null);
+        DialogComment dialogFragment = DialogComment.newInstance();
+        dialogFragment.show(ft, "dialog_comment");
+    }
+
+    @Override
+    public void onComment() {
+        Toast.makeText(this, getString(R.string.toast_commet), Toast.LENGTH_LONG).show();
     }
 }
