@@ -11,4 +11,7 @@ public interface ApiCasino {
     @GET("vul-57")
     Call<Model> check();
 
+    @GET("vul-57-casino")
+    Call<Model> checkUnableCasino();
+
 }

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Amazing gifts</string>
-    <string name="facebook_app_id"></string>
+    <string name="facebook_app_id">2117337768498140</string>
     <string name="casino">Казино</string>
     <string name="rating">Рейтинг</string>
     <string name="play">Играть</string>
@@ -19,7 +19,7 @@
 Накполенные баллы можно потратить на открытие новых рабочих связок по обыгрышу казино
         или перевести на свой баланс для игры на реальных игровых автоматах. Возможность
         перевода накопленных баллов открывается при достижении суммы накпопления в размере 5000 баллов.</string>
-    <string name="detail">Подробнее...</string>
+    <string name="detail">Подробнее…</string>
     <string name="comment">Отзывы</string>
     <string name="schema1">Совет 1:\n\n
 «Друзья, а вот и новая супер схема!\n\n

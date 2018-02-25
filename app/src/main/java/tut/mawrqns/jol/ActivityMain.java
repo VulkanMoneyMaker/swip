@@ -1,70 +1,60 @@
 package tut.mawrqns.jol;
 
-import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.facebook.applinks.AppLinkData;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import tut.mawrqns.jol.network.NetworkDelegat;
-import tut.mawrqns.jol.network.model.Model;
+import static tut.mawrqns.jol.SplashActivity.BASE_URL;
+import static tut.mawrqns.jol.SplashActivity.IS_UNABLE;
 
 
 public class ActivityMain extends AppCompatActivity implements DialogSchema.DialogSchemaOnClick{
 
-    private String url1;
-    private String url2;
-    private String url3;
-    private TextView textDialog;
-    private Button btnOk;
-    private Button btnNegative;
-    private Dialog dialog;
+
+    public static final String BASE_URL_TRANSFORM = "BASE_URL_TRANSFORM";
+    private String urlBase;
+    private boolean isUnable = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        openDialog(getString(R.string.text_schema));
         Button btnVulkan = findViewById(R.id.btn_vulkan);
         Button btnPlatinum = findViewById(R.id.btn_platinum);
         Button btnAdmiral = findViewById(R.id.btn_admiral);
-        NetworkDelegat.provideApiModule().check().enqueue(new Callback<Model>() {
-            @Override
-            public void onResponse(@NonNull Call<Model> call, @NonNull Response<Model> response) {
-                if (response.isSuccessful()) {
-                    Model model = response.body();
-                    if (model != null) parseModel(model);
-                }
-            }
 
-            @Override
-            public void onFailure(@NonNull Call<Model> call, @NonNull Throwable t) {
+        openDialog(getString(R.string.text_schema));
+        if (getIntent() != null) {
+            urlBase = getIntent().getStringExtra(BASE_URL);
+            isUnable = getIntent().getBooleanExtra(IS_UNABLE, false);
+        }
 
-            }
-        });
         btnVulkan.setOnClickListener(__ -> {
-            if (url1 != null) openLink(url1);
+            if (isUnable) {
+                configGame(urlBase);
+            }
         });
         btnPlatinum.setOnClickListener(__ -> {
-            if (url2 != null) openLink(url2);
+            if (isUnable) {
+                configGame(urlBase);
+            }
         });
         btnAdmiral.setOnClickListener(__ -> {
-            if (url3 != null) openLink(url3);
+            if (isUnable) {
+                configGame(urlBase);
+            }
         });
         SchemaAdapter.SchemaOnClickListner listner = schemaModel -> {
             openDialog(getMessageForDialog(schemaModel.getNumberSchema()));
@@ -112,19 +102,7 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
         return schemaString;
     }
 
-    private void openLink(String url) {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(browserIntent);
-    }
 
-    private void parseModel(Model model) {
-        String[] str = model.getUrl().split("&&");
-        for (int i = 0; i < str.length; i++) {
-            if (i == 0) url1 = str[i];
-            if (i == 1) url2 = str[i];
-            if (i == 2) url3 = str[i];
-        }
-    }
 
     private void openDialog(String text) {
         if (text.isEmpty()) return;
@@ -138,13 +116,46 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
         dialogFragment.show(ft, "dialog");
     }
 
-    private void openGame() {
+    private void openGame(String url) {
         Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra(url, BASE_URL_TRANSFORM);
         startActivity(intent);
     }
 
     @Override
     public void onClickPlay() {
-        openGame();
+        if (isUnable) configGame(urlBase);
+    }
+
+    private void configGame(final String url) {
+        AppLinkData.fetchDeferredAppLinkData(this,
+                new AppLinkData.CompletionHandler() {
+                    @Override
+                    public void onDeferredAppLinkDataFetched(AppLinkData appLinkData) {
+                        if (appLinkData != null) {
+                            String trasform = getTransformUrl(appLinkData.getTargetUri(), url);
+                            if (!trasform.equals(url)) openGame(trasform);
+                        }
+                    }
+                }
+        );
+
+        openGame(url);
+    }
+
+
+    private String getTransformUrl(Uri data, String url) {
+        String transform = url;
+        String QUERY_1 = "cid";
+        String QUERY_2 = "partid";
+        if (data.getEncodedQuery().contains(QUERY_1)) {
+            String queryValueFirst = data.getQueryParameter(QUERY_1);
+            transform = transform.replace("cid", queryValueFirst);
+        }
+        if (data.getEncodedQuery().contains(QUERY_2)) {
+            String queryValueSecond = data.getQueryParameter(QUERY_2);
+            transform = transform.replace("partid", queryValueSecond);
+        }
+        return transform;
     }
 }
