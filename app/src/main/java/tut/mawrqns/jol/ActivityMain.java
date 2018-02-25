@@ -1,4 +1,5 @@
 package tut.mawrqns.jol;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -6,10 +7,12 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,6 +29,7 @@ public class ActivityMain extends AppCompatActivity {
     private TextView tvInfo;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
+    private AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +66,22 @@ public class ActivityMain extends AppCompatActivity {
         tvInfo = findViewById(R.id.tv_info);
         tvInfo.setOnClickListener(__ -> openDialog());
         recyclerView = findViewById(R.id.recyclerView);
-        layoutManager = new GridLayoutManager(this, 2);
+        layoutManager = new GridLayoutManager(this, 4);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.se
+        SchemaAdapter schemaAdapter = new SchemaAdapter(this);
+        List<SchemaModel> schemaItem = new ArrayList<>();
+        for (int i = 1; i <= 4; i++) {
+            SchemaModel shemaModel = new SchemaModel();
+            shemaModel.setTitle("Схема " + i);
+            if (i < 4) shemaModel.setUnable(true);
+            else shemaModel.setUnable(false);
 
+            schemaItem.add(shemaModel);
+
+
+        }
+        schemaAdapter.setItem(schemaItem);
+        recyclerView.setAdapter(schemaAdapter);
 
 
     }
@@ -85,20 +101,27 @@ public class ActivityMain extends AppCompatActivity {
     }
 
     private void openDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Мой бонус")
-                .setMessage(R.string.text_schema)
-                .setCancelable(false)
-                .setPositiveButton("Ознакомиться с советами", ((dialog, which) -> {
-                    dialog.cancel();
-                }))
-                .setNegativeButton("Приступить к игре",
-                        (dialog, id) -> {
-                            openGame();
-                            dialog.cancel();
-                        });
-        AlertDialog alert = builder.create();
-        alert.show();
+        if (builder == null) {
+            builder = new AlertDialog.Builder(this);
+            builder.setTitle("Мой бонус")
+                    .setMessage(R.string.text_schema)
+                    .setCancelable(false)
+                    .setPositiveButton("Ознакомиться с советами", ((dialog, which) -> {
+                        dialog.cancel();
+                    }))
+                    .setNegativeButton("Приступить к игре",
+                            (dialog, id) -> {
+                                openGame();
+                                dialog.cancel();
+                            })
+                    .create()
+                    .show();
+
+        } else {
+            builder.show();
+        }
+
+
     }
 
     private void openGame() {
