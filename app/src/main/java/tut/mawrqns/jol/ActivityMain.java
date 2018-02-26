@@ -15,8 +15,15 @@ import android.widget.Toast;
 import com.facebook.applinks.AppLinkData;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+import tut.mawrqns.jol.db.BalanceDao;
+import tut.mawrqns.jol.db.BalanceEntity;
 import tut.mawrqns.jol.slotmania.GameActivity;
 
 import static tut.mawrqns.jol.SplashActivity.BASE_URL;
@@ -29,6 +36,9 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
     public static final String BASE_URL_TRANSFORM = "BASE_URL_TRANSFORM";
     private String urlBase;
     private boolean isUnable = false;
+    private TextView tvBalance;
+    private BalanceDao balanceDao;
+    private CompositeDisposable compositeDis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,22 +49,35 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
         Button btnAdmiral = findViewById(R.id.btn_admiral);
         Button btnCommnet = findViewById(R.id.comment);
         TextView tvDetail = findViewById(R.id.tv_detail);
+        tvBalance = findViewById(R.id.tv_balance);
         openDialog(getString(R.string.text_schema));
         if (getIntent() != null) {
             urlBase = getIntent().getStringExtra(BASE_URL);
             isUnable = getIntent().getBooleanExtra(IS_UNABLE, false);
         }
         btnVulkan.setOnClickListener(__ -> {
-            if (isUnable) configGame(urlBase);
-            else openNativeGame();
+            addBalanceRealGame();
+            if (isUnable) {
+                configGame(urlBase);
+            } else {
+                openNativeGame();
+            }
         });
         btnPlatinum.setOnClickListener(__ -> {
-            if (isUnable) configGame(urlBase);
-            else openNativeGame();
+            addBalanceRealGame();
+            if (isUnable) {
+                configGame(urlBase);
+            } else {
+                openNativeGame();
+            }
         });
         btnAdmiral.setOnClickListener(__ -> {
-            if (isUnable) configGame(urlBase);
-            else openNativeGame();
+            addBalanceRealGame();
+            if (isUnable) {
+                configGame(urlBase);
+            } else {
+                openNativeGame();
+            }
         });
         tvDetail.setOnClickListener(__->openDetail());
         btnCommnet.setOnClickListener(__ -> openCommentDialog());
@@ -81,7 +104,78 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
         }
         schemaAdapter.setItem(schemaItem);
         recyclerView.setAdapter(schemaAdapter);
+        balanceDao = ApplicationTc.getAppDatabase().balanceDao();
+        compositeDis = new CompositeDisposable();
+        getBalance();
+    }
 
+    private void getBalance() {
+        compositeDis.add(balanceDao
+                .getBalance()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(balanceEntity -> {
+                    if (balanceEntity.getTimePlus() == 0) {
+                        firstTime(balanceEntity);
+                    } else {
+                        firstVisitInDay(balanceEntity);
+                    }
+                }));
+    }
+
+    private void firstVisitInDay(BalanceEntity balanceEntity) {
+        Calendar c = Calendar.getInstance();
+        int month = c.get(Calendar.MONTH) * 1000;
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        int sumTime = month + day;
+        if (sumTime > balanceEntity.getTimePlus()) {
+            int currnetBalance = balanceEntity.getBalance();
+            balanceEntity.setBalance(currnetBalance + 100);
+            balanceEntity.setBalancePre(100);
+            balanceEntity.setTimePlus(sumTime);
+            tvBalance.setText(String.valueOf(balanceEntity.getBalance()));
+            compositeDis.add(Completable.fromAction(() -> balanceDao.update(balanceEntity))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread()).subscribe());
+        } else {
+            tvBalance.setText(String.valueOf(balanceEntity.getBalance()));
+        }
+    }
+
+    private void addBalanceRealGame() {
+        compositeDis.add(balanceDao
+                .getBalance()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(balanceEntity -> {
+                    if (balanceEntity.getBalancePre() < 300) {
+                        int balancePre = balanceEntity.getBalancePre();
+                        int balance = balanceEntity.getBalance();
+                        balanceEntity.setBalancePre(balancePre + 100);
+                        balanceEntity.setBalance(balance + 100);
+                        tvBalance.setText(String.valueOf(balanceEntity.getBalance()));
+                        compositeDis.add(Completable.fromAction(() -> balanceDao.update(balanceEntity))
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread()).subscribe());
+                    }
+                }));
+    }
+
+    private void firstTime(BalanceEntity balanceEntity) {
+        tvBalance.setText(String.valueOf(balanceEntity.getBalance()));
+        Calendar c = Calendar.getInstance();
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        balanceEntity.setTimePlus(month + day);
+        compositeDis.add(Completable.fromAction(() -> balanceDao.update(balanceEntity))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (compositeDis != null) compositeDis.dispose();
     }
 
     private void openDetail() {
@@ -128,8 +222,12 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
 
     @Override
     public void onClickPlay() {
-        if (isUnable) configGame(urlBase);
-        else openNativeGame();
+        addBalanceRealGame();
+        if (isUnable) {
+            configGame(urlBase);
+        } else {
+            openNativeGame();
+        }
     }
 
     private void openNativeGame() {
@@ -180,5 +278,11 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
     @Override
     public void onComment() {
         Toast.makeText(this, getString(R.string.toast_commet), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getBalance();
     }
 }

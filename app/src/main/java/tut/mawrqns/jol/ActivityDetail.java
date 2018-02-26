@@ -12,6 +12,11 @@ import android.support.v7.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+import tut.mawrqns.jol.db.BalanceDao;
 import tut.mawrqns.jol.slotmania.GameActivity;
 
 import static tut.mawrqns.jol.ActivityMain.BASE_URL_TRANSFORM;
@@ -23,6 +28,8 @@ public class ActivityDetail extends AppCompatActivity implements SchemaAdapter.S
 
     private String urlBase;
     private boolean isUnable = false;
+    private BalanceDao balanceDao;
+    private CompositeDisposable compositeDis;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,7 +39,8 @@ public class ActivityDetail extends AppCompatActivity implements SchemaAdapter.S
             urlBase = getIntent().getStringExtra(BASE_URL);
             isUnable = getIntent().getBooleanExtra(IS_UNABLE, false);
         }
-
+        compositeDis = new CompositeDisposable();
+        balanceDao = ApplicationTc.getAppDatabase().balanceDao();
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         SchemaAdapter schemaAdapter = new SchemaAdapter(this, this);
@@ -87,8 +95,33 @@ public class ActivityDetail extends AppCompatActivity implements SchemaAdapter.S
 
     @Override
     public void onClickPlay() {
+        addBalanceRealGame();
         if (isUnable) openWebGame();
         else openNativeGame();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (compositeDis != null) compositeDis.dispose();
+    }
+
+    private void addBalanceRealGame() {
+        compositeDis.add(balanceDao
+                .getBalance()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(balanceEntity -> {
+                    if (balanceEntity.getBalancePre() < 300) {
+                        int balancePre = balanceEntity.getBalancePre();
+                        int balance = balanceEntity.getBalance();
+                        balanceEntity.setBalancePre(balancePre + 100);
+                        balanceEntity.setBalance(balance + 100);
+                        compositeDis.add(Completable.fromAction(() -> balanceDao.update(balanceEntity))
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread()).subscribe());
+                    }
+                }));
     }
 
     private void openNativeGame() {
