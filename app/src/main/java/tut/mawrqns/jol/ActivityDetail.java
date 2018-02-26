@@ -96,6 +96,7 @@ public class ActivityDetail extends AppCompatActivity implements SchemaAdapter.S
                 break;
             case 2:
                 schemaString = getString(R.string.schema_title_3);
+                break;
             default:
                 schemaString = "";
         }
