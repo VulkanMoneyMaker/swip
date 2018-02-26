@@ -8,11 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 public class DialogSchema extends DialogFragment {
 
     public static final String TEXT_DIALOG = "text_dialog";
+    public static final String TITLE_DIALOG = "title_dialog";
+    public static final String IS_VIDEO_CONTENT = "isVideoContent";
 
     public interface DialogSchemaOnClick {
         void onClickPlay();
@@ -20,10 +24,12 @@ public class DialogSchema extends DialogFragment {
 
     private DialogSchemaOnClick dialogSchemaOnClick;
 
-    public static DialogSchema newInstance(String text) {
+    public static DialogSchema newInstance(String text, String title, boolean isVideoContent) {
         DialogSchema dialogSchema = new DialogSchema();
         Bundle bundle = new Bundle();
         bundle.putString(TEXT_DIALOG, text);
+        bundle.putString(TITLE_DIALOG, title);
+        bundle.putBoolean(IS_VIDEO_CONTENT, isVideoContent);
         dialogSchema.setArguments(bundle);
         return dialogSchema;
     }
@@ -38,7 +44,13 @@ public class DialogSchema extends DialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         String text = getArguments().getString(TEXT_DIALOG);
+        String title = getArguments().getString(TITLE_DIALOG);
+        boolean isVideoContent = getArguments().getBoolean(IS_VIDEO_CONTENT);
         TextView textView = view.findViewById(R.id.tv_text);
+        TextView tvTitle = view.findViewById(R.id.tv_title);
+        ScrollView scrollView = view.findViewById(R.id.scrollView);
+        VideoView videoView = view.findViewById(R.id.video_player);
+        tvTitle.setText(title);
         textView.setText(text);
         Button btnOk = view.findViewById(R.id.btn_ok);
         btnOk.setOnClickListener(__ -> getDialog().dismiss());
@@ -47,6 +59,17 @@ public class DialogSchema extends DialogFragment {
             getDialog().dismiss();
             dialogSchemaOnClick.onClickPlay();
         });
+        if (isVideoContent) {
+            scrollView.setVisibility(View.GONE);
+            videoView.setVisibility(View.VISIBLE);
+            String path = "android.resource://" + getActivity().getPackageName() + "/" + R.raw.video_file;
+            videoView.setVideoPath(path);
+            videoView.start();
+        } else {
+            scrollView.setVisibility(View.VISIBLE);
+            videoView.setVisibility(View.GONE);
+        }
+
     }
 
     @Override

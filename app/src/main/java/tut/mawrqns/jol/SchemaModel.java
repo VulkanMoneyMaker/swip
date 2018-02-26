@@ -6,7 +6,7 @@ public class SchemaModel {
     private String title;
     private boolean isUnable;
     private int numberSchema;
-
+    private boolean isVideoContnent;
 
     public int getNumberSchema() {
         return numberSchema;
@@ -30,5 +30,13 @@ public class SchemaModel {
 
     public void setUnable(boolean unable) {
         isUnable = unable;
+    }
+
+    public boolean isVideoContnent() {
+        return isVideoContnent;
+    }
+
+    public void setVideoContnent(boolean videoContnent) {
+        isVideoContnent = videoContnent;
     }
 }

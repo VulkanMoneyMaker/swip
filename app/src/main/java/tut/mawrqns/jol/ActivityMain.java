@@ -50,7 +50,8 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
         Button btnCommnet = findViewById(R.id.comment);
         TextView tvDetail = findViewById(R.id.tv_detail);
         tvBalance = findViewById(R.id.tv_balance);
-        openDialog(getString(R.string.text_schema));
+        openDialog(getString(R.string.text_schema),
+                getString(R.string.title_dialog), false);
         if (getIntent() != null) {
             urlBase = getIntent().getStringExtra(BASE_URL);
             isUnable = getIntent().getBooleanExtra(IS_UNABLE, false);
@@ -83,10 +84,12 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
         btnCommnet.setOnClickListener(__ -> openCommentDialog());
 
         SchemaAdapter.SchemaOnClickListner listner = schemaModel -> {
-            openDialog(getMessageForDialog(schemaModel.getNumberSchema()));
+            openDialog(getMessageForDialog(schemaModel.getNumberSchema()),
+                    getTitleForDialog(schemaModel.getNumberSchema()), schemaModel.isVideoContnent());
         };
         TextView tvInfo = findViewById(R.id.tv_info);
-        tvInfo.setOnClickListener(__ -> openDialog(getString(R.string.text_schema)));
+        tvInfo.setOnClickListener(__ -> openDialog(getString(R.string.text_schema),
+                getString(R.string.title_dialog), false));
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
@@ -96,8 +99,10 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
             SchemaModel shemaModel = new SchemaModel();
             shemaModel.setTitle("Совет " + i);
             shemaModel.setNumberSchema(i - 1);
-            if (i < 3) shemaModel.setUnable(true);
+            if (i < 4) shemaModel.setUnable(true);
             else shemaModel.setUnable(false);
+            if (i == 3) shemaModel.setVideoContnent(true);
+            else shemaModel.setVideoContnent(false);
             schemaItem.add(shemaModel);
 
 
@@ -200,18 +205,36 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
         return schemaString;
     }
 
-
-
-    private void openDialog(String text) {
-        if (text.isEmpty()) return;
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        Fragment prev = getFragmentManager().findFragmentByTag("dialog");
-        if (prev != null) {
-            ft.remove(prev);
+    private String getTitleForDialog(int numberSchema) {
+        String schemaString;
+        switch (numberSchema) {
+            case 0:
+                schemaString = getString(R.string.schema_title_1);
+                break;
+            case 1:
+                schemaString = getString(R.string.schema_title_2);
+                break;
+            case 2:
+                schemaString = getString(R.string.schema_title_3);
+                break;
+            default:
+                schemaString = "";
         }
-        ft.addToBackStack(null);
-        DialogSchema dialogFragment = DialogSchema.newInstance(text);
-        dialogFragment.show(ft, "dialog");
+        return schemaString;
+    }
+
+
+    private void openDialog(String text, String title, boolean isVideoContent) {
+            if (title.isEmpty()) return;
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+            if (prev != null) {
+                ft.remove(prev);
+            }
+            ft.addToBackStack(null);
+            DialogSchema dialogFragment = DialogSchema.newInstance(text, title, isVideoContent);
+            dialogFragment.show(ft, "dialog");
+
     }
 
     private void openGame(String url) {

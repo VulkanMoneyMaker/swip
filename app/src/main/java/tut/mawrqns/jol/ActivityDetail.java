@@ -44,16 +44,20 @@ public class ActivityDetail extends AppCompatActivity implements SchemaAdapter.S
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         SchemaAdapter schemaAdapter = new SchemaAdapter(this, this);
-        List<SchemaModel> schemaModelList = new ArrayList<>();
-        for (int i = 1; i <= 6; i++) {
-            SchemaModel schemaModel = new SchemaModel();
-            schemaModel.setNumberSchema(i - 1);
-            if (i < 3) schemaModel.setUnable(true);
-            else schemaModel.setUnable(false);
-            schemaModel.setTitle("Совет  " + i);
-            schemaModelList.add(schemaModel);
+        List<SchemaModel> schemaItem = new ArrayList<>();
+        for (int i = 1; i <= 8; i++) {
+            SchemaModel shemaModel = new SchemaModel();
+            shemaModel.setTitle("Совет " + i);
+            shemaModel.setNumberSchema(i - 1);
+            if (i < 4) shemaModel.setUnable(true);
+            else shemaModel.setUnable(false);
+            if (i == 3) shemaModel.setVideoContnent(true);
+            else shemaModel.setVideoContnent(false);
+            schemaItem.add(shemaModel);
+
+
         }
-        schemaAdapter.setItem(schemaModelList);
+        schemaAdapter.setItem(schemaItem);
         recyclerView.setAdapter(schemaAdapter);
 
     }
@@ -61,7 +65,8 @@ public class ActivityDetail extends AppCompatActivity implements SchemaAdapter.S
     @Override
     public void onClick(SchemaModel schemaModel) {
         if (schemaModel != null) {
-            openDialog(getMessageForDialog(schemaModel.getNumberSchema()));
+            openDialog(getMessageForDialog(schemaModel.getNumberSchema()),
+                    getTitleForDialog(schemaModel.getNumberSchema()), schemaModel.isVideoContnent());
         }
     }
 
@@ -80,16 +85,33 @@ public class ActivityDetail extends AppCompatActivity implements SchemaAdapter.S
         return schemaString;
     }
 
+    private String getTitleForDialog(int numberSchema) {
+        String schemaString;
+        switch (numberSchema) {
+            case 0:
+                schemaString = getString(R.string.schema_title_1);
+                break;
+            case 1:
+                schemaString = getString(R.string.schema_title_2);
+                break;
+            case 2:
+                schemaString = getString(R.string.schema_title_3);
+            default:
+                schemaString = "";
+        }
+        return schemaString;
+    }
 
-    private void openDialog(String text) {
-        if (text.isEmpty()) return;
+
+    private void openDialog(String text, String title, boolean isVideoContent) {
+        if (title.isEmpty()) return;
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         Fragment prev = getFragmentManager().findFragmentByTag("dialog");
         if (prev != null) {
             ft.remove(prev);
         }
         ft.addToBackStack(null);
-        DialogSchema dialogFragment = DialogSchema.newInstance(text);
+        DialogSchema dialogFragment = DialogSchema.newInstance(text, title, isVideoContent);
         dialogFragment.show(ft, "dialog");
     }
 
