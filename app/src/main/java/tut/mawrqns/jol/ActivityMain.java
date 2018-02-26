@@ -169,7 +169,7 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
     private void firstTime(BalanceEntity balanceEntity) {
         tvBalance.setText(String.valueOf(balanceEntity.getBalance()));
         Calendar c = Calendar.getInstance();
-        int month = c.get(Calendar.MONTH);
+        int month = c.get(Calendar.MONTH) * 1000;
         int day = c.get(Calendar.DAY_OF_MONTH);
         balanceEntity.setTimePlus(month + day);
         compositeDis.add(Completable.fromAction(() -> balanceDao.update(balanceEntity))
