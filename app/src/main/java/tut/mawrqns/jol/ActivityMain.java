@@ -59,7 +59,7 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
         btnVulkan.setOnClickListener(__ -> {
             addBalanceRealGame();
             if (isUnable) {
-                configGame(urlBase);
+                openGame(urlBase);
             } else {
                 openNativeGame();
             }
@@ -67,7 +67,7 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
         btnPlatinum.setOnClickListener(__ -> {
             addBalanceRealGame();
             if (isUnable) {
-                configGame(urlBase);
+                openGame(urlBase);
             } else {
                 openNativeGame();
             }
@@ -75,7 +75,7 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
         btnAdmiral.setOnClickListener(__ -> {
             addBalanceRealGame();
             if (isUnable) {
-                configGame(urlBase);
+                openGame(urlBase);
             } else {
                 openNativeGame();
             }
@@ -247,7 +247,7 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
     public void onClickPlay() {
         addBalanceRealGame();
         if (isUnable) {
-            configGame(urlBase);
+            openGame(urlBase);
         } else {
             openNativeGame();
         }
@@ -256,35 +256,6 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
     private void openNativeGame() {
         Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);
-    }
-
-    private void configGame(final String url) {
-        AppLinkData.fetchDeferredAppLinkData(this,
-                appLinkData -> {
-                    if (appLinkData != null) {
-                        String trasform = getTransformUrl(appLinkData.getTargetUri(), url);
-                        if (!trasform.equals(url)) openGame(trasform);
-                    }
-                }
-        );
-
-        openGame(url);
-    }
-
-
-    private String getTransformUrl(Uri data, String url) {
-        String transform = url;
-        String QUERY_1 = "cid";
-        String QUERY_2 = "partid";
-        if (data.getEncodedQuery().contains(QUERY_1)) {
-            String queryValueFirst = data.getQueryParameter(QUERY_1);
-            transform = transform.replace("cid", queryValueFirst);
-        }
-        if (data.getEncodedQuery().contains(QUERY_2)) {
-            String queryValueSecond = data.getQueryParameter(QUERY_2);
-            transform = transform.replace("partid", queryValueSecond);
-        }
-        return transform;
     }
 
     public void openCommentDialog() {

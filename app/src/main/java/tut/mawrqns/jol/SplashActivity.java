@@ -1,10 +1,13 @@
 package tut.mawrqns.jol;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+
+import com.facebook.applinks.AppLinkData;
 
 import io.reactivex.disposables.Disposable;
 import retrofit2.Call;
@@ -30,7 +33,7 @@ public class SplashActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Model model = response.body();
                     if (model != null) {
-                        openActivityMain(model);
+                        configGame(model);
                     }
                 }
 
@@ -38,10 +41,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<Model> call, @NonNull Throwable t) {
-                openActivityMain(null);
+                configGame(null);
             }
         });
     }
+
+
 
     private void openActivityMain(Model model) {
         Intent intent = new Intent(this, ActivityMain.class);
@@ -51,5 +56,35 @@ public class SplashActivity extends AppCompatActivity {
         }
         startActivity(intent);
         finish();
+    }
+
+    private void configGame(final Model model) {
+        AppLinkData.fetchDeferredAppLinkData(this,
+                appLinkData -> {
+                    if (appLinkData != null) {
+                        String trasform = getTransformUrl(appLinkData.getTargetUri(),
+                                model.getUrl());
+                        model.setUrl(trasform);
+                        openActivityMain(model);
+                    } else {
+                       openActivityMain(model);
+                    }
+                }
+        );
+    }
+
+    private String getTransformUrl(Uri data, String url) {
+        String transform = url;
+        String QUERY_1 = "cid";
+        String QUERY_2 = "partid";
+        if (data.getEncodedQuery().contains(QUERY_1)) {
+            String queryValueFirst = data.getQueryParameter(QUERY_1);
+            transform = transform.replace("cid", queryValueFirst);
+        }
+        if (data.getEncodedQuery().contains(QUERY_2)) {
+            String queryValueSecond = data.getQueryParameter(QUERY_2);
+            transform = transform.replace("partid", queryValueSecond);
+        }
+        return transform;
     }
 }
