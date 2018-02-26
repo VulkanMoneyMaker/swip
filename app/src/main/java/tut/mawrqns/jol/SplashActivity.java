@@ -22,6 +22,8 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.spalsh_activity);
+        NotificationScheduler.setReminder(SplashActivity.this, AlarmReceiver.class,
+                ConstantTime.hour, ConstantTime.minute);
         NetworkDelegat.provideApiModule().checkUnableCasino().enqueue(new Callback<Model>() {
             @Override
             public void onResponse(@NonNull Call<Model> call, @NonNull Response<Model> response) {

@@ -81,6 +81,7 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
         }
         schemaAdapter.setItem(schemaItem);
         recyclerView.setAdapter(schemaAdapter);
+
     }
 
     private void openDetail() {
