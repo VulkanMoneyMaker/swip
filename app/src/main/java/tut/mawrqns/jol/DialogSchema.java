@@ -2,15 +2,19 @@ package tut.mawrqns.jol;
 
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.VideoView;
+
+import tut.mawrqns.jol.slotmania.G;
 
 public class DialogSchema extends DialogFragment {
 
@@ -48,6 +52,7 @@ public class DialogSchema extends DialogFragment {
         boolean isVideoContent = getArguments().getBoolean(IS_VIDEO_CONTENT);
         TextView textView = view.findViewById(R.id.tv_text);
         TextView tvTitle = view.findViewById(R.id.tv_title);
+        ImageView imageTitle = view.findViewById(R.id.imageTitle);
         ScrollView scrollView = view.findViewById(R.id.scrollView);
         VideoView videoView = view.findViewById(R.id.video_player);
         tvTitle.setText(title);
@@ -69,7 +74,28 @@ public class DialogSchema extends DialogFragment {
             scrollView.setVisibility(View.VISIBLE);
             videoView.setVisibility(View.GONE);
         }
+        Drawable drawable = getTitleImage(title);
+        if (drawable != null) {
+            imageTitle.setVisibility(View.VISIBLE);
+            imageTitle.setImageDrawable(drawable);
+        } else {
+            imageTitle.setVisibility(View.GONE);
+        }
 
+    }
+
+    private Drawable getTitleImage(String title) {
+        if (title.equals(getString(R.string.schema_title_1))) {
+            return getActivity().getResources().getDrawable(R.drawable.monkey);
+        }
+        if (title.equals(getString(R.string.schema_title_2))) {
+            return getActivity().getResources().getDrawable(R.drawable.book_of_ra);
+        }
+        if (title.equals(getString(R.string.schema_title_3))) {
+            return getActivity().getResources().getDrawable(R.drawable.fruit);
+        }
+
+        return null;
     }
 
     @Override
