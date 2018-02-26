@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/background"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/toolbar"
-        android:layout_marginTop="24dp"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="24dp"
         android:background="@drawable/bg_toolbar">
 
         <android.support.constraint.ConstraintLayout
@@ -43,11 +44,11 @@
                 android:layout_gravity="center_vertical"
                 android:layout_margin="8dp"
                 android:gravity="center"
-                android:textStyle="bold"
-                android:textAllCaps="true"
-                android:textSize="16sp"
                 android:text="@string/top_casino"
+                android:textAllCaps="true"
                 android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tv_info"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -61,13 +62,13 @@
                 android:layout_margin="8dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
+                android:background="@drawable/yellow_button"
+                android:gravity="center"
                 android:text="@string/info"
                 android:textAllCaps="true"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:textSize="20sp"
                 android:textColor="@color/black"
-                android:background="@drawable/yellow_button"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -78,225 +79,226 @@
 
     </LinearLayout>
 
-    <ScrollView
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="fill_parent"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerView"
+        app:layout_constraintStart_toEndOf="@+id/recyclerView">
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/recyclerView"
-            app:layout_constraintStart_toEndOf="@+id/recyclerView">
-            <Button
-                android:id="@+id/button3"
+            android:background="@android:color/transparent"
+            android:text="@string/casino"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/text_detail"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/button4"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+
+            android:id="@+id/text_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="@string/rating"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/button3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="@string/play"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/button3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:weightSum="5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button3">
+
+            <ImageView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:text="@string/casino"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toStartOf="@+id/text_detail"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/button4"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="2"
+                android:src="@drawable/icon_1_min" />
 
-            <Button
-
-                android:id="@+id/text_detail"
+            <com.iarcuschin.simpleratingbar.SimpleRatingBar
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:text="@string/rating"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/button3"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:layout_weight="2"
+                app:srb_numberOfStars="5"
+                app:srb_rating="5"
+                app:srb_starSize="15dp"
+                app:srb_stepSize="0.5" />
 
             <Button
-                android:id="@+id/button4"
-                android:layout_width="0dp"
+                android:id="@+id/btn_vulkan"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/yellow_button"
                 android:text="@string/play"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toStartOf="@+id/button3"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/linearLayout1"
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:weightSum="5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
+
+            <ImageView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:weightSum="5"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button3">
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="2"
+                android:src="@drawable/icon_2_min" />
 
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_weight="2"
-                    android:src="@drawable/icon_1_min" />
-
-                <com.iarcuschin.simpleratingbar.SimpleRatingBar
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="8dp"
-                    android:layout_weight="2"
-                    app:srb_numberOfStars="5"
-                    app:srb_rating="5"
-                    app:srb_starSize="15dp"
-                    app:srb_stepSize="0.5" />
-
-                <Button
-                    android:id="@+id/btn_vulkan"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/yellow_button"
-                    android:text="@string/play"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout2"
+            <com.iarcuschin.simpleratingbar.SimpleRatingBar
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:weightSum="5"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
+                android:layout_gravity="center"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="2"
+                app:srb_numberOfStars="5"
+                app:srb_rating="5"
+                app:srb_starSize="15dp"
+                app:srb_stepSize="0.5" />
 
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_weight="2"
-                    android:src="@drawable/icon_2_min" />
-
-                <com.iarcuschin.simpleratingbar.SimpleRatingBar
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_weight="2"
-                    app:srb_numberOfStars="5"
-                    app:srb_rating="5"
-                    app:srb_starSize="15dp"
-                    app:srb_stepSize="0.5" />
-
-                <Button
-                    android:id="@+id/btn_platinum"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/yellow_button"
-                    android:text="@string/play"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-            </LinearLayout>
+            <Button
+                android:id="@+id/btn_platinum"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/yellow_button"
+                android:text="@string/play"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
 
-            <LinearLayout
-                android:id="@+id/linearLayout3"
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:weightSum="5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+            <ImageView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:weightSum="5"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="2"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_3_min" />
 
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_weight="2"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/icon_3_min" />
+            <com.iarcuschin.simpleratingbar.SimpleRatingBar
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:layout_weight="2"
+                app:srb_numberOfStars="5"
+                app:srb_rating="5"
+                app:srb_starSize="15dp"
+                app:srb_stepSize="0.5" />
 
-                <com.iarcuschin.simpleratingbar.SimpleRatingBar
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="8dp"
-                    android:layout_weight="2"
-                    app:srb_numberOfStars="5"
-                    app:srb_rating="5"
-                    app:srb_starSize="15dp"
-                    app:srb_stepSize="0.5" />
+            <Button
+                android:id="@+id/btn_admiral"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/yellow_button"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:text="@string/play"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
-                <Button
-                    android:id="@+id/btn_admiral"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/yellow_button"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
-                    android:text="@string/play"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-            </LinearLayout>
+        <LinearLayout
+            android:id="@+id/container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/comment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.48"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/tv_detail"
-                android:layout_marginEnd="12dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="12dp"
-                android:textAllCaps="true"
-                android:textStyle="bold"
-                android:textColor="@color/white"
+                android:layout_gravity="end"
                 android:text="@string/detail"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
                 android:textSize="20sp"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
-
-            <Button
-                android:id="@+id/comment"
-                android:layout_width="120dp"
-                android:layout_height="70dp"
-                android:layout_marginBottom="12dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginLeft="12dp"
                 android:textStyle="bold"
-                android:background="@drawable/yellow_button"
-                android:textSize="20sp"
-                android:layout_marginStart="12dp"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:text="@string/comment"
-                app:layout_constraintTop_toBottomOf="@+id/tv_detail" />
-        </android.support.constraint.ConstraintLayout>
-    </ScrollView>
+                android:layout_marginRight="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/comment"
+            android:layout_width="120dp"
+            android:layout_height="70dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="12dp"
+            android:background="@drawable/yellow_button"
+            android:text="@string/comment"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 
 
 </LinearLayout>
