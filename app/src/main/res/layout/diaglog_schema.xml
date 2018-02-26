@@ -41,23 +41,26 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:background="@color/colorTextSplash"
+            android:background="@drawable/red_button"
             android:text="@string/bnt_ok"
             android:textColor="@color/white"
-            android:textSize="12sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btn_play"
             android:layout_width="0dp"
             android:layout_height="55dp"
+            android:layout_marginEnd="10dp"
             android:layout_gravity="center"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:background="@color/colorTextSplash"
+            android:background="@drawable/red_button"
             android:text="@string/bnt_negative"
             android:textColor="@color/white"
-            android:textSize="12sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

@@ -44,12 +44,12 @@ public class SchemaAdapter extends RecyclerView.Adapter<SchemaAdapter.ViewHolder
                     if (schemaModel.isUnable()) listner.onClick(schemaModel);
                 });
                 if (schemaModel.isUnable()) {
-                    holder.container.setBackground(context.getResources()
-                            .getDrawable(R.drawable.shcema_bkg));
+//                    holder.container.setBackground(context.getResources()
+//                            .getDrawable(R.drawable.shcema_bkg));
                     holder.textView.setTextColor(context.getResources().getColor(R.color.white));
                 } else {
-                    holder.container.setBackground(context.getResources()
-                            .getDrawable(R.drawable.shcema_bkg_unable));
+//                    holder.container.setBackground(context.getResources()
+//                            .getDrawable(R.drawable.shcema_bkg_unable));
                     holder.textView.setTextColor(context.getResources().getColor(R.color.black));
                 }
             }

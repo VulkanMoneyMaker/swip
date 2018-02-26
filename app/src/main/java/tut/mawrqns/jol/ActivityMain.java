@@ -65,7 +65,7 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
         TextView tvInfo = findViewById(R.id.tv_info);
         tvInfo.setOnClickListener(__ -> openDialog(getString(R.string.text_schema)));
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 4);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
         SchemaAdapter schemaAdapter = new SchemaAdapter(this, listner);
         List<SchemaModel> schemaItem = new ArrayList<>();
