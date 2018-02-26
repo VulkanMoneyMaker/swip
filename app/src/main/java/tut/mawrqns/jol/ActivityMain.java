@@ -71,7 +71,7 @@ public class ActivityMain extends AppCompatActivity implements DialogSchema.Dial
         List<SchemaModel> schemaItem = new ArrayList<>();
         for (int i = 1; i <= 4; i++) {
             SchemaModel shemaModel = new SchemaModel();
-            shemaModel.setTitle("Схема " + i);
+            shemaModel.setTitle("Совет " + i);
             shemaModel.setNumberSchema(i - 1);
             if (i < 3) shemaModel.setUnable(true);
             else shemaModel.setUnable(false);

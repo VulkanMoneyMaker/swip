@@ -42,7 +42,7 @@ public class ActivityDetail extends AppCompatActivity implements SchemaAdapter.S
             schemaModel.setNumberSchema(i - 1);
             if (i < 3) schemaModel.setUnable(true);
             else schemaModel.setUnable(false);
-            schemaModel.setTitle("Схема " + i);
+            schemaModel.setTitle("Совет  " + i);
             schemaModelList.add(schemaModel);
         }
         schemaAdapter.setItem(schemaModelList);
