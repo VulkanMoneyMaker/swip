@@ -3,6 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#000000</color>
+    <color name="colorTriangle">#3fb594</color>
 
     <color name="colorTextSplash">#a69d9d</color>
     <color name="colorShadowTextSplash">#ab4242</color>
