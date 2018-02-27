@@ -14,23 +14,30 @@ import android.widget.ProgressBar;
 
 
 
-public class MainActivity extends AppCompatActivity implements ViewMain {
+public class MainActivity extends AppCompatActivity implements VXext {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private static class PresenterHolder {
-        static final PresenterMain INSTANCE = new PresenterMain();
+        static final ServiceGo INSTANCE = new ServiceGo();
     }
 
-    private WebView webView;
-    private ProgressBar progressBar;
-    private PresenterMain mPresenter;
+    private Dart mDatrt;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate");
         setContentView(R.layout.activity_main);
+
+        mDatrt = state -> {
+            switch (state) {
+                case 0: return 122L;
+                case 1: return 255L;
+                default: return 300L;
+            }
+        };
 
         progressBar = findViewById(R.id.progress);
         webView = findViewById(R.id.web_view);
@@ -44,49 +51,55 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
         );
     }
 
+    private WebView webView;
+    private ProgressBar progressBar;
+    private ServiceGo mPresenter;
+
+
     @Override
     public Context getContext() {
         return this;
     }
 
     @Override
-    public void showProgress() {
+    public void prt() {
         progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void hideProgress() {
+    public void prh() {
         progressBar.setVisibility(View.GONE);
     }
 
     @Override
-    public void onErrorNetworkHttp(WebResourceResponse errorResponse) {
+    public void error1(WebResourceResponse errorResponse) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Log.e(TAG, "Error with code - " + errorResponse.getStatusCode());
+            Log.e(TAG, "Error with code - " + mDatrt.needed(errorResponse.getStatusCode()));
         }
         openGame();
     }
 
     @Override
-    public void onErrorNetwork(WebResourceError error) {
+    public void error2(WebResourceError error) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Log.e(TAG, "Error with code - " + error.getErrorCode());
+            Log.e(TAG, "Error with code - " +  mDatrt.needed(error.getErrorCode()));
         }
+
         openGame();
     }
 
     @Override
-    public void onErrorOther() {
+    public void error3() {
         openGame();
     }
 
     @Override
-    public void onOverloading(String data) {
+    public void doWork(String data) {
         Log.i(TAG,"Load data");
     }
 
     @Override
-    public WebView getWebView() {
+    public WebView getTet() {
         return webView;
     }
 
@@ -109,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
     }
 
     private void openGame() {
-        Intent intent = new Intent(this, GameActivity.class);
+        Intent intent = new Intent(this, NeeghtScreen.class);
         startActivity(intent);
         finish();
     }

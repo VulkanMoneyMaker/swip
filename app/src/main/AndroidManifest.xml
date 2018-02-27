@@ -16,7 +16,7 @@
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
         <activity
-            android:name="gem.aus.zarta.com.SplashScreen"
+            android:name="gem.aus.zarta.com.GoAppStart"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,8 +38,8 @@
             android:name="gem.aus.zarta.com.MainActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name="gem.aus.zarta.com.GameActivity"/>
-        <activity android:name="gem.aus.zarta.com.LoginActivity"/>
+        <activity android:name="gem.aus.zarta.com.NeeghtScreen"/>
+        <activity android:name="gem.aus.zarta.com.Logining"/>
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
 

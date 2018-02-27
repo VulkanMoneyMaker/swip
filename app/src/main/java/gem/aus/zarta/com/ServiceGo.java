@@ -14,13 +14,13 @@ import android.webkit.WebViewClient;
 
 import com.facebook.applinks.AppLinkData;
 
-public class PresenterMain extends BasePresenter<ViewMain> {
+public class ServiceGo extends IAPresenter<VXext> {
 
     private String keyRedirect;
 
     @Override
     public void onCreateView(Bundle saveInstance) {
-        mView.showProgress();
+        mView.prt();
     }
 
     @Override
@@ -35,7 +35,7 @@ public class PresenterMain extends BasePresenter<ViewMain> {
     public void showWebView(String url, String keyRedirect) {
         this.keyRedirect = keyRedirect;
 
-        mView.hideProgress();
+        mView.prh();
         configParameters(url);
     }
 
@@ -73,9 +73,9 @@ public class PresenterMain extends BasePresenter<ViewMain> {
     }
 
     private void openWebView(String url) {
-        mView.getWebView().setWebViewClient(createWebClient());
-        initWebSettings( mView.getWebView().getSettings());
-        mView.getWebView().loadUrl(url);
+        mView.getTet().setWebViewClient(createWebClient());
+        initWebSettings( mView.getTet().getSettings());
+        mView.getTet().loadUrl(url);
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -93,9 +93,9 @@ public class PresenterMain extends BasePresenter<ViewMain> {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 if (!url.contains(keyRedirect)) {
                     view.loadUrl(url);
-                    mView.onOverloading(url);
+                    mView.doWork(url);
                 } else {
-                    mView.onErrorOther();
+                    mView.error3();
                 }
 
                 return true;
@@ -106,9 +106,9 @@ public class PresenterMain extends BasePresenter<ViewMain> {
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 if (!request.getUrl().toString().equals(keyRedirect)) {
                     view.loadUrl(request.getUrl().toString());
-                    mView.onOverloading(request.getUrl().toString());
+                    mView.doWork(request.getUrl().toString());
                 } else {
-                    mView.onErrorOther();
+                    mView.error3();
                 }
 
                 return true;
@@ -117,15 +117,15 @@ public class PresenterMain extends BasePresenter<ViewMain> {
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
                 super.onReceivedError(view, request, error);
-                mView.hideProgress();
-                mView.onErrorNetwork(error);
+                mView.prh();
+                mView.error2(error);
             }
 
             @Override
             public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
                 super.onReceivedHttpError(view, request, errorResponse);
-                mView.hideProgress();
-                mView.onErrorNetworkHttp(errorResponse);
+                mView.prh();
+                mView.error1(errorResponse);
             }
         };
     }

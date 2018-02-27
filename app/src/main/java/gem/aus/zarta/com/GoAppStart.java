@@ -10,19 +10,45 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 
-public class SplashScreen extends Activity {
+public class GoAppStart extends Activity {
+
+    private int mData;
+
+    private Lost mLost;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        mLost = () -> savedInstanceState == null ? 1 : 0;
+
         Observable.timer(3, TimeUnit.SECONDS)
-               .subscribe(__ -> openWebGame());
+               .subscribe(__ -> ttt());
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 
-    private void openWebGame() {
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mLost != null) mData = mLost.getData();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    private void ttt() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();

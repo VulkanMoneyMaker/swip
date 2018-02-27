@@ -1,6 +1,6 @@
 package gem.aus.zarta.com;
 
-public abstract class BasePresenter<T> implements MainPresenter {
+public abstract class IAPresenter<T> implements IMain {
 
     T mView;
 
@@ -8,7 +8,7 @@ public abstract class BasePresenter<T> implements MainPresenter {
         this.mView = view;
     }
 
-    BasePresenter() {
+    IAPresenter() {
     }
 
     @Override

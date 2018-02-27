@@ -2,7 +2,7 @@ package gem.aus.zarta.com;
 
 import android.os.Bundle;
 
-public interface MainPresenter {
+public interface IMain {
 
     void onCreateView(Bundle saveInstance);
 

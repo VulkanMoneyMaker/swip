@@ -7,7 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class LoginActivity extends Activity {
+public class Logining extends Activity {
 
     private EditText passwordEdit;
     private EditText usernameEdit;
