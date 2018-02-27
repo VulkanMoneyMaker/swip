@@ -3,7 +3,7 @@ package ghh.auus.fhhh.com;
 
 import android.content.Context;
 
-public interface ViewBase {
+public interface IViewBase {
 
     Context getContext();
 }

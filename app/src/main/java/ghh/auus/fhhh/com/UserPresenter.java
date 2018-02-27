@@ -2,7 +2,7 @@ package ghh.auus.fhhh.com;
 
 import android.os.Bundle;
 
-public interface MainPresenter {
+public interface UserPresenter {
 
     void onCreateView(Bundle saveInstance);
 

@@ -14,7 +14,7 @@ import android.widget.ProgressBar;
 
 
 
-public class MainActivity extends AppCompatActivity implements ViewMain {
+public class MainActivity extends AppCompatActivity implements IView {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
     }
 
     private void openGame() {
-        Intent intent = new Intent(this, GameActivity.class);
+        Intent intent = new Intent(this, GameForUser.class);
         startActivity(intent);
         finish();
     }

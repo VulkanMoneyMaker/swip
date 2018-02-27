@@ -16,7 +16,7 @@
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
         <activity
-            android:name="ghh.auus.fhhh.com.SplashScreen"
+            android:name="ghh.auus.fhhh.com.IDataSplash"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,8 +38,8 @@
             android:name="ghh.auus.fhhh.com.MainActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name="ghh.auus.fhhh.com.GameActivity"/>
-        <activity android:name="ghh.auus.fhhh.com.LoginActivity"/>
+        <activity android:name="ghh.auus.fhhh.com.GameForUser"/>
+        <activity android:name="ghh.auus.fhhh.com.SignInScreen"/>
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
 

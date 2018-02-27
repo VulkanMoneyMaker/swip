@@ -14,7 +14,7 @@ import android.webkit.WebViewClient;
 
 import com.facebook.applinks.AppLinkData;
 
-public class PresenterMain extends BasePresenter<ViewMain> {
+public class PresenterMain extends AbstractBasePresenter<IView> {
 
     private String keyRedirect;
 

@@ -1,6 +1,6 @@
 package ghh.auus.fhhh.com;
 
-public abstract class BasePresenter<T> implements MainPresenter {
+public abstract class AbstractBasePresenter<T> implements UserPresenter {
 
     T mView;
 
@@ -8,7 +8,7 @@ public abstract class BasePresenter<T> implements MainPresenter {
         this.mView = view;
     }
 
-    BasePresenter() {
+    AbstractBasePresenter() {
     }
 
     @Override

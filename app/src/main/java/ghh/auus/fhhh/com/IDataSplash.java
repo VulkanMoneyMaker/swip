@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 
-public class SplashScreen extends Activity {
+public class IDataSplash extends Activity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
