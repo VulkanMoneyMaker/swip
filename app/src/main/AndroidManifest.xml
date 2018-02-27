@@ -35,11 +35,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainSplsh"
+            android:name=".MainActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".GameRule"/>
-        <activity android:name=".LogInScreen"/>
+        <activity android:name=".GameActivity"/>
+        <activity android:name=".LoginActivity"/>
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
 

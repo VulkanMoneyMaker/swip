@@ -3,7 +3,6 @@ package habib.angpdjms.nel;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,7 +16,7 @@ import android.widget.ImageView;
 import java.util.Random;
 
 
-public class GameRule extends Activity {
+public class GameActivity extends Activity {
 
     private ImageView imageRoulette;
     private Button btnPlay;
@@ -73,7 +72,6 @@ public class GameRule extends Activity {
             }
         });
         animator.start();
-
     }
 
     private void showDialogWin() {
@@ -91,7 +89,7 @@ public class GameRule extends Activity {
     }
 
     private void openRegistration() {
-        Intent intent = new Intent(this,LogInScreen.class);
+        Intent intent = new Intent(this,LoginActivity.class);
         startActivity(intent);
         finish();
     }

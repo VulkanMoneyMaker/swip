@@ -2,7 +2,7 @@ package habib.angpdjms.nel;
 
 import android.os.Bundle;
 
-public interface PresenterJOP {
+public interface MainPresenter {
 
     void onCreateView(Bundle saveInstance);
 
@@ -11,8 +11,4 @@ public interface PresenterJOP {
     void onStop();
 
     void onDestroy();
-
-    void onShow();
-
-    void  onLow();
 }

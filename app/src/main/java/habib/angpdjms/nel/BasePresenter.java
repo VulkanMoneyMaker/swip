@@ -1,6 +1,6 @@
 package habib.angpdjms.nel;
 
-public abstract class BasePresenter<T> implements PresenterJOP {
+public abstract class BasePresenter<T> implements MainPresenter {
 
     T mView;
 
