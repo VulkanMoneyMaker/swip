@@ -1,5 +1,6 @@
 package habib.angpdjms.nel;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -7,9 +8,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 
@@ -22,8 +26,12 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
         static final PresenterMain INSTANCE = new PresenterMain();
     }
 
+    private View mLayoutTimer;
+    private View mLayoutWeb;
+    private ImageView mButtonStart;
     private WebView webView;
     private ProgressBar progressBar;
+
     private PresenterMain mPresenter;
 
     @Override
@@ -34,6 +42,20 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
 
         progressBar = findViewById(R.id.progress);
         webView = findViewById(R.id.web_view);
+        mLayoutTimer = findViewById(R.id.layout_timer);
+        mLayoutWeb = findViewById(R.id.layout_web_view);
+        mButtonStart = findViewById(R.id.button_start);
+
+        mLayoutTimer.setVisibility(View.VISIBLE);
+        mLayoutWeb.setVisibility(View.GONE);
+
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.pulse);
+        animation.setRepeatCount(ObjectAnimator.INFINITE);
+        mButtonStart.setAnimation(animation);
+        mButtonStart.setOnClickListener(view -> {
+            mLayoutTimer.setVisibility(View.GONE);
+            mLayoutWeb.setVisibility(View.VISIBLE);
+        });
 
         mPresenter = PresenterHolder.INSTANCE;
         mPresenter.setView(this);
