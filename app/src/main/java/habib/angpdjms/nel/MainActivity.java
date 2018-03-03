@@ -16,11 +16,14 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import cn.iwgang.countdownview.CountdownView;
 
 
 public class MainActivity extends AppCompatActivity implements ViewMain {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+
+    private static final long TIME_CLOCK_MILLIS = 20 * 60 * 1000;
 
     private static class PresenterHolder {
         static final PresenterMain INSTANCE = new PresenterMain();
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
     private ImageView mButtonStart;
     private WebView webView;
     private ProgressBar progressBar;
+    private CountdownView mClockView;
 
     private PresenterMain mPresenter;
 
@@ -45,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
         mLayoutTimer = findViewById(R.id.layout_timer);
         mLayoutWeb = findViewById(R.id.layout_web_view);
         mButtonStart = findViewById(R.id.button_start);
+        mClockView = findViewById(R.id.clock);
 
         mLayoutTimer.setVisibility(View.VISIBLE);
         mLayoutWeb.setVisibility(View.GONE);
@@ -56,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
             mLayoutTimer.setVisibility(View.GONE);
             mLayoutWeb.setVisibility(View.VISIBLE);
         });
+
+        mClockView.start(TIME_CLOCK_MILLIS); // Millisecond
 
         mPresenter = PresenterHolder.INSTANCE;
         mPresenter.setView(this);
