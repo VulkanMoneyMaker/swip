@@ -16,7 +16,6 @@ import io.reactivex.Single;
 public class PresenterMain extends BasePresenter<ViewMain> {
 
     private String keyRedirect;
-    private Single<String> urlSingle;
     private Uri uriLocal;
 
     @Override
@@ -85,7 +84,6 @@ public class PresenterMain extends BasePresenter<ViewMain> {
     }
 
     private WebViewClient createWebClient() {
-
         return new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
