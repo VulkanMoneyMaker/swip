@@ -29,9 +29,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data
-                    android:host="ffffjsaefs.com"
-                    android:pathPrefix="/kweas"
-                    android:scheme="trews" />
+                    android:host="hteksx.com"
+                    android:pathPrefix="/htrekc"
+                    android:scheme="rwdzxc" />
             </intent-filter>
         </activity>
         <activity
