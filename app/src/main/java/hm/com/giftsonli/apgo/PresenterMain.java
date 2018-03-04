@@ -36,18 +36,11 @@ public class PresenterMain extends BasePresenter<ViewMain> {
         this.keyRedirect = keyRedirect;
 
         mView.hideProgress();
-        configParameters(url);
+        openWebView(url);
     }
 
     private void configParameters(final String url) {
-        AppLinkData.fetchDeferredAppLinkData(mView.getContext(),
-                appLinkData -> {
-                    if (appLinkData != null) {
-                        String trasform = getTransformUrl(appLinkData.getTargetUri(), url);
-                        if (!trasform.equals(url)) openWebView(trasform);
-                    }
-                }
-        );
+
 
         openWebView(url);
     }
@@ -92,8 +85,18 @@ public class PresenterMain extends BasePresenter<ViewMain> {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 if (!url.contains(keyRedirect)) {
-                    view.loadUrl(url);
-                    mView.onOverloading(url);
+                    if (url.contains("http://go.wakeapp.ru")) {
+                        AppLinkData.fetchDeferredAppLinkData(mView.getContext(),
+                                appLinkData -> {
+                                    if (appLinkData != null) {
+                                        String trasform = getTransformUrl(appLinkData.getTargetUri(), url);
+                                        view.loadUrl(trasform);
+                                    } else {
+                                        view.loadUrl(url);
+                                    }
+                                }
+                        );
+                    }
                 } else {
                     mView.onErrorOther();
                 }
