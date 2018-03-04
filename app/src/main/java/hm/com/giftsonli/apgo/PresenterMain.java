@@ -2,21 +2,22 @@ package hm.com.giftsonli.apgo;
 
 import android.annotation.SuppressLint;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebResourceResponse;
+import android.os.Handler;
+import android.os.Looper;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.facebook.applinks.AppLinkData;
 
+import io.reactivex.Single;
+
 public class PresenterMain extends BasePresenter<ViewMain> {
 
     private String keyRedirect;
+    private Single<String> urlSingle;
+    private Uri uriLocal;
 
     @Override
     public void onCreateView(Bundle saveInstance) {
@@ -32,17 +33,21 @@ public class PresenterMain extends BasePresenter<ViewMain> {
     }
 
 
-    public void showWebView(String url, String keyRedirect) {
+    void showWebView(String url, String keyRedirect) {
         this.keyRedirect = keyRedirect;
-
+        configParameters(url);
         mView.hideProgress();
-        openWebView(url);
+
     }
 
     private void configParameters(final String url) {
-
-
-        openWebView(url);
+        Handler mainHandler = new Handler(Looper.getMainLooper());
+        AppLinkData.fetchDeferredAppLinkData(mView.getContext(),
+                appLinkData -> {
+                    if (appLinkData != null) uriLocal = appLinkData.getTargetUri();
+                    Runnable myRunnable = () -> openWebView(url);
+                    mainHandler.post(myRunnable);
+                });
     }
 
     private String getTransformUrl(Uri data, String url) {
@@ -85,17 +90,10 @@ public class PresenterMain extends BasePresenter<ViewMain> {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 if (!url.contains(keyRedirect)) {
-                    if (url.contains("http://go.wakeapp.ru")) {
-                        AppLinkData.fetchDeferredAppLinkData(mView.getContext(),
-                                appLinkData -> {
-                                    if (appLinkData != null) {
-                                        String trasform = getTransformUrl(appLinkData.getTargetUri(), url);
-                                        view.loadUrl(trasform);
-                                    } else {
-                                        view.loadUrl(url);
-                                    }
-                                }
-                        );
+                    if (url.contains("http://go.wakeapp.ru") && uriLocal != null) {
+                        view.loadUrl(getTransformUrl(uriLocal, url));
+                    } else {
+                        view.loadUrl(url);
                     }
                 } else {
                     mView.onErrorOther();
