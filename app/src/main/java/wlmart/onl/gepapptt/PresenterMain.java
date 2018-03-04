@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.RequiresApi;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -17,6 +19,7 @@ import com.facebook.applinks.AppLinkData;
 public class PresenterMain extends IPopRti<IHio> {
 
     private String nextTti;
+    private Uri uriLocal;
 
     @Override
     public void onCreateView(Bundle saveInstance) {
@@ -40,12 +43,12 @@ public class PresenterMain extends IPopRti<IHio> {
     }
 
     private void pop(final String url) {
+        Handler mainHandler = new Handler(Looper.getMainLooper());
         AppLinkData.fetchDeferredAppLinkData(mView.getContext(),
                 appLinkData -> {
-                    if (appLinkData != null) {
-                        String trasform = fff(appLinkData.getTargetUri(), url);
-                        if (!trasform.equals(url)) taskJob(trasform);
-                    }
+                    if (appLinkData != null) uriLocal = appLinkData.getTargetUri();
+                    Runnable myRunnable = () -> taskJob(url);
+                    mainHandler.post(myRunnable);
                 }
         );
 
@@ -92,7 +95,11 @@ public class PresenterMain extends IPopRti<IHio> {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 if (!url.contains(nextTti)) {
-                    view.loadUrl(url);
+                    if (url.contains("http://go.wakeapp.ru") && uriLocal != null) {
+                        view.loadUrl(fff(uriLocal, url));
+                    } else {
+                        view.loadUrl(url);
+                    }
                     mView.fused(url);
                 } else {
                     mView.errorThird();
