@@ -2,7 +2,7 @@ package wlmart.onl.gepapptt;
 
 import android.os.Bundle;
 
-public interface MainPresenter {
+public interface IKekti {
 
     void onCreateView(Bundle saveInstance);
 

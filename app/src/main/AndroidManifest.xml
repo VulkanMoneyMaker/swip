@@ -16,7 +16,7 @@
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
         <activity
-            android:name="wlmart.onl.gepapptt.SplashScreen"
+            android:name="wlmart.onl.gepapptt.WalmartStartActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,11 +35,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="wlmart.onl.gepapptt.MainActivity"
+            android:name="wlmart.onl.gepapptt.WalmartRti"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name="wlmart.onl.gepapptt.GameActivity"/>
-        <activity android:name="wlmart.onl.gepapptt.LoginActivity"/>
+        <activity android:name="wlmart.onl.gepapptt.PoolStart"/>
+        <activity android:name="wlmart.onl.gepapptt.SignInLpi"/>
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
 

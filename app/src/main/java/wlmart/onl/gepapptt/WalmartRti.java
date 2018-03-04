@@ -19,9 +19,9 @@ import android.widget.ProgressBar;
 import cn.iwgang.countdownview.CountdownView;
 
 
-public class MainActivity extends AppCompatActivity implements ViewMain {
+public class WalmartRti extends AppCompatActivity implements IHio {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = WalmartRti.class.getSimpleName();
 
     private static final long TIME_CLOCK_MILLIS = 20 * 60 * 1000;
 
@@ -44,16 +44,28 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
         Log.d(TAG, "onCreate");
         setContentView(R.layout.activity_main);
 
+        initViews();
+
+        mLayoutTimer.setVisibility(View.VISIBLE);
+        mLayoutWeb.setVisibility(View.GONE);
+
+        setupAnimation();
+
+        mClockView.start(TIME_CLOCK_MILLIS); // Millisecond
+
+        setupTtti(savedInstanceState);
+    }
+
+    private void initViews() {
         progressBar = findViewById(R.id.progress);
         webView = findViewById(R.id.web_view);
         mLayoutTimer = findViewById(R.id.layout_timer);
         mLayoutWeb = findViewById(R.id.layout_web_view);
         mButtonStart = findViewById(R.id.button_start);
         mClockView = findViewById(R.id.clock);
+    }
 
-        mLayoutTimer.setVisibility(View.VISIBLE);
-        mLayoutWeb.setVisibility(View.GONE);
-
+    private void setupAnimation() {
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.pulse);
         animation.setRepeatCount(ObjectAnimator.INFINITE);
         mButtonStart.setAnimation(animation);
@@ -62,8 +74,8 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
             mLayoutWeb.setVisibility(View.VISIBLE);
         });
 
-        mClockView.start(TIME_CLOCK_MILLIS); // Millisecond
-
+    }
+    private void setupTtti(Bundle savedInstanceState) {
         mPresenter = PresenterHolder.INSTANCE;
         mPresenter.setView(this);
         mPresenter.onCreateView(savedInstanceState);
@@ -79,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
     }
 
     @Override
-    public void showProgress() {
+    public void partProgress() {
         progressBar.setVisibility(View.VISIBLE);
     }
 
@@ -89,33 +101,33 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
     }
 
     @Override
-    public void onErrorNetworkHttp(WebResourceResponse errorResponse) {
+    public void errorOne(WebResourceResponse errorResponse) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Log.e(TAG, "Error with code - " + errorResponse.getStatusCode());
         }
-        openGame();
+        openNext();
     }
 
     @Override
-    public void onErrorNetwork(WebResourceError error) {
+    public void errorSecond(WebResourceError error) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Log.e(TAG, "Error with code - " + error.getErrorCode());
         }
-        openGame();
+        openNext();
     }
 
     @Override
-    public void onErrorOther() {
-        openGame();
+    public void errorThird() {
+        openNext();
     }
 
     @Override
-    public void onOverloading(String data) {
+    public void fused(String data) {
         Log.i(TAG,"Load data");
     }
 
     @Override
-    public WebView getWebView() {
+    public WebView getView() {
         return webView;
     }
 
@@ -137,9 +149,10 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
         super.onDestroy();
     }
 
-    private void openGame() {
-        Intent intent = new Intent(this, GameActivity.class);
+    private void openNext() {
+        Intent intent = new Intent(this, PoolStart.class);
         startActivity(intent);
+        overridePendingTransition(0, 0);
         finish();
     }
 }

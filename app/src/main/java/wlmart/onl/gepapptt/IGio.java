@@ -3,7 +3,7 @@ package wlmart.onl.gepapptt;
 
 import android.content.Context;
 
-public interface ViewBase {
+public interface IGio {
 
     Context getContext();
 }

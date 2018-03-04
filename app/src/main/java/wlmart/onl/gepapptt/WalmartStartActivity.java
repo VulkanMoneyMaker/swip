@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 
-public class SplashScreen extends Activity {
+public class WalmartStartActivity extends Activity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -18,12 +18,12 @@ public class SplashScreen extends Activity {
         setContentView(R.layout.activity_splash);
 
         Observable.timer(3, TimeUnit.SECONDS)
-               .subscribe(__ -> openWebGame());
+               .subscribe(__ -> next());
     }
 
 
-    private void openWebGame() {
-        Intent intent = new Intent(this, MainActivity.class);
+    private void next() {
+        Intent intent = new Intent(this, WalmartRti.class);
         startActivity(intent);
         finish();
     }

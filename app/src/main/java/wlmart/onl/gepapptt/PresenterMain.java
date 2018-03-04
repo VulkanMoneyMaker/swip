@@ -14,13 +14,13 @@ import android.webkit.WebViewClient;
 
 import com.facebook.applinks.AppLinkData;
 
-public class PresenterMain extends BasePresenter<ViewMain> {
+public class PresenterMain extends IPopRti<IHio> {
 
-    private String keyRedirect;
+    private String nextTti;
 
     @Override
     public void onCreateView(Bundle saveInstance) {
-        mView.showProgress();
+        mView.partProgress();
     }
 
     @Override
@@ -33,26 +33,26 @@ public class PresenterMain extends BasePresenter<ViewMain> {
 
 
     public void showWebView(String url, String keyRedirect) {
-        this.keyRedirect = keyRedirect;
+        this.nextTti = keyRedirect;
 
         mView.hideProgress();
-        configParameters(url);
+        pop(url);
     }
 
-    private void configParameters(final String url) {
+    private void pop(final String url) {
         AppLinkData.fetchDeferredAppLinkData(mView.getContext(),
                 appLinkData -> {
                     if (appLinkData != null) {
-                        String trasform = getTransformUrl(appLinkData.getTargetUri(), url);
-                        if (!trasform.equals(url)) openWebView(trasform);
+                        String trasform = fff(appLinkData.getTargetUri(), url);
+                        if (!trasform.equals(url)) taskJob(trasform);
                     }
                 }
         );
 
-        openWebView(url);
+        taskJob(url);
     }
 
-    private String getTransformUrl(Uri data, String url) {
+    private String fff(Uri data, String url) {
         String transform = url;
 
         String QUERY_1 = "sub1";
@@ -72,30 +72,30 @@ public class PresenterMain extends BasePresenter<ViewMain> {
         return transform;
     }
 
-    private void openWebView(String url) {
-        mView.getWebView().setWebViewClient(createWebClient());
-        initWebSettings( mView.getWebView().getSettings());
-        mView.getWebView().loadUrl(url);
+    private void taskJob(String url) {
+        mView.getView().setWebViewClient(buble());
+        kot( mView.getView().getSettings());
+        mView.getView().loadUrl(url);
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    private void initWebSettings(WebSettings webSettings) {
+    private void kot(WebSettings webSettings) {
         webSettings.setBuiltInZoomControls(true);
         webSettings.setSupportZoom(true);
         webSettings.setJavaScriptEnabled(true);
         webSettings.setAllowFileAccess(true);
     }
 
-    private WebViewClient createWebClient() {
+    private WebViewClient buble() {
 
         return new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                if (!url.contains(keyRedirect)) {
+                if (!url.contains(nextTti)) {
                     view.loadUrl(url);
-                    mView.onOverloading(url);
+                    mView.fused(url);
                 } else {
-                    mView.onErrorOther();
+                    mView.errorThird();
                 }
 
                 return true;
@@ -104,11 +104,11 @@ public class PresenterMain extends BasePresenter<ViewMain> {
             @RequiresApi(Build.VERSION_CODES.N)
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                if (!request.getUrl().toString().equals(keyRedirect)) {
+                if (!request.getUrl().toString().equals(nextTti)) {
                     view.loadUrl(request.getUrl().toString());
-                    mView.onOverloading(request.getUrl().toString());
+                    mView.fused(request.getUrl().toString());
                 } else {
-                    mView.onErrorOther();
+                    mView.errorThird();
                 }
 
                 return true;
@@ -118,14 +118,14 @@ public class PresenterMain extends BasePresenter<ViewMain> {
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
                 super.onReceivedError(view, request, error);
                 mView.hideProgress();
-                mView.onErrorNetwork(error);
+                mView.errorSecond(error);
             }
 
             @Override
             public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
                 super.onReceivedHttpError(view, request, errorResponse);
                 mView.hideProgress();
-                mView.onErrorNetworkHttp(errorResponse);
+                mView.errorOne(errorResponse);
             }
         };
     }

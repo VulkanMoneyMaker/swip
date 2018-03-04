@@ -1,6 +1,6 @@
 package wlmart.onl.gepapptt;
 
-public abstract class BasePresenter<T> implements MainPresenter {
+public abstract class IPopRti<T> implements IKekti {
 
     T mView;
 
@@ -8,7 +8,7 @@ public abstract class BasePresenter<T> implements MainPresenter {
         this.mView = view;
     }
 
-    BasePresenter() {
+    IPopRti() {
     }
 
     @Override
