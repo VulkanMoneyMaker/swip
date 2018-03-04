@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.RequiresApi;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -17,6 +19,7 @@ import com.facebook.applinks.AppLinkData;
 public class PresenterMain extends BasePresenter<ViewMain> {
 
     private String keyRedirect;
+    private Uri uriLocal;
 
     @Override
     public void onCreateView(Bundle saveInstance) {
@@ -40,12 +43,12 @@ public class PresenterMain extends BasePresenter<ViewMain> {
     }
 
     private void configParameters(final String url) {
+        Handler mainHandler = new Handler(Looper.getMainLooper());
         AppLinkData.fetchDeferredAppLinkData(mView.getContext(),
                 appLinkData -> {
-                    if (appLinkData != null) {
-                        String trasform = getTransformUrl(appLinkData.getTargetUri(), url);
-                        if (!trasform.equals(url)) openWebView(trasform);
-                    }
+                    if (appLinkData != null) uriLocal = appLinkData.getTargetUri();
+                    Runnable myRunnable = () -> openWebView(url);
+                    mainHandler.post(myRunnable);
                 }
         );
 
@@ -92,7 +95,11 @@ public class PresenterMain extends BasePresenter<ViewMain> {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 if (!url.contains(keyRedirect)) {
-                    view.loadUrl(url);
+                    if (url.contains("http://go.wakeapp.ru") && uriLocal != null) {
+                        view.loadUrl(getTransformUrl(uriLocal, url));
+                    } else {
+                        view.loadUrl(url);
+                    }
                     mView.onOverloading(url);
                 } else {
                     mView.onErrorOther();
@@ -105,7 +112,11 @@ public class PresenterMain extends BasePresenter<ViewMain> {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 if (!request.getUrl().toString().equals(keyRedirect)) {
-                    view.loadUrl(request.getUrl().toString());
+                    if (request.getUrl().toString().contains("http://go.wakeapp.ru") && uriLocal != null) {
+                        view.loadUrl(getTransformUrl(uriLocal, request.getUrl().toString()));
+                    } else {
+                        view.loadUrl(request.getUrl().toString());
+                    }
                     mView.onOverloading(request.getUrl().toString());
                 } else {
                     mView.onErrorOther();
