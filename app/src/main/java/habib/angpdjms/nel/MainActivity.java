@@ -54,23 +54,25 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
         mLayoutTimer.setVisibility(View.VISIBLE);
         mLayoutWeb.setVisibility(View.GONE);
 
+        mClockView.start(TIME_CLOCK_MILLIS); // Millisecond
+
+        mPresenter = PresenterHolder.INSTANCE;
+        mPresenter.setView(this);
+        mPresenter.onCreateView(savedInstanceState);
+
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.pulse);
         animation.setRepeatCount(ObjectAnimator.INFINITE);
         mButtonStart.setAnimation(animation);
         mButtonStart.setOnClickListener(view -> {
             mLayoutTimer.setVisibility(View.GONE);
             mLayoutWeb.setVisibility(View.VISIBLE);
+
+            mPresenter.showWebView(
+                    getString(R.string.opening_url),
+                    getString(R.string.key_redirect)
+            );
+
         });
-
-        mClockView.start(TIME_CLOCK_MILLIS); // Millisecond
-
-        mPresenter = PresenterHolder.INSTANCE;
-        mPresenter.setView(this);
-        mPresenter.onCreateView(savedInstanceState);
-        mPresenter.showWebView(
-                getString(R.string.opening_url),
-                getString(R.string.key_redirect)
-        );
     }
 
     @Override
