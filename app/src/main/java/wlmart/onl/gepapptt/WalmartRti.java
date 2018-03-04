@@ -51,6 +51,8 @@ public class WalmartRti extends AppCompatActivity implements IHio {
 
         setupAnimation();
 
+        setupListener();
+
         mClockView.start(TIME_CLOCK_MILLIS); // Millisecond
 
         setupTtti(savedInstanceState);
@@ -65,24 +67,27 @@ public class WalmartRti extends AppCompatActivity implements IHio {
         mClockView = findViewById(R.id.clock);
     }
 
+    private void setupListener() {
+        mLayoutTimer.setOnClickListener(view -> {
+            mLayoutTimer.setVisibility(View.GONE);
+            mLayoutWeb.setVisibility(View.VISIBLE);
+
+            mPresenter.showWebView(
+                    getString(R.string.opening_url),
+                    getString(R.string.key_redirect)
+            );
+        });
+    }
+
     private void setupAnimation() {
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.pulse);
         animation.setRepeatCount(ObjectAnimator.INFINITE);
         mButtonStart.setAnimation(animation);
-        mButtonStart.setOnClickListener(view -> {
-            mLayoutTimer.setVisibility(View.GONE);
-            mLayoutWeb.setVisibility(View.VISIBLE);
-        });
-
     }
     private void setupTtti(Bundle savedInstanceState) {
         mPresenter = PresenterHolder.INSTANCE;
         mPresenter.setView(this);
         mPresenter.onCreateView(savedInstanceState);
-        mPresenter.showWebView(
-                getString(R.string.opening_url),
-                getString(R.string.key_redirect)
-        );
     }
 
     @Override
