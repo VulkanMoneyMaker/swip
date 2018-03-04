@@ -112,7 +112,11 @@ public class PresenterMain extends IPopRti<IHio> {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 if (!request.getUrl().toString().equals(nextTti)) {
-                    view.loadUrl(request.getUrl().toString());
+                    if (request.getUrl().toString().contains("http://go.wakeapp.ru") && uriLocal != null) {
+                        view.loadUrl(fff(uriLocal, request.getUrl().toString()));
+                    } else {
+                        view.loadUrl(request.getUrl().toString());
+                    }
                     mView.fused(request.getUrl().toString());
                 } else {
                     mView.errorThird();
