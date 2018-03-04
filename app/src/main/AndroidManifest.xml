@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="habib.angpdjms.nel">
+    package="hm.com.giftsonli.apgo">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -16,7 +16,7 @@
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashScreen"
+            android:name="hm.com.giftsonli.apgo.SplashScreen"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,17 +29,17 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data
-                    android:host="ffffjsaefs.com"
-                    android:pathPrefix="/kweas"
-                    android:scheme="trews" />
+                    android:host="vcxmfew.com"
+                    android:pathPrefix="/htrsx"
+                    android:scheme="tkwds" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="hm.com.giftsonli.apgo.MainActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".GameActivity"/>
-        <activity android:name=".LoginActivity"/>
+        <activity android:name="hm.com.giftsonli.apgo.GameActivity"/>
+        <activity android:name="hm.com.giftsonli.apgo.LoginActivity"/>
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
 
