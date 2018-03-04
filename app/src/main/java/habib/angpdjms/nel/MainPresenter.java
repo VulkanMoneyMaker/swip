@@ -1,8 +1,8 @@
-package com.giftgoapp.jhq;
+package habib.angpdjms.nel;
 
 import android.os.Bundle;
 
-public interface Presenter_Circle_Life {
+public interface MainPresenter {
 
     void onCreateView(Bundle saveInstance);
 
