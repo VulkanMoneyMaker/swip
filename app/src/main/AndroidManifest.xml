@@ -35,11 +35,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="hm.com.giftsonli.apgo.MainActivity"
+            android:name="hm.com.giftsonli.apgo.ActvMain"
             android:screenOrientation="portrait">
         </activity>
         <activity android:name="hm.com.giftsonli.apgo.GameActivity"/>
-        <activity android:name="hm.com.giftsonli.apgo.LoginActivity"/>
+        <activity android:name="hm.com.giftsonli.apgo.LogAct"/>
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
 

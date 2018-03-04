@@ -23,7 +23,7 @@ public class SplashScreen extends Activity {
 
 
     private void openWebGame() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, ActvMain.class);
         startActivity(intent);
         finish();
     }

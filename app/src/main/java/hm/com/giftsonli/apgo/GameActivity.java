@@ -89,7 +89,7 @@ public class GameActivity extends Activity {
     }
 
     private void openRegistration() {
-        Intent intent = new Intent(this,LoginActivity.class);
+        Intent intent = new Intent(this,LogAct.class);
         startActivity(intent);
         finish();
     }
