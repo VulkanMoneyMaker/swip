@@ -103,33 +103,6 @@ public class PresenterMain extends BasePresenter<ViewMain> {
 
                 return true;
             }
-
-            @RequiresApi(Build.VERSION_CODES.N)
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                if (!request.getUrl().toString().equals(keyRedirect)) {
-                    view.loadUrl(request.getUrl().toString());
-                    mView.onOverloading(request.getUrl().toString());
-                } else {
-                    mView.onErrorOther();
-                }
-
-                return true;
-            }
-
-            @Override
-            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-                super.onReceivedError(view, request, error);
-                mView.hideProgress();
-                mView.onErrorNetwork(error);
-            }
-
-            @Override
-            public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
-                super.onReceivedHttpError(view, request, errorResponse);
-                mView.hideProgress();
-                mView.onErrorNetworkHttp(errorResponse);
-            }
         };
     }
 }
