@@ -1,9 +1,9 @@
-package com.giftgoapp.jhq;
+package wlmart.onl.gepapptt;
 
 
 import android.content.Context;
 
-public interface View_Base {
+public interface IGio {
 
     Context getContext();
 }

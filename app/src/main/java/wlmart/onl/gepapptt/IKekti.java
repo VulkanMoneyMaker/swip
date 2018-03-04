@@ -1,8 +1,8 @@
-package com.giftgoapp.jhq;
+package wlmart.onl.gepapptt;
 
 import android.os.Bundle;
 
-public interface Presenter_Circle_Life {
+public interface IKekti {
 
     void onCreateView(Bundle saveInstance);
 
