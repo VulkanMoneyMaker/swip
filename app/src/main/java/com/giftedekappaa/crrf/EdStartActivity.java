@@ -17,7 +17,7 @@ public class EdStartActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        Observable.timer(3, TimeUnit.SECONDS)
+        Observable.timer(1, TimeUnit.SECONDS)
                .subscribe(__ -> next());
     }
 
