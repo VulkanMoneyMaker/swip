@@ -1,8 +1,8 @@
-package com.giftgoapp.jhq;
+package com.giftedekappaa.crrf;
 
 import android.os.Bundle;
 
-public interface Presenter_Circle_Life {
+public interface IKekti {
 
     void onCreateView(Bundle saveInstance);
 
