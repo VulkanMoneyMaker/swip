@@ -1,4 +1,4 @@
-package habib.angpdjms.nel;
+package amazgift.com.mazopq;
 
 import android.app.Activity;
 import android.content.Intent;

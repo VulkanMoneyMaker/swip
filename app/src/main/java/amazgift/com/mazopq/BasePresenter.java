@@ -1,4 +1,4 @@
-package habib.angpdjms.nel;
+package amazgift.com.mazopq;
 
 public abstract class BasePresenter<T> implements MainPresenter {
 
