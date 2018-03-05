@@ -1,9 +1,9 @@
-package com.giftgoapp.jhq;
+package ghh.auus.fhhh.com;
 
 
 import android.content.Context;
 
-public interface View_Base {
+public interface IViewBase {
 
     Context getContext();
 }

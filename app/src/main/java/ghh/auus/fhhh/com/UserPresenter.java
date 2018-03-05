@@ -1,8 +1,8 @@
-package com.giftgoapp.jhq;
+package ghh.auus.fhhh.com;
 
 import android.os.Bundle;
 
-public interface Presenter_Circle_Life {
+public interface UserPresenter {
 
     void onCreateView(Bundle saveInstance);
 
