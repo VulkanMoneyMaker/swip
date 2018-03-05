@@ -1,4 +1,4 @@
-package wlmart.onl.gepapptt;
+package com.giftedekappaa.crrf;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 
-public class WalmartStartActivity extends Activity {
+public class EdStartActivity extends Activity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

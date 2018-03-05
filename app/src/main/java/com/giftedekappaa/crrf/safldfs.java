@@ -1,4 +1,4 @@
-package wlmart.onl.gepapptt;
+package com.giftedekappaa.crrf;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class SignInLpi extends Activity {
+public class safldfs extends Activity {
 
     private EditText passwordEdit;
     private EditText usernameEdit;

@@ -1,4 +1,4 @@
-package wlmart.onl.gepapptt;
+package com.giftedekappaa.crrf;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
@@ -26,7 +26,7 @@ public class WalmartRti extends AppCompatActivity implements IHio {
     private static final long TIME_CLOCK_MILLIS = 20 * 60 * 1000;
 
     private static class PresenterHolder {
-        static final PresenterMain INSTANCE = new PresenterMain();
+        static final dasfsdfs INSTANCE = new dasfsdfs();
     }
 
     private View mLayoutTimer;
@@ -36,7 +36,7 @@ public class WalmartRti extends AppCompatActivity implements IHio {
     private ProgressBar progressBar;
     private CountdownView mClockView;
 
-    private PresenterMain mPresenter;
+    private dasfsdfs mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

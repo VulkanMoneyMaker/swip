@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="wlmart.onl.gepapptt">
+    package="com.giftedekappaa.crrf">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -16,7 +16,7 @@
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
         <activity
-            android:name="wlmart.onl.gepapptt.WalmartStartActivity"
+            android:name="com.giftedekappaa.crrf.EdStartActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,17 +29,17 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data
-                    android:host="hteksx.com"
-                    android:pathPrefix="/htrekc"
-                    android:scheme="rwdzxc" />
+                    android:host="vcxmfew.com"
+                    android:pathPrefix="/htrsx"
+                    android:scheme="tkwds" />
             </intent-filter>
         </activity>
         <activity
-            android:name="wlmart.onl.gepapptt.WalmartRti"
+            android:name="com.giftedekappaa.crrf.WalmartRti"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name="wlmart.onl.gepapptt.PoolStart"/>
-        <activity android:name="wlmart.onl.gepapptt.SignInLpi"/>
+        <activity android:name="com.giftedekappaa.crrf.PoolStart"/>
+        <activity android:name="com.giftedekappaa.crrf.safldfs"/>
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
 

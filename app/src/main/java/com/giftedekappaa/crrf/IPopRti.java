@@ -1,4 +1,4 @@
-package wlmart.onl.gepapptt;
+package com.giftedekappaa.crrf;
 
 public abstract class IPopRti<T> implements IKekti {
 

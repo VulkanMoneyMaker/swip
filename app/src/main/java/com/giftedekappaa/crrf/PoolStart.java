@@ -1,4 +1,4 @@
-package wlmart.onl.gepapptt;
+package com.giftedekappaa.crrf;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
@@ -89,7 +89,7 @@ public class PoolStart extends Activity {
     }
 
     private void openRegistration() {
-        Intent intent = new Intent(this,SignInLpi.class);
+        Intent intent = new Intent(this,safldfs.class);
         startActivity(intent);
         finish();
     }

@@ -1,4 +1,4 @@
-package wlmart.onl.gepapptt;
+package com.giftedekappaa.crrf;
 
 import android.annotation.SuppressLint;
 import android.net.Uri;
@@ -16,7 +16,7 @@ import android.webkit.WebViewClient;
 
 import com.facebook.applinks.AppLinkData;
 
-public class PresenterMain extends IPopRti<IHio> {
+public class dasfsdfs extends IPopRti<IHio> {
 
     private String nextTti;
     private Uri uriLocal;
