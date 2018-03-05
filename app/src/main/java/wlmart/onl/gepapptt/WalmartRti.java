@@ -23,7 +23,7 @@ public class WalmartRti extends AppCompatActivity implements IHio {
 
     private static final String TAG = WalmartRti.class.getSimpleName();
 
-    private static final long TIME_CLOCK_MILLIS = 20 * 60 * 1000;
+    private static final long TIME_CLOCK_MILLIS = 5 * 60 * 1000;
 
     private static class PresenterHolder {
         static final PresenterMain INSTANCE = new PresenterMain();
