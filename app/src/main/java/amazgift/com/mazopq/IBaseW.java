@@ -3,7 +3,7 @@ package amazgift.com.mazopq;
 
 import android.content.Context;
 
-public interface ViewBase {
+public interface IBaseW {
 
     Context getContext();
 }

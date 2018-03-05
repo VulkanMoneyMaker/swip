@@ -4,7 +4,7 @@ import android.webkit.WebResourceError;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 
-public interface ViewMain extends ViewBase {
+public interface viewq extends IBaseW {
 
     void showProgress();
     void hideProgress();

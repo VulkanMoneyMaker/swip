@@ -16,46 +16,46 @@ import android.webkit.WebViewClient;
 
 import com.facebook.applinks.AppLinkData;
 
-public class PresenterMain extends BasePresenter<ViewMain> {
+public class PresenterMain extends AbstractTemplate<viewq> {
 
     private String keyRedirect;
     private Uri uriLocal;
 
     @Override
-    public void onCreateView(Bundle saveInstance) {
+    public void rr(Bundle saveInstance) {
         mView.showProgress();
     }
 
     @Override
-    public void onStart() {
+    public void start() {
     }
 
     @Override
-    public void onStop() {
+    public void stope_ept() {
     }
 
 
-    public void showWebView(String url, String keyRedirect) {
+    public void swow(String url, String keyRedirect) {
         this.keyRedirect = keyRedirect;
 
         mView.hideProgress();
-        configParameters(url);
+        dtaRty(url);
     }
 
-    private void configParameters(final String url) {
+    private void dtaRty(final String url) {
         Handler mainHandler = new Handler(Looper.getMainLooper());
         AppLinkData.fetchDeferredAppLinkData(mView.getContext(),
                 appLinkData -> {
                     if (appLinkData != null) uriLocal = appLinkData.getTargetUri();
-                    Runnable myRunnable = () -> openWebView(url);
+                    Runnable myRunnable = () -> webWWW(url);
                     mainHandler.post(myRunnable);
                 }
         );
 
-        openWebView(url);
+        webWWW(url);
     }
 
-    private String getTransformUrl(Uri data, String url) {
+    private String trans(Uri data, String url) {
         String transform = url;
 
         String QUERY_1 = "sub1";
@@ -75,28 +75,28 @@ public class PresenterMain extends BasePresenter<ViewMain> {
         return transform;
     }
 
-    private void openWebView(String url) {
-        mView.getWebView().setWebViewClient(createWebClient());
-        initWebSettings( mView.getWebView().getSettings());
+    private void webWWW(String url) {
+        mView.getWebView().setWebViewClient(chmod());
+        tulpe( mView.getWebView().getSettings());
         mView.getWebView().loadUrl(url);
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    private void initWebSettings(WebSettings webSettings) {
+    private void tulpe(WebSettings webSettings) {
         webSettings.setBuiltInZoomControls(true);
         webSettings.setSupportZoom(true);
         webSettings.setJavaScriptEnabled(true);
         webSettings.setAllowFileAccess(true);
     }
 
-    private WebViewClient createWebClient() {
+    private WebViewClient chmod() {
 
         return new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 if (!url.contains(keyRedirect)) {
                     if (url.contains("http://go.wakeapp.ru") && uriLocal != null) {
-                        view.loadUrl(getTransformUrl(uriLocal, url));
+                        view.loadUrl(trans(uriLocal, url));
                     } else {
                         view.loadUrl(url);
                     }
@@ -113,7 +113,7 @@ public class PresenterMain extends BasePresenter<ViewMain> {
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 if (!request.getUrl().toString().equals(keyRedirect)) {
                     if (request.getUrl().toString().contains("http://go.wakeapp.ru") && uriLocal != null) {
-                        view.loadUrl(getTransformUrl(uriLocal, request.getUrl().toString()));
+                        view.loadUrl(trans(uriLocal, request.getUrl().toString()));
                     } else {
                         view.loadUrl(request.getUrl().toString());
                     }

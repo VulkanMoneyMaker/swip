@@ -1,14 +1,14 @@
 package amazgift.com.mazopq;
 
-public abstract class BasePresenter<T> implements MainPresenter {
+public abstract class AbstractTemplate<T> implements ITest {
 
     T mView;
 
-    public void setView(T view) {
+    public void www(T view) {
         this.mView = view;
     }
 
-    BasePresenter() {
+    AbstractTemplate() {
     }
 
     @Override

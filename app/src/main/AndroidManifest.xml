@@ -16,7 +16,7 @@
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
         <activity
-            android:name="amazgift.com.mazopq.SplashScreen"
+            android:name="amazgift.com.mazopq.YuiTemp"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,11 +35,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="amazgift.com.mazopq.MainActivity"
+            android:name="amazgift.com.mazopq.Sdxls"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name="amazgift.com.mazopq.GameActivity"/>
-        <activity android:name="amazgift.com.mazopq.LoginActivity"/>
+        <activity android:name="amazgift.com.mazopq.ShockScreen"/>
+        <activity android:name="amazgift.com.mazopq.SignInTTT"/>
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
 

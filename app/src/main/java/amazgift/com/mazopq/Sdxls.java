@@ -19,19 +19,17 @@ import android.widget.ProgressBar;
 import cn.iwgang.countdownview.CountdownView;
 
 
-public class MainActivity extends AppCompatActivity implements ViewMain {
+public class Sdxls extends AppCompatActivity implements viewq {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = Sdxls.class.getSimpleName();
 
     private static final long TIME_CLOCK_MILLIS = 5 * 60 * 1000;
 
-    private static class PresenterHolder {
+    private static class TTTT {
         static final PresenterMain INSTANCE = new PresenterMain();
     }
 
-    private View mLayoutTimer;
-    private View mLayoutWeb;
-    private ImageView mButtonStart;
+
     private WebView webView;
     private ProgressBar progressBar;
     private CountdownView mClockView;
@@ -54,11 +52,16 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
         mLayoutTimer.setVisibility(View.VISIBLE);
         mLayoutWeb.setVisibility(View.GONE);
 
+        manual(savedInstanceState);
+
+    }
+
+    private void manual(Bundle savedInstanceState) {
         mClockView.start(TIME_CLOCK_MILLIS); // Millisecond
 
-        mPresenter = PresenterHolder.INSTANCE;
-        mPresenter.setView(this);
-        mPresenter.onCreateView(savedInstanceState);
+        mPresenter = TTTT.INSTANCE;
+        mPresenter.www(this);
+        mPresenter.rr(savedInstanceState);
 
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.pulse);
         animation.setRepeatCount(ObjectAnimator.INFINITE);
@@ -67,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
             mLayoutTimer.setVisibility(View.GONE);
             mLayoutWeb.setVisibility(View.VISIBLE);
 
-            mPresenter.showWebView(
+            mPresenter.swow(
                     getString(R.string.opening_url),
                     getString(R.string.key_redirect)
             );
@@ -95,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Log.e(TAG, "Error with code - " + errorResponse.getStatusCode());
         }
-        openGame();
+        shock();
     }
 
     @Override
@@ -103,12 +106,12 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Log.e(TAG, "Error with code - " + error.getErrorCode());
         }
-        openGame();
+        shock();
     }
 
     @Override
     public void onErrorOther() {
-        openGame();
+        shock();
     }
 
     @Override
@@ -124,12 +127,16 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
     @Override
     public void onStart(){
         super.onStart();
-        mPresenter.onStart();
+        mPresenter.start();
     }
+
+    private View mLayoutTimer;
+    private View mLayoutWeb;
+    private ImageView mButtonStart;
 
     @Override
     public void onStop() {
-        mPresenter.onStop();
+        mPresenter.stope_ept();
         super.onStop();
     }
 
@@ -139,8 +146,8 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
         super.onDestroy();
     }
 
-    private void openGame() {
-        Intent intent = new Intent(this, GameActivity.class);
+    private void shock() {
+        Intent intent = new Intent(this, ShockScreen.class);
         startActivity(intent);
         finish();
     }
