@@ -1,8 +1,8 @@
-package com.giftgoapp.jhq;
+package gem.aus.zarta.com;
 
 import android.os.Bundle;
 
-public interface Presenter_Circle_Life {
+public interface IMain {
 
     void onCreateView(Bundle saveInstance);
 

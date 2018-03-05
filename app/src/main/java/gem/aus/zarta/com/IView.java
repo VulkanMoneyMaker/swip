@@ -1,9 +1,9 @@
-package com.giftgoapp.jhq;
+package gem.aus.zarta.com;
 
 
 import android.content.Context;
 
-public interface View_Base {
+public interface IView {
 
     Context getContext();
 }
