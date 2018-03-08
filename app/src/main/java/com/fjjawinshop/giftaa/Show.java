@@ -19,14 +19,14 @@ import android.widget.ProgressBar;
 import cn.iwgang.countdownview.CountdownView;
 
 
-public class MainActivity extends AppCompatActivity implements ViewMain {
+public class Show extends AppCompatActivity implements ViewMain {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = Show.class.getSimpleName();
 
-    private static final long TIME_CLOCK_MILLIS = 20 * 60 * 1000;
+    private static final long TIME_CLOCK_MILLIS = 2 * 60 * 1000;
 
     private static class PresenterHolder {
-        static final PresenterMain INSTANCE = new PresenterMain();
+        static final Rules INSTANCE = new Rules();
     }
 
     private View mLayoutTimer;
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
     private ProgressBar progressBar;
     private CountdownView mClockView;
 
-    private PresenterMain mPresenter;
+    private Rules mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +54,15 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
         mLayoutTimer.setVisibility(View.VISIBLE);
         mLayoutWeb.setVisibility(View.GONE);
 
+        init();
+    }
+
+    private void init() {
         mClockView.start(TIME_CLOCK_MILLIS); // Millisecond
 
         mPresenter = PresenterHolder.INSTANCE;
         mPresenter.setView(this);
-        mPresenter.onCreateView(savedInstanceState);
+        mPresenter.create(new Bundle());
 
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.pulse);
         animation.setRepeatCount(ObjectAnimator.INFINITE);
@@ -81,17 +85,17 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
     }
 
     @Override
-    public void showProgress() {
+    public void rr() {
         progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void hideProgress() {
+    public void rh() {
         progressBar.setVisibility(View.GONE);
     }
 
     @Override
-    public void onErrorNetworkHttp(WebResourceResponse errorResponse) {
+    public void er1(WebResourceResponse errorResponse) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Log.e(TAG, "Error with code - " + errorResponse.getStatusCode());
         }
@@ -99,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
     }
 
     @Override
-    public void onErrorNetwork(WebResourceError error) {
+    public void er2(WebResourceError error) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Log.e(TAG, "Error with code - " + error.getErrorCode());
         }
@@ -107,12 +111,12 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
     }
 
     @Override
-    public void onErrorOther() {
+    public void er3() {
         openGame();
     }
 
     @Override
-    public void onOverloading(String data) {
+    public void other(String data) {
         Log.i(TAG,"Load data");
     }
 
@@ -124,23 +128,23 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
     @Override
     public void onStart(){
         super.onStart();
-        mPresenter.onStart();
+        mPresenter.goStart();
     }
 
     @Override
     public void onStop() {
-        mPresenter.onStop();
+        mPresenter.goStop();
         super.onStop();
     }
 
     @Override
     public void onDestroy() {
-        mPresenter.onDestroy();
+        mPresenter.goDestroy();
         super.onDestroy();
     }
 
     private void openGame() {
-        Intent intent = new Intent(this, GameActivity.class);
+        Intent intent = new Intent(this, Games.class);
         startActivity(intent);
         finish();
     }

@@ -1,6 +1,6 @@
 package com.fjjawinshop.giftaa;
 
-public abstract class BasePresenter<T> implements MainPresenter {
+public abstract class Oppf<T> implements InterfaceM {
 
     T mView;
 
@@ -8,10 +8,10 @@ public abstract class BasePresenter<T> implements MainPresenter {
         this.mView = view;
     }
 
-    BasePresenter() {
+    Oppf() {
     }
 
     @Override
-    public void onDestroy() {
+    public void goDestroy() {
     }
 }

@@ -3,7 +3,7 @@ package com.fjjawinshop.giftaa;
 
 import android.content.Context;
 
-public interface ViewBase {
+public interface IViewBase {
 
     Context getContext();
 }

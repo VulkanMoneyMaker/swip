@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 
-public class SplashScreen extends Activity {
+public class ScoupS extends Activity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class SplashScreen extends Activity {
 
 
     private void openWebGame() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, Show.class);
         startActivity(intent);
         finish();
     }
