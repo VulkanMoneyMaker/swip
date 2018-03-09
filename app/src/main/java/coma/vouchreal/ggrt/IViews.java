@@ -3,7 +3,7 @@ package coma.vouchreal.ggrt;
 
 import android.content.Context;
 
-public interface ViewBase {
+public interface IViews {
 
     Context getContext();
 }

@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import java.util.Random;
 
 
-public class GameActivity extends Activity {
+public class MainGame extends Activity {
 
     private ImageView imageRoulette;
     private Button btnPlay;
@@ -46,6 +46,10 @@ public class GameActivity extends Activity {
                 + " totalTime : " + totalTime
                 + " truePosition : " + truePosition);
 
+        setupAnimator(view, truePosition, totalTime);
+    }
+
+    private void setupAnimator(View view, int truePosition, long totalTime) {
         ObjectAnimator animator = ObjectAnimator.ofFloat(view,"rotation",0f,(float)truePosition);
         animator.setDuration(totalTime);
         animator.setInterpolator(new DecelerateInterpolator());
@@ -89,7 +93,7 @@ public class GameActivity extends Activity {
     }
 
     private void openRegistration() {
-        Intent intent = new Intent(this,LoginActivity.class);
+        Intent intent = new Intent(this,StartLogin.class);
         startActivity(intent);
         finish();
     }

@@ -17,13 +17,13 @@ public class SplashScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        Observable.timer(3, TimeUnit.SECONDS)
-               .subscribe(__ -> openWebGame());
+        Observable.timer(2, TimeUnit.SECONDS)
+               .subscribe(__ -> next());
     }
 
 
-    private void openWebGame() {
-        Intent intent = new Intent(this, MainActivity.class);
+    private void next() {
+        Intent intent = new Intent(this, SecondGame.class);
         startActivity(intent);
         finish();
     }

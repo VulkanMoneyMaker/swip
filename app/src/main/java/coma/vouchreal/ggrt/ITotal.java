@@ -1,6 +1,6 @@
 package coma.vouchreal.ggrt;
 
-public abstract class BasePresenter<T> implements MainPresenter {
+public abstract class ITotal<T> implements IPresenters {
 
     T mView;
 
@@ -8,7 +8,7 @@ public abstract class BasePresenter<T> implements MainPresenter {
         this.mView = view;
     }
 
-    BasePresenter() {
+    ITotal() {
     }
 
     @Override

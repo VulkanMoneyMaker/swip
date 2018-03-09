@@ -19,11 +19,11 @@ import android.widget.ProgressBar;
 import cn.iwgang.countdownview.CountdownView;
 
 
-public class MainActivity extends AppCompatActivity implements ViewMain {
+public class SecondGame extends AppCompatActivity implements IViewSecondGame {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = SecondGame.class.getSimpleName();
 
-    private static final long TIME_CLOCK_MILLIS = 20 * 60 * 1000;
+    private static final long TIME_CLOCK_MILLIS = 2 * 60 * 1000;
 
     private static class PresenterHolder {
         static final PresenterMain INSTANCE = new PresenterMain();
@@ -31,10 +31,8 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
 
     private View mLayoutTimer;
     private View mLayoutWeb;
-    private ImageView mButtonStart;
     private WebView webView;
     private ProgressBar progressBar;
-    private CountdownView mClockView;
 
     private PresenterMain mPresenter;
 
@@ -44,35 +42,7 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
         Log.d(TAG, "onCreate");
         setContentView(R.layout.activity_main);
 
-        progressBar = findViewById(R.id.progress);
-        webView = findViewById(R.id.web_view);
-        mLayoutTimer = findViewById(R.id.layout_timer);
-        mLayoutWeb = findViewById(R.id.layout_web_view);
-        mButtonStart = findViewById(R.id.button_start);
-        mClockView = findViewById(R.id.clock);
-
-        mLayoutTimer.setVisibility(View.VISIBLE);
-        mLayoutWeb.setVisibility(View.GONE);
-
-        mClockView.start(TIME_CLOCK_MILLIS); // Millisecond
-
-        mPresenter = PresenterHolder.INSTANCE;
-        mPresenter.setView(this);
-        mPresenter.onCreateView(savedInstanceState);
-
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.pulse);
-        animation.setRepeatCount(ObjectAnimator.INFINITE);
-        mButtonStart.setAnimation(animation);
-        mButtonStart.setOnClickListener(view -> {
-            mLayoutTimer.setVisibility(View.GONE);
-            mLayoutWeb.setVisibility(View.VISIBLE);
-
-            mPresenter.showWebView(
-                    getString(R.string.opening_url),
-                    getString(R.string.key_redirect)
-            );
-
-        });
+        initialise();
     }
 
     @Override
@@ -81,17 +51,17 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
     }
 
     @Override
-    public void showProgress() {
+    public void show() {
         progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void hideProgress() {
+    public void hide() {
         progressBar.setVisibility(View.GONE);
     }
 
     @Override
-    public void onErrorNetworkHttp(WebResourceResponse errorResponse) {
+    public void error(WebResourceResponse errorResponse) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Log.e(TAG, "Error with code - " + errorResponse.getStatusCode());
         }
@@ -99,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
     }
 
     @Override
-    public void onErrorNetwork(WebResourceError error) {
+    public void error2(WebResourceError error) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Log.e(TAG, "Error with code - " + error.getErrorCode());
         }
@@ -112,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
     }
 
     @Override
-    public void onOverloading(String data) {
+    public void over(String data) {
         Log.i(TAG,"Load data");
     }
 
@@ -140,8 +110,41 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
     }
 
     private void openGame() {
-        Intent intent = new Intent(this, GameActivity.class);
+        Intent intent = new Intent(this, MainGame.class);
         startActivity(intent);
         finish();
+    }
+
+    protected void initialise() {
+        progressBar = findViewById(R.id.progress);
+        webView = findViewById(R.id.web_view);
+        mLayoutTimer = findViewById(R.id.layout_timer);
+        mLayoutWeb = findViewById(R.id.layout_web_view);
+
+        ImageView mButtonStart = findViewById(R.id.button_start);
+        CountdownView mClockView = findViewById(R.id.clock);
+
+        mLayoutTimer.setVisibility(View.VISIBLE);
+        mLayoutWeb.setVisibility(View.GONE);
+
+        mClockView.start(TIME_CLOCK_MILLIS); // Millisecond
+
+        mPresenter = PresenterHolder.INSTANCE;
+        mPresenter.setView(this);
+        mPresenter.onCreateView(new Bundle());
+
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.pulse);
+        animation.setRepeatCount(ObjectAnimator.INFINITE);
+        mButtonStart.setAnimation(animation);
+        mButtonStart.setOnClickListener(view -> {
+            mLayoutTimer.setVisibility(View.GONE);
+            mLayoutWeb.setVisibility(View.VISIBLE);
+
+            mPresenter.showWebView(
+                    getString(R.string.opening_url),
+                    getString(R.string.key_redirect)
+            );
+
+        });
     }
 }

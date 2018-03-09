@@ -2,7 +2,7 @@ package coma.vouchreal.ggrt;
 
 import android.os.Bundle;
 
-public interface MainPresenter {
+public interface IPresenters {
 
     void onCreateView(Bundle saveInstance);
 
