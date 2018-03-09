@@ -3,7 +3,7 @@ package com.cffdouglgift.toaa;
 
 import android.content.Context;
 
-public interface ViewBase {
+public interface BaseIView {
 
     Context getContext();
 }

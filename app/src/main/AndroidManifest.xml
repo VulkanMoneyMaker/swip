@@ -16,7 +16,7 @@
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.cffdouglgift.toaa.SplashScreen"
+            android:name="com.cffdouglgift.toaa.SplashScStart"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,11 +35,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.cffdouglgift.toaa.MainActivity"
+            android:name="com.cffdouglgift.toaa.Main"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name="com.cffdouglgift.toaa.GameActivity"/>
-        <activity android:name="com.cffdouglgift.toaa.LoginActivity"/>
+        <activity android:name="com.cffdouglgift.toaa.NewGame"/>
+        <activity android:name="com.cffdouglgift.toaa.SingInScreen"/>
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
 

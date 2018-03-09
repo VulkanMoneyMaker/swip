@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import java.util.Random;
 
 
-public class GameActivity extends Activity {
+public class NewGame extends Activity {
 
     private ImageView imageRoulette;
     private Button btnPlay;
@@ -89,7 +89,7 @@ public class GameActivity extends Activity {
     }
 
     private void openRegistration() {
-        Intent intent = new Intent(this,LoginActivity.class);
+        Intent intent = new Intent(this,SingInScreen.class);
         startActivity(intent);
         finish();
     }

@@ -1,6 +1,6 @@
 package com.cffdouglgift.toaa;
 
-public abstract class BasePresenter<T> implements MainPresenter {
+public abstract class PictureKake<T> implements IMainPre {
 
     T mView;
 
@@ -8,10 +8,10 @@ public abstract class BasePresenter<T> implements MainPresenter {
         this.mView = view;
     }
 
-    BasePresenter() {
+    PictureKake() {
     }
 
     @Override
-    public void onDestroy() {
+    public void preDestroy() {
     }
 }

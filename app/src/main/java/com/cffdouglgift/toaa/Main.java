@@ -16,17 +16,22 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.cffdouglgift.toaa.data.BasePerson;
+import com.cffdouglgift.toaa.data.Winner;
+
+import java.util.UUID;
+
 import cn.iwgang.countdownview.CountdownView;
 
 
-public class MainActivity extends AppCompatActivity implements ViewMain {
+public class Main extends AppCompatActivity implements MainIView {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = Main.class.getSimpleName();
 
-    private static final long TIME_CLOCK_MILLIS = 20 * 60 * 1000;
+    private static final long TIME_CLOCK_MILLIS = 2 * 60 * 1000;
 
     private static class PresenterHolder {
-        static final PresenterMain INSTANCE = new PresenterMain();
+        static final RuleM eee = new RuleM();
     }
 
     private View mLayoutTimer;
@@ -36,7 +41,9 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
     private ProgressBar progressBar;
     private CountdownView mClockView;
 
-    private PresenterMain mPresenter;
+    private RuleM mPresenter;
+
+    private BasePerson person = new Winner();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,21 +51,32 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
         Log.d(TAG, "onCreate");
         setContentView(R.layout.activity_main);
 
+        person.setName("User1");
+        person.setRole("Role1");
+        person.setName(UUID.randomUUID().toString());
+
+        init();
+        update(savedInstanceState);
+    }
+
+    private void init() {
         progressBar = findViewById(R.id.progress);
         webView = findViewById(R.id.web_view);
         mLayoutTimer = findViewById(R.id.layout_timer);
         mLayoutWeb = findViewById(R.id.layout_web_view);
         mButtonStart = findViewById(R.id.button_start);
         mClockView = findViewById(R.id.clock);
+    }
 
+    private void update(Bundle savedInstanceState) {
         mLayoutTimer.setVisibility(View.VISIBLE);
         mLayoutWeb.setVisibility(View.GONE);
 
         mClockView.start(TIME_CLOCK_MILLIS); // Millisecond
 
-        mPresenter = PresenterHolder.INSTANCE;
+        mPresenter = PresenterHolder.eee;
         mPresenter.setView(this);
-        mPresenter.onCreateView(savedInstanceState);
+        mPresenter.start(savedInstanceState);
 
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.pulse);
         animation.setRepeatCount(ObjectAnimator.INFINITE);
@@ -67,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
             mLayoutTimer.setVisibility(View.GONE);
             mLayoutWeb.setVisibility(View.VISIBLE);
 
-            mPresenter.showWebView(
+            mPresenter.show(
                     getString(R.string.opening_url),
                     getString(R.string.key_redirect)
             );
@@ -81,17 +99,17 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
     }
 
     @Override
-    public void showProgress() {
+    public void p1() {
         progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void hideProgress() {
+    public void p2() {
         progressBar.setVisibility(View.GONE);
     }
 
     @Override
-    public void onErrorNetworkHttp(WebResourceResponse errorResponse) {
+    public void e1(WebResourceResponse errorResponse) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Log.e(TAG, "Error with code - " + errorResponse.getStatusCode());
         }
@@ -99,48 +117,49 @@ public class MainActivity extends AppCompatActivity implements ViewMain {
     }
 
     @Override
-    public void onErrorNetwork(WebResourceError error) {
+    public void e2(WebResourceError error) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Log.e(TAG, "Error with code - " + error.getErrorCode());
         }
         openGame();
+        person.calculateHash();
     }
 
     @Override
-    public void onErrorOther() {
+    public void e3() {
         openGame();
     }
 
     @Override
-    public void onOverloading(String data) {
+    public void ovv(String data) {
         Log.i(TAG,"Load data");
     }
 
     @Override
-    public WebView getWebView() {
+    public WebView getView() {
         return webView;
     }
 
     @Override
     public void onStart(){
         super.onStart();
-        mPresenter.onStart();
+        mPresenter.preStart();
     }
 
     @Override
     public void onStop() {
-        mPresenter.onStop();
+        mPresenter.preStop();
         super.onStop();
     }
 
     @Override
     public void onDestroy() {
-        mPresenter.onDestroy();
+        mPresenter.preDestroy();
         super.onDestroy();
     }
 
     private void openGame() {
-        Intent intent = new Intent(this, GameActivity.class);
+        Intent intent = new Intent(this, NewGame.class);
         startActivity(intent);
         finish();
     }
