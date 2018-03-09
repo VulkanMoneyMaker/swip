@@ -6,7 +6,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/layout_timer"
-        android:background="@drawable/walmart"
+        android:background="@drawable/timer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -23,8 +23,8 @@
             android:layout_height="40dp"
             android:layout_centerHorizontal="true"
             app:isHideTimeBackground="false"
-            app:isShowDay="true"
-            app:isShowHour="true"
+            app:isShowDay="false"
+            app:isShowHour="false"
             app:isShowMinute="true"
             app:isShowSecond="true"
             app:isShowMillisecond="true"
