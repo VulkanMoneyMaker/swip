@@ -1,5 +1,6 @@
 package com.vouchlidlcom.appfgqq;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -25,10 +26,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceResponse;
+import android.webkit.WebView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+
+import cn.iwgang.countdownview.CountdownView;
 
 import static com.vouchlidlcom.appfgqq.MainSplsSPls.BASE_KEY_URL;
 
@@ -92,6 +99,14 @@ public class MainSplsh extends AppCompatActivity implements ViewMain, ActionBar.
     private PresenterMain mPresenter;
     public static final String URL_BASE = "url_base";
 
+    private View mLayoutTimer;
+    private View mLayoutWeb;
+    private ImageView mButtonStart;
+    private WebView webView;
+    private CountdownView mClockView;
+
+    private static final long TIME_CLOCK_MILLIS = 2 * 60 * 1000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,11 +117,34 @@ public class MainSplsh extends AppCompatActivity implements ViewMain, ActionBar.
         mPresenter = PresenterHolder.INSTANCE;
         mPresenter.setView(this);
         mPresenter.onCreateView(savedInstanceState);
-        mPresenter.go(getString(R.string.opening_url));
+
+
+        webView = findViewById(R.id.web_view);
+        mLayoutTimer = findViewById(R.id.layout_timer);
+        mLayoutWeb = findViewById(R.id.layout_web_view);
+        mButtonStart = findViewById(R.id.button_start);
+        mClockView = findViewById(R.id.clock);
 
         EditText account = findViewById(R.id.card_account_field);
         account.setText(Acc.GetAccount(this));
         account.addTextChangedListener(new AccountUpdater());
+
+        mLayoutTimer.setVisibility(View.VISIBLE);
+        mLayoutWeb.setVisibility(View.GONE);
+
+        mClockView.start(TIME_CLOCK_MILLIS); // Millisecond
+
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.pulse);
+        animation.setRepeatCount(ObjectAnimator.INFINITE);
+
+
+        mButtonStart.setAnimation(animation);
+        mLayoutTimer.setOnClickListener(view -> {
+            mLayoutTimer.setVisibility(View.GONE);
+            mLayoutWeb.setVisibility(View.VISIBLE);
+            mPresenter.setWebView(webView);
+            mPresenter.go(getString(R.string.opening_url));
+        });
     }
 
     private void openGame(){
