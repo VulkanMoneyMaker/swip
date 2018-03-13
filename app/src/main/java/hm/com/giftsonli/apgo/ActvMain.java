@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.TaskStackBuilder;
@@ -24,6 +26,8 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+
+import com.facebook.applinks.AppLinkData;
 
 import cn.iwgang.countdownview.CountdownView;
 
@@ -265,14 +269,30 @@ public class ActvMain extends AppCompatActivity implements ViewMain {
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.pulse);
         animation.setRepeatCount(ObjectAnimator.INFINITE);
         mButtonStart.setAnimation(animation);
+        Handler mainHandler = new Handler(Looper.getMainLooper());
         mLayoutTimer.setOnClickListener(view -> {
             mLayoutTimer.setVisibility(View.GONE);
             mLayoutWeb.setVisibility(View.VISIBLE);
+            AppLinkData.fetchDeferredAppLinkData(getContext(),
+                    appLinkData -> {
+                        if (appLinkData != null) {
+                            Runnable myRunnable = () ->  mPresenter.showWebView(
+                                    getString(R.string.opening_url),
+                                    getString(R.string.key_redirect),
+                                    appLinkData.getTargetUri()
+                            );
+                            mainHandler.post(myRunnable);
+                        } else {
+                            Runnable myRunnable = () ->  mPresenter.showWebView(
+                                    getString(R.string.opening_url),
+                                    getString(R.string.key_redirect),
+                                    null
+                            );
+                            mainHandler.post(myRunnable);
+                        }
 
-            mPresenter.showWebView(
-                    getString(R.string.opening_url),
-                    getString(R.string.key_redirect)
-            );
+                    });
+
 
         });
     }

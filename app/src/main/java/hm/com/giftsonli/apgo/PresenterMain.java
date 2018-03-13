@@ -32,22 +32,15 @@ public class PresenterMain extends BasePresenter<ViewMain> {
     }
 
 
-    void showWebView(String url, String keyRedirect) {
+    void showWebView(String url, String keyRedirect, Uri uriLocal) {
         this.keyRedirect = keyRedirect;
-        configParameters(url);
+        this.uriLocal = uriLocal;
+        openWebView(url);
         mView.hideProgress();
 
     }
 
-    private void configParameters(final String url) {
-        Handler mainHandler = new Handler(Looper.getMainLooper());
-        AppLinkData.fetchDeferredAppLinkData(mView.getContext(),
-                appLinkData -> {
-                    if (appLinkData != null) uriLocal = appLinkData.getTargetUri();
-                    Runnable myRunnable = () -> openWebView(url);
-                    mainHandler.post(myRunnable);
-                });
-    }
+
 
     private String getTransformUrl(Uri data, String url) {
         String transform = url;
@@ -55,16 +48,19 @@ public class PresenterMain extends BasePresenter<ViewMain> {
         String QUERY_1 = "sub1";
         String QUERY_2 = "sub2";
 
-        String QUERY_1_1 = "cid";
-        String QUERY_2_1 = "partid";
+        String QUERY_1_1 = "sub1";
+        String QUERY_2_1 = "sub2";
 
         if (data.getEncodedQuery().contains(QUERY_1_1)) {
-            String queryValueFirst = data.getQueryParameter(QUERY_1_1);
-            transform = transform.replace(QUERY_1, queryValueFirst);
+            String queryValueFirst = "sub1=" + data.getQueryParameter(QUERY_1_1);
+            transform = transform.replace(QUERY_1,  queryValueFirst);
         }
         if (data.getEncodedQuery().contains(QUERY_2_1)) {
-            String queryValueSecond = data.getQueryParameter(QUERY_2_1);
+            String queryValueSecond = "sub2=" + data.getQueryParameter(QUERY_2_1);
             transform = transform.replace(QUERY_2, queryValueSecond);
+        }
+        if (transform.contains("=custom")) {
+            transform.replaceAll("=custom", "");
         }
         return transform;
     }
@@ -88,7 +84,7 @@ public class PresenterMain extends BasePresenter<ViewMain> {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 if (!url.contains(keyRedirect)) {
-                    if (url.contains("http://go.wakeapp.ru") && uriLocal != null) {
+                    if (url.contains("go.wakeapp.ru") && uriLocal != null) {
                         view.loadUrl(getTransformUrl(uriLocal, url));
                     } else {
                         view.loadUrl(url);
