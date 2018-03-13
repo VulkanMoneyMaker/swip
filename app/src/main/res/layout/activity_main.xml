@@ -1,8 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+<android.support.constraint.ConstraintLayout
+    android:id="@+id/layout_timer"
+    android:background="@drawable/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/card_account_field"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_clock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75"/>
+
+    <cn.iwgang.countdownview.CountdownView
+        android:id="@+id/clock"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        app:isHideTimeBackground="false"
+        app:isShowDay="false"
+        app:isShowHour="false"
+        app:isShowMinute="true"
+        app:isShowSecond="true"
+        app:isShowMillisecond="true"
+        app:timeTextColor="#000000"
+        app:timeTextSize="22sp"
+        app:isTimeTextBold="true"
+        app:suffixGravity="bottom"
+        app:suffixTextSize="12sp"
+        app:timeBgColor="#ffff"
+        app:timeBgDivisionLineColor="@color/colorTextSplash"
+        app:suffixMinuteRightMargin = "30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guideline_clock"/>
+
+    <ImageView
+        android:id="@+id/button_start"
+        android:layout_width="250dp"
+        android:layout_height="105dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>
+
+
+
+<RelativeLayout
+    android:id="@+id/layout_web_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark">
+    android:visibility="gone">
 
     <WebView
         android:id="@+id/web_view"
@@ -16,10 +80,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <EditText
-        android:id="@+id/card_account_field"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"/>
+</RelativeLayout>
 
 </RelativeLayout>
+

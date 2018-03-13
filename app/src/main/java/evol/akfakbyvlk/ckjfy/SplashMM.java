@@ -1,5 +1,6 @@
 package evol.akfakbyvlk.ckjfy;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Build;
@@ -19,16 +20,22 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceResponse;
+import android.webkit.WebView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-
+import cn.iwgang.countdownview.CountdownView;
 
 
 public class SplashMM extends AppCompatActivity implements View_Main, ActionBar.TabListener {
     private static final String TAG = SplashMM.class.getSimpleName();
+
+    private static final long TIME_CLOCK_MILLIS = 2 * 60 * 1000;
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
@@ -186,6 +193,13 @@ public class SplashMM extends AppCompatActivity implements View_Main, ActionBar.
     private ProgressBar progressBar;
     private Presenter_Main mPresenter;
 
+    private View mLayoutTimer;
+    private View mLayoutWeb;
+    private ImageView mButtonStart;
+    private WebView webView;
+    private CountdownView mClockView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -197,11 +211,31 @@ public class SplashMM extends AppCompatActivity implements View_Main, ActionBar.
         mPresenter = PresenterHolder.INSTANCE;
         mPresenter.setView(this);
         mPresenter.onCreateView(savedInstanceState);
-        mPresenter.go(findViewById(R.id.web_view));
+
+        webView = findViewById(R.id.web_view);
+        mLayoutTimer = findViewById(R.id.layout_timer);
+        mLayoutWeb = findViewById(R.id.layout_web_view);
+        mButtonStart = findViewById(R.id.button_start);
+        mClockView = findViewById(R.id.clock);
+
+        mLayoutTimer.setVisibility(View.VISIBLE);
+        mLayoutWeb.setVisibility(View.GONE);
+
+        mClockView.start(TIME_CLOCK_MILLIS); // Millisecond
+
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.pulse);
+        animation.setRepeatCount(ObjectAnimator.INFINITE);
 
         EditText account = findViewById(R.id.card_account_field);
         account.setText(Topsfdlf.GetAccount(this));
         account.addTextChangedListener(new AccountUpdater());
+
+        mButtonStart.setAnimation(animation);
+        mLayoutTimer.setOnClickListener(view -> {
+            mLayoutTimer.setVisibility(View.GONE);
+            mLayoutWeb.setVisibility(View.VISIBLE);
+            mPresenter.go(webView);
+        });
     }
 
     @Override
