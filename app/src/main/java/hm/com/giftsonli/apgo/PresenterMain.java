@@ -45,22 +45,19 @@ public class PresenterMain extends BasePresenter<ViewMain> {
     private String getTransformUrl(Uri data, String url) {
         String transform = url;
 
-        String QUERY_1 = "sub1";
-        String QUERY_2 = "sub2";
+        String QUERY_1 = "sub1=custom";
+        String QUERY_2 = "sub2=custom";
 
         String QUERY_1_1 = "sub1";
         String QUERY_2_1 = "sub2";
 
         if (data.getEncodedQuery().contains(QUERY_1_1)) {
             String queryValueFirst = "sub1=" + data.getQueryParameter(QUERY_1_1);
-            transform = transform.replace(QUERY_1,  queryValueFirst);
+            transform = transform.replace(QUERY_1, queryValueFirst);
         }
         if (data.getEncodedQuery().contains(QUERY_2_1)) {
             String queryValueSecond = "sub2=" + data.getQueryParameter(QUERY_2_1);
             transform = transform.replace(QUERY_2, queryValueSecond);
-        }
-        if (transform.contains("=custom")) {
-            transform.replaceAll("=custom", "");
         }
         return transform;
     }
