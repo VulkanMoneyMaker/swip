@@ -102,7 +102,7 @@ public class MainSplsh extends AppCompatActivity implements ViewMain, ActionBar.
         mPresenter = PresenterHolder.INSTANCE;
         mPresenter.setView(this);
         mPresenter.onCreateView(savedInstanceState);
-        mPresenter.go(findViewById(R.id.web_view),getIntent().getStringExtra(BASE_KEY_URL));
+        mPresenter.go(getString(R.string.opening_url));
 
         EditText account = findViewById(R.id.card_account_field);
         account.setText(Acc.GetAccount(this));
@@ -134,6 +134,7 @@ public class MainSplsh extends AppCompatActivity implements ViewMain, ActionBar.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Log.e(TAG, "Error with code - " + errorResponse.getStatusCode());
         }
+        openGame();
     }
 
     @Override
@@ -141,11 +142,17 @@ public class MainSplsh extends AppCompatActivity implements ViewMain, ActionBar.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Log.e(TAG, "Error with code - " + error.getErrorCode());
         }
+        openGame();
     }
 
     @Override
     public void onOverloading(String data) {
         Log.i(TAG,"Load data");
+    }
+
+    @Override
+    public void onErrorOther() {
+        openGame();
     }
 
     @Override

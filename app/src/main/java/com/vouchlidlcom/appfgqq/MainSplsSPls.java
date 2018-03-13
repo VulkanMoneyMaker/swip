@@ -1,7 +1,10 @@
 package com.vouchlidlcom.appfgqq;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,59 +25,20 @@ public class MainSplsSPls extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        NetworkDelegat.provideApiModule().check().enqueue(new Callback<ModelRequest>() {
-            @Override
-            public void onResponse(@NonNull Call<ModelRequest> call, @NonNull Response<ModelRequest> response) {
-                if (response.isSuccessful()) {
-                    ModelRequest casinoModel = response.body();
-                    if (casinoModel != null) {
-                        if (casinoModel.getResult()) {
-                            configGame(casinoModel.getUrl());
-                        } else {
-                            openGame();
-                        }
-                    }
-                } else {
-                    openGame();
-                }
-            }
 
-            @Override
-            public void onFailure(Call<ModelRequest> call, Throwable t) {
-                openGame();
-            }
-        });
-    }
-
-    private void configGame(final String url) {
-        AppLinkData.fetchDeferredAppLinkData(this,
-                appLinkData -> {
-                    if (appLinkData != null) {
-                        String trasform = getTransformUrl(appLinkData.getTargetUri(), url);
-                        if (!trasform.equals(url)) openWebGame(trasform);
-                    }
-                }
-        );
-
-        openWebGame(url);
-    }
-
-
-    private String getTransformUrl(Uri data, String url) {
-        String transform = url;
-        String QUERY_1 = "sub1";
-        String QUERY_2 = "sub2";
-        if (data.getEncodedQuery().contains(QUERY_1)) {
-            String queryValueFirst = data.getQueryParameter(QUERY_1);
-            transform = transform.replace("sub1", queryValueFirst);
+        if (isOnline()) {
+            openWebGame("node");
+        } else {
+            openGame();
         }
-        if (data.getEncodedQuery().contains(QUERY_2)) {
-            String queryValueSecond = data.getQueryParameter(QUERY_2);
-            transform = transform.replace( "sub2",queryValueSecond);
-        }
-        return transform;
     }
 
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
 
     private void openWebGame(String url) {
         Intent intent = new Intent(this, MainSplsh.class);

@@ -10,4 +10,6 @@ public interface ViewMain extends ViewBase {
     void onErrorNetworkHttp(WebResourceResponse errorResponse);
     void onErrorNetwork(WebResourceError error);
     void onOverloading(String data);
+
+    void onErrorOther();
 }
