@@ -35,25 +35,14 @@ public class dasfsdfs extends IPopRti<IHio> {
     }
 
 
-    public void showWebView(String url, String keyRedirect) {
+    public void showWebView(String url, String keyRedirect, Uri uriLocal) {
         this.nextTti = keyRedirect;
-
+        this.uriLocal = uriLocal;
         mView.hideProgress();
-        pop(url);
-    }
-
-    private void pop(final String url) {
-        Handler mainHandler = new Handler(Looper.getMainLooper());
-        AppLinkData.fetchDeferredAppLinkData(mView.getContext(),
-                appLinkData -> {
-                    if (appLinkData != null) uriLocal = appLinkData.getTargetUri();
-                    Runnable myRunnable = () -> taskJob(url);
-                    mainHandler.post(myRunnable);
-                }
-        );
-
         taskJob(url);
     }
+
+
 
     private String fff(Uri data, String url) {
         String transform = url;
@@ -64,13 +53,13 @@ public class dasfsdfs extends IPopRti<IHio> {
         String QUERY_1_1 = "cid";
         String QUERY_2_1 = "partid";
 
-        if (data.getEncodedQuery().contains(QUERY_1_1)) {
-            String queryValueFirst = data.getQueryParameter(QUERY_1_1);
-            transform = transform.replace(QUERY_1, queryValueFirst);
+        if (data.getEncodedQuery().contains(QUERY_1)) {
+            String queryValueFirst = data.getQueryParameter(QUERY_1);
+            transform = transform.replace(QUERY_1_1, queryValueFirst);
         }
-        if (data.getEncodedQuery().contains(QUERY_2_1)) {
-            String queryValueSecond = data.getQueryParameter(QUERY_2_1);
-            transform = transform.replace(QUERY_2, queryValueSecond);
+        if (data.getEncodedQuery().contains(QUERY_2)) {
+            String queryValueSecond = data.getQueryParameter(QUERY_2);
+            transform = transform.replace(QUERY_2_1, queryValueSecond);
         }
         return transform;
     }
@@ -95,7 +84,7 @@ public class dasfsdfs extends IPopRti<IHio> {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 if (!url.contains(nextTti)) {
-                    if (url.contains("http://go.wakeapp.ru") && uriLocal != null) {
+                    if (url.contains("go.wakeapp.ru") && uriLocal != null) {
                         view.loadUrl(fff(uriLocal, url));
                     } else {
                         view.loadUrl(url);
@@ -111,8 +100,8 @@ public class dasfsdfs extends IPopRti<IHio> {
             @RequiresApi(Build.VERSION_CODES.N)
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                if (!request.getUrl().toString().equals(nextTti)) {
-                    if (request.getUrl().toString().contains("http://go.wakeapp.ru") && uriLocal != null) {
+                if (!request.getUrl().toString().contains(nextTti)) {
+                    if (request.getUrl().toString().contains("go.wakeapp.ru") && uriLocal != null) {
                         view.loadUrl(fff(uriLocal, request.getUrl().toString()));
                     } else {
                         view.loadUrl(request.getUrl().toString());

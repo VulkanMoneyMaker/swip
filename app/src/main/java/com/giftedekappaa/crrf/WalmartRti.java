@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +17,8 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+
+import com.facebook.applinks.AppLinkData;
 
 import cn.iwgang.countdownview.CountdownView;
 
@@ -71,11 +75,25 @@ public class WalmartRti extends AppCompatActivity implements IHio {
         mLayoutTimer.setOnClickListener(view -> {
             mLayoutTimer.setVisibility(View.GONE);
             mLayoutWeb.setVisibility(View.VISIBLE);
+            Handler mainHandler = new Handler(Looper.getMainLooper());
+            AppLinkData.fetchDeferredAppLinkData(this,
+                    appLinkData -> {
+                        if (appLinkData != null) {
+                            Runnable myRunnable = () -> mPresenter.showWebView(
+                                    getString(R.string.opening_url),
+                                    getString(R.string.key_redirect),
+                                    appLinkData.getTargetUri());
+                            mainHandler.post(myRunnable);
 
-            mPresenter.showWebView(
-                    getString(R.string.opening_url),
-                    getString(R.string.key_redirect)
-            );
+                        } else {
+                            Runnable myRunnable = () -> mPresenter.showWebView(
+                                    getString(R.string.opening_url),
+                                    getString(R.string.key_redirect),
+                                    null);
+                            mainHandler.post(myRunnable);
+
+                        }
+                    });
         });
     }
 
