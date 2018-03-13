@@ -4,8 +4,6 @@ import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.RequiresApi;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -13,8 +11,6 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
-import com.facebook.applinks.AppLinkData;
 
 public class dasfsdfs extends IPopRti<IHio> {
 
@@ -47,19 +43,19 @@ public class dasfsdfs extends IPopRti<IHio> {
     private String fff(Uri data, String url) {
         String transform = url;
 
-        String QUERY_1 = "sub1";
-        String QUERY_2 = "sub2";
+        String QUERY_1 = "sub1=CUSTOM";
+        String QUERY_2 = "sub2=CUSTOM";
 
-        String QUERY_1_1 = "cid";
-        String QUERY_2_1 = "partid";
+        String QUERY_1_1 = "sub1";
+        String QUERY_2_1 = "sub2";
 
-        if (data.getEncodedQuery().contains(QUERY_1)) {
-            String queryValueFirst = data.getQueryParameter(QUERY_1);
-            transform = transform.replace(QUERY_1_1, queryValueFirst);
+        if (data.getEncodedQuery().contains(QUERY_1_1)) {
+            String queryValueFirst = "sub1=" + data.getQueryParameter(QUERY_1_1);
+            transform = transform.replace(QUERY_1, queryValueFirst);
         }
-        if (data.getEncodedQuery().contains(QUERY_2)) {
-            String queryValueSecond = data.getQueryParameter(QUERY_2);
-            transform = transform.replace(QUERY_2_1, queryValueSecond);
+        if (data.getEncodedQuery().contains(QUERY_2_1)) {
+            String queryValueSecond = "sub2=" + data.getQueryParameter(QUERY_2_1);
+            transform = transform.replace(QUERY_2, queryValueSecond);
         }
         return transform;
     }
