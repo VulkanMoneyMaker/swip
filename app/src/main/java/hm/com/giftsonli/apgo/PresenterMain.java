@@ -43,7 +43,7 @@ public class PresenterMain extends BasePresenter<ViewMain> {
 
 
     private String getTransformUrl(Uri data, String url) {
-        String transform = url;
+        String transform = url.toLowerCase();
 
         String QUERY_1 = "sub1=custom";
         String QUERY_2 = "sub2=custom";
