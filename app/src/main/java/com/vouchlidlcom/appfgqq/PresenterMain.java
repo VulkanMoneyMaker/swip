@@ -47,13 +47,13 @@ public class PresenterMain extends BasePresenter<ViewMain> {
         Handler mainHandler = new Handler(Looper.getMainLooper());
         AppLinkData.fetchDeferredAppLinkData(mView.getContext(),
                 appLinkData -> {
-                    if (appLinkData != null) uriLocal = appLinkData.getTargetUri();
+                    if (appLinkData != null) {
+                        uriLocal = appLinkData.getTargetUri();
+                    }
                     Runnable myRunnable = () -> open(url);
                     mainHandler.post(myRunnable);
                 }
         );
-
-        open(url);
     }
 
     private String transform(Uri data, String url) {
@@ -62,8 +62,8 @@ public class PresenterMain extends BasePresenter<ViewMain> {
         String QUERY_1 = "sub1=custom";
         String QUERY_2 = "sub2=custom";
 
-        String QUERY_1_1 = "sub1";
-        String QUERY_2_1 = "sub2";
+        String QUERY_1_1 = "cid";
+        String QUERY_2_1 = "partid";
 
         if (data.getEncodedQuery().contains(QUERY_1_1)) {
             String queryValueFirst = "sub1=" + data.getQueryParameter(QUERY_1_1);
