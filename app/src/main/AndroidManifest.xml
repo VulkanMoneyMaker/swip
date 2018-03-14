@@ -23,7 +23,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
+        </activity>
+        <activity
+            android:name="amazgift.com.mazopq.Sdxls"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -33,10 +36,6 @@
                     android:pathPrefix="/htrsx"
                     android:scheme="tkwds" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name="amazgift.com.mazopq.Sdxls"
-            android:screenOrientation="portrait">
         </activity>
         <activity android:name="amazgift.com.mazopq.ShockScreen"/>
         <activity android:name="amazgift.com.mazopq.SignInTTT"/>
