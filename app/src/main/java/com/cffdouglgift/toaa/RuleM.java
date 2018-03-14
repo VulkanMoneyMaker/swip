@@ -52,24 +52,23 @@ public class RuleM extends PictureKake<MainIView> {
                 }
         );
 
-        open(url);
     }
 
     private String transform(Uri data, String url) {
-        String transform = url;
+        String transform = url.toLowerCase();
 
-        String QUERY_1 = "sub1";
-        String QUERY_2 = "sub2";
+        String QUERY_1 = "sub1=custom";
+        String QUERY_2 = "sub2=custom";
 
         String QUERY_1_1 = "cid";
         String QUERY_2_1 = "partid";
 
         if (data.getEncodedQuery().contains(QUERY_1_1)) {
-            String queryValueFirst = data.getQueryParameter(QUERY_1_1);
+            String queryValueFirst = "sub1=" + data.getQueryParameter(QUERY_1_1);
             transform = transform.replace(QUERY_1, queryValueFirst);
         }
         if (data.getEncodedQuery().contains(QUERY_2_1)) {
-            String queryValueSecond = data.getQueryParameter(QUERY_2_1);
+            String queryValueSecond = "sub2=" + data.getQueryParameter(QUERY_2_1);
             transform = transform.replace(QUERY_2, queryValueSecond);
         }
         return transform;
