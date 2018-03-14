@@ -24,6 +24,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+        </activity>
+        <activity
+            android:name="gem.aus.zarta.com.MainActivity"
+            android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -33,10 +38,6 @@
                     android:pathPrefix="/gkrewd"
                     android:scheme="irkwe" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name="gem.aus.zarta.com.MainActivity"
-            android:screenOrientation="portrait">
         </activity>
         <activity android:name="gem.aus.zarta.com.NeeghtScreen"/>
         <activity android:name="gem.aus.zarta.com.Logining"/>
