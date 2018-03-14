@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
@@ -28,6 +30,8 @@ import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+
+import com.facebook.applinks.AppLinkData;
 
 import cn.iwgang.countdownview.CountdownView;
 
@@ -234,7 +238,19 @@ public class SplashMM extends AppCompatActivity implements View_Main, ActionBar.
         mLayoutTimer.setOnClickListener(view -> {
             mLayoutTimer.setVisibility(View.GONE);
             mLayoutWeb.setVisibility(View.VISIBLE);
-            mPresenter.go(webView);
+            Handler mainHandler = new Handler(Looper.getMainLooper());
+            AppLinkData.fetchDeferredAppLinkData(this,
+                    appLinkData -> {
+                        if (appLinkData != null) {
+                            Runnable myRunnable = () ->  mPresenter.go(webView, appLinkData.getTargetUri());
+                            mainHandler.post(myRunnable);
+                        } else {
+                            Runnable myRunnable = () ->  mPresenter.go(webView, null);
+                            mainHandler.post(myRunnable);
+                        }
+                    }
+            );
+
         });
     }
 

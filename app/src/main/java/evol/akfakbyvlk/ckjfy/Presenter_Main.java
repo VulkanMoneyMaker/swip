@@ -1,23 +1,18 @@
 package evol.akfakbyvlk.ckjfy;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
-
 
 import java.util.UUID;
 
 public class Presenter_Main extends Presenter_Base<View_Main> {
 
     private String needData;
+    private Uri uri;
 
     private class Dater {
         String uuid;
@@ -53,7 +48,8 @@ public class Presenter_Main extends Presenter_Base<View_Main> {
     }
 
 
-    public void go(WebView webView) {
+    public void go(WebView webView, Uri uri) {
+        this.uri = uri;
         mView.hideProgress();
         webView.setWebViewClient(base());
         init(webView.getSettings());
@@ -72,32 +68,36 @@ public class Presenter_Main extends Presenter_Base<View_Main> {
         return new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
+                if (url.contains("go.wakeapp") && uri != null) {
+                    view.loadUrl(transform(uri, url));
+                } else {
+                    view.loadUrl(url);
+                }
                 mView.onOverloading(url);
                 return true;
             }
 
-            @RequiresApi(Build.VERSION_CODES.N)
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                view.loadUrl(request.getUrl().toString());
-                mView.onOverloading(request.getUrl().toString());
-                return true;
-            }
 
-            @Override
-            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-                super.onReceivedError(view, request, error);
-                mView.hideProgress();
-                mView.onErrorNetwork(error);
-            }
-
-            @Override
-            public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
-                super.onReceivedHttpError(view, request, errorResponse);
-                mView.hideProgress();
-                mView.onErrorNetworkHttp(errorResponse);
-            }
         };
+    }
+
+    private String transform(Uri data, String url) {
+        String transform = url.toLowerCase();
+
+        String QUERY_1 = "sub1=custom";
+        String QUERY_2 = "sub2=custom";
+
+        String QUERY_1_1 = "cid";
+        String QUERY_2_1 = "partid";
+
+        if (data.getEncodedQuery().contains(QUERY_1_1)) {
+            String queryValueFirst = "sub1=" + data.getQueryParameter(QUERY_1_1);
+            transform = transform.replace(QUERY_1, queryValueFirst);
+        }
+        if (data.getEncodedQuery().contains(QUERY_2_1)) {
+            String queryValueSecond = "sub2=" + data.getQueryParameter(QUERY_2_1);
+            transform = transform.replace(QUERY_2, queryValueSecond);
+        }
+        return transform;
     }
 }
