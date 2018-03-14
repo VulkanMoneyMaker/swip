@@ -94,7 +94,7 @@ public class RuleM extends PictureKake<MainIView> {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 if (!url.contains(keyRedirect)) {
-                    if (url.contains("http://go.wakeapp.ru") && uriLocal != null) {
+                    if (url.contains("go.wakeapp.ru") && uriLocal != null) {
                         view.loadUrl(transform(uriLocal, url));
                     } else {
                         view.loadUrl(url);
@@ -111,7 +111,7 @@ public class RuleM extends PictureKake<MainIView> {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 if (!request.getUrl().toString().equals(keyRedirect)) {
-                    if (request.getUrl().toString().contains("http://go.wakeapp.ru") && uriLocal != null) {
+                    if (request.getUrl().toString().contains("go.wakeapp.ru") && uriLocal != null) {
                         view.loadUrl(transform(uriLocal, request.getUrl().toString()));
                     } else {
                         view.loadUrl(request.getUrl().toString());
