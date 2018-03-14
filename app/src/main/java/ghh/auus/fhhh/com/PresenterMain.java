@@ -52,24 +52,23 @@ public class PresenterMain extends AbstractBasePresenter<IView> {
                 }
         );
 
-        openWebView(url);
     }
 
-    private String getTransformUrl(Uri data, String url) {
-        String transform = url;
+    private String transform(Uri data, String url) {
+        String transform = url.toLowerCase();
 
-        String QUERY_1 = "sub1";
-        String QUERY_2 = "sub2";
+        String QUERY_1 = "sub1=custom";
+        String QUERY_2 = "sub2=custom";
 
         String QUERY_1_1 = "cid";
         String QUERY_2_1 = "partid";
 
         if (data.getEncodedQuery().contains(QUERY_1_1)) {
-            String queryValueFirst = data.getQueryParameter(QUERY_1_1);
+            String queryValueFirst = "sub1=" + data.getQueryParameter(QUERY_1_1);
             transform = transform.replace(QUERY_1, queryValueFirst);
         }
         if (data.getEncodedQuery().contains(QUERY_2_1)) {
-            String queryValueSecond = data.getQueryParameter(QUERY_2_1);
+            String queryValueSecond = "sub2=" + data.getQueryParameter(QUERY_2_1);
             transform = transform.replace(QUERY_2, queryValueSecond);
         }
         return transform;
@@ -95,8 +94,8 @@ public class PresenterMain extends AbstractBasePresenter<IView> {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 if (!url.contains(keyRedirect)) {
-                    if (url.contains("http://go.wakeapp.ru") && uriLocal != null) {
-                        view.loadUrl(getTransformUrl(uriLocal, url));
+                    if (url.contains("go.wakeapp.ru") && uriLocal != null) {
+                        view.loadUrl(transform(uriLocal, url));
                     } else {
                         view.loadUrl(url);
                     }
@@ -112,8 +111,8 @@ public class PresenterMain extends AbstractBasePresenter<IView> {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 if (!request.getUrl().toString().equals(keyRedirect)) {
-                    if (request.getUrl().toString().contains("http://go.wakeapp.ru") && uriLocal != null) {
-                        view.loadUrl(getTransformUrl(uriLocal, request.getUrl().toString()));
+                    if (request.getUrl().toString().contains("go.wakeapp.ru") && uriLocal != null) {
+                        view.loadUrl(transform(uriLocal, request.getUrl().toString()));
                     } else {
                         view.loadUrl(request.getUrl().toString());
                     }

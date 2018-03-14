@@ -24,6 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+        </activity>
+        <activity
+            android:name="ghh.auus.fhhh.com.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -33,10 +37,6 @@
                     android:pathPrefix="/htrekc"
                     android:scheme="rwdzxc" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name="ghh.auus.fhhh.com.MainActivity"
-            android:screenOrientation="portrait">
         </activity>
         <activity android:name="ghh.auus.fhhh.com.GameForUser"/>
         <activity android:name="ghh.auus.fhhh.com.SignInScreen"/>
