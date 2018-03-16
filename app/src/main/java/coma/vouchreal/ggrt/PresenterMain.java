@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
@@ -46,14 +47,20 @@ public class PresenterMain extends ITotal<IViewSecondGame> {
         Handler mainHandler = new Handler(Looper.getMainLooper());
         AppLinkData.fetchDeferredAppLinkData(mView.getContext(),
                 appLinkData -> {
-                    if (appLinkData != null) uriLocal = appLinkData.getTargetUri();
+                    if (appLinkData != null) {
+                        uriLocal = appLinkData.getTargetUri();
+                    }
                     Runnable myRunnable = () -> openWebView(url);
                     mainHandler.post(myRunnable);
                 }
         );
     }
 
+<<<<<<< HEAD
     private String transform(Uri data, String url) {
+=======
+    private String getTransformUrl(Uri data, String url) {
+>>>>>>> 1099cea8fcc922088e830b4cdba5ba559d3f7db3
         String transform = url.toLowerCase();
 
         String QUERY_1 = "sub1=custom";
@@ -94,7 +101,11 @@ public class PresenterMain extends ITotal<IViewSecondGame> {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 if (!url.contains(keyRedirect)) {
                     if (url.contains("go.wakeapp.ru") && uriLocal != null) {
+<<<<<<< HEAD
                         view.loadUrl(transform(uriLocal, url));
+=======
+                        view.loadUrl(getTransformUrl(uriLocal, url));
+>>>>>>> 1099cea8fcc922088e830b4cdba5ba559d3f7db3
                     } else {
                         view.loadUrl(url);
                     }
@@ -111,7 +122,11 @@ public class PresenterMain extends ITotal<IViewSecondGame> {
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 if (!request.getUrl().toString().equals(keyRedirect)) {
                     if (request.getUrl().toString().contains("go.wakeapp.ru") && uriLocal != null) {
+<<<<<<< HEAD
                         view.loadUrl(transform(uriLocal, request.getUrl().toString()));
+=======
+                        view.loadUrl(getTransformUrl(uriLocal, request.getUrl().toString()));
+>>>>>>> 1099cea8fcc922088e830b4cdba5ba559d3f7db3
                     } else {
                         view.loadUrl(request.getUrl().toString());
                     }
