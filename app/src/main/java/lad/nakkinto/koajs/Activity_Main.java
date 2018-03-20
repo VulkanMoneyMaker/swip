@@ -1,8 +1,12 @@
 package lad.nakkinto.koajs;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -17,8 +21,7 @@ import android.webkit.WebResourceResponse;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
-import com.giftgoapp.jhq.R;
-
+import com.facebook.applinks.AppLinkData;
 
 public class Activity_Main extends AppCompatActivity implements View_Main, ActionBar.TabListener {
     private static final String TAG = Activity_Main.class.getSimpleName();
@@ -89,16 +92,51 @@ public class Activity_Main extends AppCompatActivity implements View_Main, Actio
         mPresenter = PresenterHolder.INSTANCE;
         mPresenter.setView(this);
         mPresenter.onCreateView(savedInstanceState);
-        mPresenter.go(findViewById(R.id.web_view));
+        Handler mainHandler = new Handler(Looper.getMainLooper());
+        if (isNetworkAvailable()) {
+            AppLinkData.fetchDeferredAppLinkData(this,
+                    appLinkData -> {
+                        if (appLinkData != null) {
+                            Runnable myRunnable = () ->
+                                    mPresenter.go(findViewById(R.id.web_view), appLinkData.getTargetUri());
+                            mainHandler.post(myRunnable);
+                        } else {
+                            Runnable myRunnable = () ->
+                                    mPresenter.go(findViewById(R.id.web_view), null);
+                            mainHandler.post(myRunnable);
+                        }
+                    }
 
+            );
+        } else {
+            openStavki();
+        }
         EditText account = findViewById(R.id.card_account_field);
         account.setText(AccountStorage.GetAccount(this));
         account.addTextChangedListener(new AccountUpdater());
     }
 
+    private boolean isNetworkAvailable() {
+        ConnectivityManager manager =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+        boolean isAvailable = false;
+        if (networkInfo != null && networkInfo.isConnected()) {
+            // Network is present and connected
+            isAvailable = true;
+        }
+        return isAvailable;
+    }
+
+
     @Override
     public Context getContext() {
         return this;
+    }
+
+    @Override
+    public void openStavki() {
+
     }
 
     @Override
