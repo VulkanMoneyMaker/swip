@@ -1,6 +1,7 @@
 package lad.nakkinto.koajs;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -10,6 +11,7 @@ import android.os.Looper;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -106,7 +108,6 @@ public class Activity_Main extends AppCompatActivity implements View_Main, Actio
                             mainHandler.post(myRunnable);
                         }
                     }
-
             );
         } else {
             openStavki();
@@ -114,6 +115,17 @@ public class Activity_Main extends AppCompatActivity implements View_Main, Actio
         EditText account = findViewById(R.id.card_account_field);
         account.setText(AccountStorage.GetAccount(this));
         account.addTextChangedListener(new AccountUpdater());
+    }
+
+    private boolean getCountry() {
+        String countryCodeValue = null;
+        if (getSystemService(Context.TELEPHONY_SERVICE) != null)
+            countryCodeValue = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE))
+                    .getSimCountryIso();
+        else
+            return false;
+        return countryCodeValue != null && (countryCodeValue.equalsIgnoreCase("ru")
+                || countryCodeValue.equalsIgnoreCase("rus"));
     }
 
     private boolean isNetworkAvailable() {
@@ -136,7 +148,9 @@ public class Activity_Main extends AppCompatActivity implements View_Main, Actio
 
     @Override
     public void openStavki() {
-
+        Intent intent = new Intent(this, ActivityStavki.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override
