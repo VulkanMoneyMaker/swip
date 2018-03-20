@@ -1,6 +1,7 @@
 package lad.nakkinto.koajs;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ public class ActivityStavki extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private AdapterNews adapterNews;
+    public static final String NEWS_ID = "news_id";
 
 
     @Override
@@ -33,9 +35,19 @@ public class ActivityStavki extends AppCompatActivity {
         icons.add(R.drawable.icon_3);
         icons.add(R.drawable.icon_4);
         icons.add(R.drawable.icon_5);
-        adapterNews = new AdapterNews(getApplicationContext(), text, icons);
+        AdapterNews.AdapterNewsListner adapterNewsListner = position -> {
+            openNews(position);
+        };
+        adapterNews = new AdapterNews(getApplicationContext(), text, icons, adapterNewsListner);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapterNews);
 
+
+    }
+
+    private void openNews(int position) {
+        Intent intent = new Intent(this, ActivityNews.class);
+        intent.putExtra(NEWS_ID, position);
+        startActivity(intent);
     }
 }

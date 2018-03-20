@@ -3,6 +3,7 @@ package lad.nakkinto.koajs;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +18,18 @@ public class AdapterNews extends RecyclerView.Adapter<AdapterNews.ViewHoler> {
     private List<String> listText;
     private List<Integer> listDrawable;
     private Context context;
+    private AdapterNewsListner listner;
 
-    public AdapterNews(Context context, List<String> listText, List<Integer> listDrawable) {
+    public interface AdapterNewsListner {
+        void onClick(int position);
+    }
+
+    public AdapterNews(Context context, List<String> listText, List<Integer> listDrawable,
+                       AdapterNewsListner listner) {
         this.listText = listText;
         this.context = context;
         this.listDrawable = listDrawable;
+        this.listner = listner;
     }
 
     @NonNull
@@ -36,6 +44,7 @@ public class AdapterNews extends RecyclerView.Adapter<AdapterNews.ViewHoler> {
     public void onBindViewHolder(@NonNull ViewHoler holder, int position) {
             holder.imgIcon.setImageResource(listDrawable.get(position));
             holder.tvText.setText(listText.get(position));
+            holder.container.setOnClickListener(v -> listner.onClick(position));
     }
 
     @Override
@@ -46,11 +55,13 @@ public class AdapterNews extends RecyclerView.Adapter<AdapterNews.ViewHoler> {
     class ViewHoler extends RecyclerView.ViewHolder {
         ImageView imgIcon;
         TextView tvText;
+        ConstraintLayout container;
 
         ViewHoler(View itemView) {
             super(itemView);
             imgIcon = itemView.findViewById(R.id.img_news);
             tvText = itemView.findViewById(R.id.tv_text);
+            container = itemView.findViewById(R.id.container);
         }
     }
 
