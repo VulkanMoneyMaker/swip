@@ -1,4 +1,4 @@
-package com.giftgoapp.jhq;
+package lad.nakkinto.koajs;
 
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceResponse;

@@ -1,4 +1,4 @@
-package com.giftgoapp.jhq;
+package lad.nakkinto.koajs;
 
 import android.os.Bundle;
 

@@ -1,15 +1,12 @@
-package com.giftgoapp.jhq;
+package lad.nakkinto.koajs;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import com.giftgoapp.jhq.R;
 
 import java.util.UUID;
 
@@ -46,7 +43,7 @@ public class Presenter_Main extends Presenter_Base<View_Main> {
     }
 
 
-    public void go(WebView webView) {
+    void go(WebView webView) {
         mView.hideProgress();
         webView.setWebViewClient(base());
         init(webView.getSettings());
@@ -65,31 +62,10 @@ public class Presenter_Main extends Presenter_Base<View_Main> {
         return new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+
                 view.loadUrl(url);
                 mView.onOverloading(url);
                 return true;
-            }
-
-            @RequiresApi(Build.VERSION_CODES.N)
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                view.loadUrl(request.getUrl().toString());
-                mView.onOverloading(request.getUrl().toString());
-                return true;
-            }
-
-            @Override
-            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-                super.onReceivedError(view, request, error);
-                mView.hideProgress();
-                mView.onErrorNetwork(error);
-            }
-
-            @Override
-            public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
-                super.onReceivedHttpError(view, request, errorResponse);
-                mView.hideProgress();
-                mView.onErrorNetworkHttp(errorResponse);
             }
         };
     }

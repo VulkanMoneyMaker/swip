@@ -1,4 +1,4 @@
-package com.giftgoapp.jhq;
+package lad.nakkinto.koajs;
 
 public abstract class Presenter_Base<T> implements Presenter_Circle_Life {
 
