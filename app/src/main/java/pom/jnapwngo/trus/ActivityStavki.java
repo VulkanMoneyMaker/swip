@@ -1,4 +1,4 @@
-package lad.nakkinto.koajs;
+package pom.jnapwngo.trus;
 
 
 import android.content.Intent;

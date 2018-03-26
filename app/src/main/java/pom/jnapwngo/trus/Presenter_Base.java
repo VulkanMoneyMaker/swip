@@ -1,4 +1,4 @@
-package lad.nakkinto.koajs;
+package pom.jnapwngo.trus;
 
 public abstract class Presenter_Base<T> implements Presenter_Circle_Life {
 

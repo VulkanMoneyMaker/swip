@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="lad.nakkinto.koajs">
+    package="pom.jnapwngo.trus">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="lad.nakkinto.koajs.SplashScreenActvity"
+            android:name="pom.jnapwngo.trus.SplashScreenActvity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +26,7 @@
         </activity>
 
         <activity
-            android:name=".Activity_Main"
+            android:name="pom.jnapwngo.trus.Activity_Main"
             android:screenOrientation="portrait">
 
             <intent-filter>
@@ -42,10 +42,10 @@
         </activity>
 
         <activity
-            android:name="lad.nakkinto.koajs.ActivityStavki"
+            android:name="pom.jnapwngo.trus.ActivityStavki"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".ActivityNews"/>
+        <activity android:name="pom.jnapwngo.trus.ActivityNews"/>
 
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
