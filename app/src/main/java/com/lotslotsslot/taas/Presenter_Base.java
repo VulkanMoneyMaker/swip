@@ -1,4 +1,4 @@
-package pom.jnapwngo.trus;
+package com.lotslotsslot.taas;
 
 public abstract class Presenter_Base<T> implements Presenter_Circle_Life {
 

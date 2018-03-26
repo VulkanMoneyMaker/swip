@@ -1,4 +1,4 @@
-package pom.jnapwngo.trus;
+package com.lotslotsslot.taas;
 
 import android.annotation.SuppressLint;
 import android.net.Uri;
