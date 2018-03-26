@@ -33,11 +33,11 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/buttons"
-        android:layout_marginBottom="20dp"
+        android:src="@drawable/button"
+        android:layout_margin="25dp"
         app:layout_constraintStart_toStartOf="@id/guidline"
         app:layout_constraintRight_toRightOf="@id/img_news"
-        app:layout_constraintBottom_toBottomOf="@id/img_news"/>
+        app:layout_constraintTop_toTopOf="@id/img_news"/>
 
     <TextView
         android:id="@+id/tv_text"
