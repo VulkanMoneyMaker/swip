@@ -6,19 +6,38 @@
     android:orientation="horizontal"
     android:layout_marginRight="16dp"
     android:id="@+id/container"
-    android:layout_marginTop="8dp"
+    android:layout_marginTop="4dp"
     android:layout_marginLeft="16dp"
     android:background="@drawable/bg_icon"
     android:layout_height="wrap_content">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guidline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.45"/>
 
     <ImageView
         android:id="@+id/img_news"
         android:src="@drawable/icon_2"
         android:scaleType="centerCrop"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/buttons"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintStart_toStartOf="@id/guidline"
+        app:layout_constraintRight_toRightOf="@id/img_news"
+        app:layout_constraintBottom_toBottomOf="@id/img_news"/>
 
     <TextView
         android:id="@+id/tv_text"
@@ -27,6 +46,8 @@
         android:textColor="@android:color/white"
         android:gravity="center"
         android:layout_height="0dp"
+
+        android:visibility="gone"
 
         app:layout_constraintBottom_toBottomOf="@+id/img_news"
         app:layout_constraintEnd_toEndOf="parent"
