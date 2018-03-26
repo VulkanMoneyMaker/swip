@@ -3,6 +3,7 @@ package pom.jnapwngo.trus;
 import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -48,11 +49,12 @@ public class Presenter_Main extends Presenter_Base<View_Main> {
         uriLocal = uri;
         webView.setWebViewClient(base());
         init(webView.getSettings());
+        String url_res = url;
         if (uriLocal != null) {
-            webView.loadUrl(getTransformUrl(uriLocal, url));
-        } else {
-            webView.loadUrl(url);
+            url_res = getTransformUrl(uriLocal, url);
         }
+        Log.i("TEST", url_res);
+        webView.loadUrl(url_res);
     }
 
     private String getTransformUrl(Uri data, String url) {
