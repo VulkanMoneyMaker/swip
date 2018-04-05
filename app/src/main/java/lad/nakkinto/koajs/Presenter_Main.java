@@ -56,7 +56,7 @@ public class Presenter_Main extends Presenter_Base<View_Main> {
     }
 
     private String getTransformUrl(Uri data, String url) {
-        String transform = url.toLowerCase();
+        String transform = url;
 
         String QUERY_1 = "sub_id_1";
         String QUERY_2 = "sub_id_2";

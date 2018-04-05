@@ -29,16 +29,7 @@
             android:name=".Activity_Main"
             android:screenOrientation="portrait">
 
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="fbcampaign"
-                    android:scheme="mastercasino2017" />
-            </intent-filter>
         </activity>
 
         <activity
