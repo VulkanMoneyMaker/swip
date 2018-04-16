@@ -16,6 +16,8 @@ public class SplashScreenActvity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        NotificationScheduler.setReminder(SplashScreenActvity.this, AlarmReceiver.class,
+                ConstantTime.hour, ConstantTime.minute);
         Observable.timer(1, TimeUnit.SECONDS)
                 .subscribe(t -> openOpeningLaunchScreen());
     }
