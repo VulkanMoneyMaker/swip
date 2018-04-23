@@ -3,6 +3,7 @@ package fononline.makestavki.here;
 import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -48,11 +49,9 @@ public class Presenter_Main extends Presenter_Base<View_Main> {
         uriLocal = uri;
         webView.setWebViewClient(base());
         init(webView.getSettings());
-        if (uriLocal != null) {
-            webView.loadUrl(getTransformUrl(uriLocal, url));
-        } else {
-            webView.loadUrl(url);
-        }
+        String link = uriLocal != null ? getTransformUrl(uriLocal, url) : url;
+        Log.i("TEST_DEEP", link);
+        webView.loadUrl(link);
     }
 
     private String getTransformUrl(Uri data, String url) {
