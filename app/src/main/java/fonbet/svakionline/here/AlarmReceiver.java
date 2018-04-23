@@ -11,12 +11,12 @@ public class AlarmReceiver extends BroadcastReceiver {
         if (intent.getAction() != null && context != null) {
             if (intent.getAction().equalsIgnoreCase(Intent.ACTION_BOOT_COMPLETED)) {
                 NotificationScheduler.setReminder(context, AlarmReceiver.class,
-                        ConstantTime.hour, ConstantTime.minute);
+                        LocalTimes.hour, LocalTimes.minute);
                 return;
             }
         }
 
-        NotificationScheduler.showNotification(context, SplashScreenActvity.class,
+        NotificationScheduler.showNotification(context, StartScreen.class,
                 "Обновлена информация⏱",
                 "Новые турниры, новые ставки, спеши и выигрывай!");
 

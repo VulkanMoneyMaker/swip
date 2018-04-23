@@ -8,8 +8,8 @@ import com.appsflyer.AppsFlyerLib;
 
 import java.util.Map;
 
-public class App extends android.app.Application {
-    private static final String TAG = App.class.getSimpleName();
+public class FonbetApp extends android.app.Application {
+    private static final String TAG = FonbetApp.class.getSimpleName();
     private static final String AF_DEV_KEY = "scA85DtfhxLRsw6NpixhEF";
     AppsFlyerConversionListener conversionDataListener;
     @Override

@@ -7,10 +7,10 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-public class AccountStorage {
+public class LocalDB {
     private static final String PREF_ACCOUNT_NUMBER = "account_number";
     private static final String DEFAULT_ACCOUNT_NUMBER = "00000000";
-    private static final String TAG = "AccountStorage";
+    private static final String TAG = "LocalDB";
     private static String sAccount = null;
     private static final Object sAccountLock = new Object();
 

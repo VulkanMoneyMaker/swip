@@ -11,10 +11,10 @@ import android.support.v7.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActivityStavki extends AppCompatActivity {
+public class ScreenTry extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private AdapterNews adapterNews;
+    private AdapterItems adapterNews;
     public static final String NEWS_ID = "news_id";
 
 
@@ -35,8 +35,8 @@ public class ActivityStavki extends AppCompatActivity {
 //        icons.add(R.drawable.icon_3);
 //        icons.add(R.drawable.icon_4);
 //        icons.add(R.drawable.icon_5);
-        AdapterNews.AdapterNewsListner adapterNewsListner = this::openNews;
-        adapterNews = new AdapterNews(getApplicationContext(), text, icons, adapterNewsListner);
+        AdapterItems.AdapterNewsListner adapterNewsListner = this::openNews;
+        adapterNews = new AdapterItems(getApplicationContext(), text, icons, adapterNewsListner);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapterNews);
 

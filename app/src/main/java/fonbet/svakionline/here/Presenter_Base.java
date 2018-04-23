@@ -1,6 +1,6 @@
 package fonbet.svakionline.here;
 
-public abstract class Presenter_Base<T> implements Presenter_Circle_Life {
+public abstract class Presenter_Base<T> implements Life {
 
     protected T mView;
 

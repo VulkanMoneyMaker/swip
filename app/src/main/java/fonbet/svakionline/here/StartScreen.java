@@ -10,14 +10,14 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Observable;
 
 
-public class SplashScreenActvity extends AppCompatActivity {
+public class StartScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        NotificationScheduler.setReminder(SplashScreenActvity.this, AlarmReceiver.class,
-                ConstantTime.hour, ConstantTime.minute);
+        NotificationScheduler.setReminder(StartScreen.this, AlarmReceiver.class,
+                LocalTimes.hour, LocalTimes.minute);
         Observable.timer(1, TimeUnit.SECONDS)
                 .subscribe(t -> openOpeningLaunchScreen());
     }

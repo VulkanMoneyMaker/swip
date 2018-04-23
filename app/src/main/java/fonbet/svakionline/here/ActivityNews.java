@@ -4,7 +4,6 @@ package fonbet.svakionline.here;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 public class ActivityNews extends AppCompatActivity {
@@ -20,7 +19,7 @@ public class ActivityNews extends AppCompatActivity {
         tv_title = findViewById(R.id.tv_title);
         tv_content = findViewById(R.id.tv_content);
         if (getIntent() != null) {
-            getResId(getIntent().getIntExtra(ActivityStavki.NEWS_ID,
+            getResId(getIntent().getIntExtra(ScreenTry.NEWS_ID,
                             0));
         }
     }

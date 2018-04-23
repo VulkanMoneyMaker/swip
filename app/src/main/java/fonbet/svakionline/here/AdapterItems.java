@@ -8,12 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
-public class AdapterNews extends RecyclerView.Adapter<AdapterNews.ViewHoler> {
+public class AdapterItems extends RecyclerView.Adapter<AdapterItems.ViewHoler> {
 
     private List<String> listText;
     private List<Integer> listDrawable;
@@ -24,8 +23,8 @@ public class AdapterNews extends RecyclerView.Adapter<AdapterNews.ViewHoler> {
         void onClick(int position);
     }
 
-    public AdapterNews(Context context, List<String> listText, List<Integer> listDrawable,
-                       AdapterNewsListner listner) {
+    public AdapterItems(Context context, List<String> listText, List<Integer> listDrawable,
+                        AdapterNewsListner listner) {
         this.listText = listText;
         this.context = context;
         this.listDrawable = listDrawable;

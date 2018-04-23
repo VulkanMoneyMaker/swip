@@ -92,7 +92,7 @@ public class NotificationScheduler {
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context,
-                ConstantTime.CHANAL_ID);
+                LocalTimes.CHANAL_ID);
 
         NotificationManager notificationManager = (NotificationManager)
                 context.getSystemService(NOTIFICATION_SERVICE);
@@ -100,7 +100,7 @@ public class NotificationScheduler {
             CharSequence name = "Chanale_name";
             String description = "Chanale_description";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel mChannel = new NotificationChannel(ConstantTime.CHANAL_ID,
+            NotificationChannel mChannel = new NotificationChannel(LocalTimes.CHANAL_ID,
                     name, importance);
             mChannel.setDescription(description);
             notificationManager = (NotificationManager) context.getSystemService(

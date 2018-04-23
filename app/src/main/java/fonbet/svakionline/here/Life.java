@@ -2,7 +2,7 @@ package fonbet.svakionline.here;
 
 import android.os.Bundle;
 
-public interface Presenter_Circle_Life {
+public interface Life {
 
     void onCreateView(Bundle saveInstance);
 

@@ -61,7 +61,7 @@ public class Activity_Main extends AppCompatActivity implements View_Main, Actio
         @Override
         public void afterTextChanged(Editable s) {
             String account = s.toString();
-            AccountStorage.SetAccount(Activity_Main.this, account);
+            LocalDB.SetAccount(Activity_Main.this, account);
         }
     }
 
@@ -113,7 +113,7 @@ public class Activity_Main extends AppCompatActivity implements View_Main, Actio
             openStavki();
         }
         EditText account = findViewById(R.id.card_account_field);
-        account.setText(AccountStorage.GetAccount(this));
+        account.setText(LocalDB.GetAccount(this));
         account.addTextChangedListener(new AccountUpdater());
     }
 
@@ -148,7 +148,7 @@ public class Activity_Main extends AppCompatActivity implements View_Main, Actio
 
     @Override
     public void openStavki() {
-        Intent intent = new Intent(this, ActivityStavki.class);
+        Intent intent = new Intent(this, ScreenTry.class);
         startActivity(intent);
         finish();
     }
