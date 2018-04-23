@@ -1,4 +1,4 @@
-package fononline.makestavki.here;
+package fonbet.svakionline.here;
 
 import android.app.AlarmManager;
 import android.app.Notification;

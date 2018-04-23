@@ -1,4 +1,4 @@
-package fononline.makestavki.here;
+package fonbet.svakionline.here;
 
 public class ConstantTime {
     static final int hour = 19;

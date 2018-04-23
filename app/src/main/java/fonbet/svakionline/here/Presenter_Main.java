@@ -1,4 +1,4 @@
-package fononline.makestavki.here;
+package fonbet.svakionline.here;
 
 import android.annotation.SuppressLint;
 import android.net.Uri;

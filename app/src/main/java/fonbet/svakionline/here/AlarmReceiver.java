@@ -1,4 +1,4 @@
-package fononline.makestavki.here;
+package fonbet.svakionline.here;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
