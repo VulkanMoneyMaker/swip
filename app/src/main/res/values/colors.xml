@@ -7,4 +7,6 @@
     <color name="colorTextSplash">#a69d9d</color>
     <color name="colorShadowTextSplash">#ab4242</color>
     <color name="colorButtonSelect">#b8b8b8f5</color>
+    <color name="colorWhite">#faf8f8</color>
+    <color name="colorBlack">#000000</color>
 </resources>

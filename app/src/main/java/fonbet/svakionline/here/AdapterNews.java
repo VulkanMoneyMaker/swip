@@ -42,7 +42,7 @@ public class AdapterNews extends RecyclerView.Adapter<AdapterNews.ViewHoler> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHoler holder, int position) {
-            holder.imgIcon.setImageResource(listDrawable.get(position));
+//            holder.imgIcon.setImageResource(listDrawable.get(position));
             holder.tvText.setText(listText.get(position));
             holder.container.setOnClickListener(v -> listner.onClick(position));
     }
@@ -53,13 +53,13 @@ public class AdapterNews extends RecyclerView.Adapter<AdapterNews.ViewHoler> {
     }
 
     class ViewHoler extends RecyclerView.ViewHolder {
-        ImageView imgIcon;
+//        ImageView imgIcon;
         TextView tvText;
         ConstraintLayout container;
 
         ViewHoler(View itemView) {
             super(itemView);
-            imgIcon = itemView.findViewById(R.id.img_news);
+//            imgIcon = itemView.findViewById(R.id.img_news);
             tvText = itemView.findViewById(R.id.tv_text);
             container = itemView.findViewById(R.id.container);
         }
