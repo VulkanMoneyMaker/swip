@@ -24,11 +24,11 @@ public class ActivityStavki extends AppCompatActivity {
         setContentView(R.layout.activity_stavki);
         recyclerView = findViewById(R.id.recycler_view);
         List<String> text = new ArrayList<>();
-        text.add("Кутепов: очень хочется поиграть в итальянском клубе.");
-        text.add("Самые красивые болельщицы 23-го тура Премьер-Лиги.");
-        text.add("Месси: если мы не победим на ЧМ в России, то другого шанса боль");
-        text.add("Паредеса попросили прокомментировать будущего соперника по Лиге");
-        text.add("«Наполи» победил «Дженоа», «Лацио» сыграл вничью с «Болоньей» ");
+        text.add("«ЛОКОМОТИВ» - СКА: ЗАБРОШЕННУЮ ШАЙБУ ХОЗЯЕВ ОТМЕНИЛИ ПОСЛЕ ДОЛГОГО ПРОСМОТРА");
+        text.add("ФОРМУЛА-1 ПОЛУЧИЛА НОВЫЙ ПЕЙС-КАР И МЕДИЦИНСКУЮ МАШИНУ");
+        text.add("«ЮВЕНТУС»: ТРАВМА КЬЕЛЛИНИ ОКАЗАЛАСЬ НЕСЕРЬЕЗНОЙ");
+        text.add("КАСПРАЙТИС - О ГОНКЕ СНАЙПЕРОВ НХЛ: ЗАДАЧИ ДОНАТЬ ОВЕЧКИНА У МАЛКИНА НЕТ");
+        text.add("ГОЛОВИН: ЛУЧШИЙ ИГРОК ЦСК? СЕЙЧАС, НАВЕРНОЕ, ДЗАГОЕВ");
         List<Integer> icons = new ArrayList<>();
         icons.add(R.drawable.icon_1);
         icons.add(R.drawable.icon_2);
