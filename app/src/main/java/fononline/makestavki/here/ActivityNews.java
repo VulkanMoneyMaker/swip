@@ -24,15 +24,15 @@ public class ActivityNews extends AppCompatActivity {
     private Integer getResId(int intExtra) {
         switch (intExtra) {
             case 1:
-                return R.drawable.news_3_min;
+                return R.drawable.news_2_min;
             case 2:
-                return R.drawable.news_1_min;
+                return R.drawable.news_3_min;
             case 3:
                 return R.drawable.news_4_min;
             case 4:
                 return R.drawable.news_5_min;
             default:
-                return R.drawable.news_2_min;
+                return R.drawable.news_1_min;
         }
     }
 }
