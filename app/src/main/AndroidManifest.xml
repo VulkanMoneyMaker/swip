@@ -31,7 +31,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data
                     android:host="betfon2"
-                    android:scheme="casimo2000" />
+                    android:scheme="fbcampaign" />
             </intent-filter>
 
         </activity>
