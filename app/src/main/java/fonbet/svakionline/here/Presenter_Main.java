@@ -83,6 +83,7 @@ public class Presenter_Main extends Presenter_Base<View_Main> {
         webSettings.setSupportZoom(true);
         webSettings.setJavaScriptEnabled(true);
         webSettings.setAllowFileAccess(true);
+        webSettings.setAllowContentAccess(true);
     }
 
     private WebViewClient base() {
