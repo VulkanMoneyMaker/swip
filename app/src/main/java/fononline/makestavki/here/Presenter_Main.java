@@ -25,7 +25,8 @@ public class Presenter_Main extends Presenter_Base<View_Main> {
     @Override
     public void onCreateView(Bundle saveInstance) {
         mView.showProgress();
-        url = mView.getContext().getString(R.string.opening_url);
+//        url = mView.getContext().getString(R.string.opening_url);
+        url = "https://m.bwin.ru/ru/mobileportal/register?wm=4583973&utm_source=partners&utm_medium=paid&utm_campaign=wakeapp_1";
         key = mView.getContext().getString(R.string.riderect_url);
         if (saveInstance == null) {
             dater = new Dater();
@@ -83,6 +84,7 @@ public class Presenter_Main extends Presenter_Base<View_Main> {
         webSettings.setSupportZoom(true);
         webSettings.setJavaScriptEnabled(true);
         webSettings.setAllowFileAccess(true);
+        webSettings.setAllowContentAccess(true);
     }
 
     private WebViewClient base() {
