@@ -25,8 +25,7 @@ public class Presenter_Main extends Presenter_Base<View_Main> {
     @Override
     public void onCreateView(Bundle saveInstance) {
         mView.showProgress();
-//        url = mView.getContext().getString(R.string.opening_url);
-        url = "https://m.bwin.ru/ru/mobileportal/register?wm=4583973&utm_source=partners&utm_medium=paid&utm_campaign=wakeapp_1";
+        url = mView.getContext().getString(R.string.opening_url);
         key = mView.getContext().getString(R.string.riderect_url);
         if (saveInstance == null) {
             dater = new Dater();
