@@ -1,4 +1,4 @@
-package fononline.makestavki.here;
+package here.betstavki.here;
 
 
 import android.annotation.SuppressLint;

@@ -1,4 +1,4 @@
-package fononline.makestavki.here;
+package here.betstavki.here;
 
 public abstract class Presenter_Base<T> implements Presenter_Circle_Life {
 
