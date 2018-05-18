@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,22 +24,14 @@ public class ActivityStavki extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stavki);
         recyclerView = findViewById(R.id.recycler_view);
-        List<String> text = new ArrayList<>();
-        text.add("«ЛОКОМОТИВ» - СКА: ЗАБРОШЕННУЮ ШАЙБУ ХОЗЯЕВ ОТМЕНИЛИ ПОСЛЕ ДОЛГОГО ПРОСМОТРА");
-        text.add("ФОРМУЛА-1 ПОЛУЧИЛА НОВЫЙ ПЕЙС-КАР И МЕДИЦИНСКУЮ МАШИНУ");
-        text.add("«ЮВЕНТУС»: ТРАВМА КЬЕЛЛИНИ ОКАЗАЛАСЬ НЕСЕРЬЕЗНОЙ");
-        text.add("КАСПРАЙТИС - О ГОНКЕ СНАЙПЕРОВ НХЛ: ЗАДАЧИ ДОНАТЬ ОВЕЧКИНА У МАЛКИНА НЕТ");
-        text.add("ГОЛОВИН: ЛУЧШИЙ ИГРОК ЦСК? СЕЙЧАС, НАВЕРНОЕ, ДЗАГОЕВ");
-        List<Integer> icons = new ArrayList<>();
-        icons.add(R.drawable.icon_1);
-        icons.add(R.drawable.icon_2);
-        icons.add(R.drawable.icon_3);
-        icons.add(R.drawable.icon_4);
-        icons.add(R.drawable.icon_5);
-        AdapterNews.AdapterNewsListner adapterNewsListner = position -> {
-            openNews(position);
-        };
-        adapterNews = new AdapterNews(getApplicationContext(), text, icons, adapterNewsListner);
+        AdapterNews.AdapterNewsListner adapterNewsListner = this::openNews;
+        String[] main_text = getResources().getStringArray(R.array.main_text);
+        String[] secondary_text = getResources().getStringArray(R.array.secondary_text);
+        ArrayList<Pair<String, String >> resources = new ArrayList<>();
+        for (int i = 0; i < main_text.length; ++i) {
+            resources.add(new Pair<>(main_text[i], secondary_text[i]));
+        }
+        adapterNews = new AdapterNews(getApplicationContext(), resources, adapterNewsListner);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapterNews);
 

@@ -5,34 +5,40 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 public class ActivityNews extends AppCompatActivity {
 
+    TextView tv_toolbar;
+    TextView tv_secondary_text;
+    TextView tv_main_text;
+    TextView tv_large_text;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
-        FrameLayout frameLayout = findViewById(R.id.container);
+
+        tv_toolbar = findViewById(R.id.tv_toolbar);
+        tv_secondary_text = findViewById(R.id.tv_secondary_text);
+        tv_main_text = findViewById(R.id.tv_main_text);
+        tv_large_text = findViewById(R.id.tv_large_text_text);
+
+
         if (getIntent() != null) {
-            frameLayout.setBackground(getResources().getDrawable(getResId
-                    (getIntent().getIntExtra(ActivityStavki.NEWS_ID,
-                            0))));
+            setData(getIntent().getIntExtra(ActivityStavki.NEWS_ID, 0));
         }
     }
 
-    private Integer getResId(int intExtra) {
-        switch (intExtra) {
-            case 1:
-                return R.drawable.news_2_min;
-            case 2:
-                return R.drawable.news_3_min;
-            case 3:
-                return R.drawable.news_4_min;
-            case 4:
-                return R.drawable.news_5_min;
-            default:
-                return R.drawable.news_1_min;
-        }
+    private void setData(int intExtra) {
+
+        String[] main_text = getResources().getStringArray(R.array.main_text);
+        String[] secondary_text = getResources().getStringArray(R.array.secondary_text);
+        String[] large_text = getResources().getStringArray(R.array.large_text);
+
+        tv_toolbar.setText(main_text[intExtra]);
+        tv_main_text.setText(main_text[intExtra]);
+        tv_secondary_text.setText(secondary_text[intExtra]);
+        tv_large_text.setText(large_text[intExtra]);
     }
 }

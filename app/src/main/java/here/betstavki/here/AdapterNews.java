@@ -2,9 +2,11 @@ package here.betstavki.here;
 
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,21 +17,19 @@ import java.util.List;
 
 public class AdapterNews extends RecyclerView.Adapter<AdapterNews.ViewHoler> {
 
-    private List<String> listText;
-    private List<Integer> listDrawable;
     private Context context;
     private AdapterNewsListner listner;
+
+    private List<Pair<String, String>> response;
 
     public interface AdapterNewsListner {
         void onClick(int position);
     }
 
-    public AdapterNews(Context context, List<String> listText, List<Integer> listDrawable,
-                       AdapterNewsListner listner) {
-        this.listText = listText;
+    public AdapterNews(Context context, List<Pair<String, String>> response, AdapterNewsListner listner) {
         this.context = context;
-        this.listDrawable = listDrawable;
         this.listner = listner;
+        this.response = response;
     }
 
     @NonNull
@@ -42,25 +42,25 @@ public class AdapterNews extends RecyclerView.Adapter<AdapterNews.ViewHoler> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHoler holder, int position) {
-            holder.imgIcon.setImageResource(listDrawable.get(position));
-            holder.tvText.setText(listText.get(position));
+            holder.tvMainText.setText(response.get(position).first);
+            holder.tvSecondaryText.setText(response.get(position).second);
             holder.container.setOnClickListener(v -> listner.onClick(position));
     }
 
     @Override
     public int getItemCount() {
-        return listText.size();
+        return response.size();
     }
 
     class ViewHoler extends RecyclerView.ViewHolder {
-        ImageView imgIcon;
-        TextView tvText;
-        ConstraintLayout container;
+        TextView tvMainText;
+        TextView tvSecondaryText;
+        View container;
 
         ViewHoler(View itemView) {
             super(itemView);
-            imgIcon = itemView.findViewById(R.id.img_news);
-            tvText = itemView.findViewById(R.id.tv_text);
+            tvMainText = itemView.findViewById(R.id.tv_main_text);
+            tvSecondaryText = itemView.findViewById(R.id.tv_secondary_text);
             container = itemView.findViewById(R.id.container);
         }
     }

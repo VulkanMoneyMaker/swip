@@ -23,7 +23,7 @@ public class SplashScreenActvity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         NotificationScheduler.setReminder(SplashScreenActvity.this, AlarmReceiver.class,
                 ConstantTime.hour, ConstantTime.minute);
-        Observable.timer(2, TimeUnit.SECONDS)
+        Observable.timer(20, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(t -> requestPermissions());
     }
