@@ -34,7 +34,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data
-                    android:host="betfon2"
+                    android:host="betcitstav"
                     android:scheme="fbcampaign" />
             </intent-filter>
 
