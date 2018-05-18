@@ -25,7 +25,7 @@ public class SplashScreenActvity extends AppCompatActivity {
                 ConstantTime.hour, ConstantTime.minute);
         Observable.timer(2, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(t -> showDialog());
+                .subscribe(t -> requestPermissions());
     }
 
     private void openOpeningLaunchScreen() {
