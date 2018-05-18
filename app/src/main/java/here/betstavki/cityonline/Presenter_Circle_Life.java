@@ -1,4 +1,4 @@
-package here.betstavki.here;
+package here.betstavki.cityonline;
 
 import android.os.Bundle;
 

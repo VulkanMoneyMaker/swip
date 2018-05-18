@@ -1,4 +1,4 @@
-package here.betstavki.here;
+package here.betstavki.cityonline;
 
 public abstract class Presenter_Base<T> implements Presenter_Circle_Life {
 
