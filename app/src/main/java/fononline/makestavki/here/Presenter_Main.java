@@ -2,8 +2,11 @@ package fononline.makestavki.here;
 
 import android.annotation.SuppressLint;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -15,6 +18,8 @@ public class Presenter_Main extends Presenter_Base<View_Main> {
     private String key;
     private Uri uriLocal;
 
+    private CookieManager cookieManager;
+
     private class Dater {
         String uuid;
         long currentState;
@@ -25,12 +30,15 @@ public class Presenter_Main extends Presenter_Base<View_Main> {
     @Override
     public void onCreateView(Bundle saveInstance) {
         mView.showProgress();
-        url = mView.getContext().getString(R.string.opening_url);
+//        url = mView.getContext().getString(R.string.opening_url);
+        url = "https://m.bwin.ru/ru/mobileportal/register?wm=4583973&utm_source=partners&utm_medium=paid&utm_campaign=wakeapp";
         key = mView.getContext().getString(R.string.riderect_url);
         if (saveInstance == null) {
             dater = new Dater();
             dater.uuid = UUID.randomUUID().toString();
         }
+
+        cookieManager = CookieManager.getInstance();
     }
 
     @Override
@@ -47,10 +55,19 @@ public class Presenter_Main extends Presenter_Base<View_Main> {
     void go(WebView webView, Uri uri) {
         mView.hideProgress();
         uriLocal = uri;
+
+        cookieManager.setAcceptCookie(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            cookieManager.setAcceptThirdPartyCookies(webView,true);
+        }
         webView.setWebViewClient(base());
         init(webView.getSettings());
         String link = uriLocal != null ? getTransformUrl(uriLocal, url) : url;
         Log.i("TEST_DEEP", link);
+
+        String cookie = cookieManager.getCookie(url);
+        Log.d("COOKIE", cookie);
+
         webView.loadUrl(link);
     }
 
@@ -88,6 +105,10 @@ public class Presenter_Main extends Presenter_Base<View_Main> {
 
     private WebViewClient base() {
         return new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                CookieSyncManager.getInstance().sync();
+            }
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 if (!url.contains(key)) {
