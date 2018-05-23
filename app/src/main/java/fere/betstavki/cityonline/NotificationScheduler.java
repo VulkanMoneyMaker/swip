@@ -1,4 +1,4 @@
-package here.betstavki.cityonline;
+package fere.betstavki.cityonline;
 
 import android.app.AlarmManager;
 import android.app.Notification;

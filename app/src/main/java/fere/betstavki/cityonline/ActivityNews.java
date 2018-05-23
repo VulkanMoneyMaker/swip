@@ -1,10 +1,9 @@
-package here.betstavki.cityonline;
+package fere.betstavki.cityonline;
 
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 public class ActivityNews extends AppCompatActivity {

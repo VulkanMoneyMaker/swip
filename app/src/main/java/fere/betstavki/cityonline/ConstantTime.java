@@ -1,4 +1,4 @@
-package here.betstavki.cityonline;
+package fere.betstavki.cityonline;
 
 public class ConstantTime {
     static final int hour = 19;

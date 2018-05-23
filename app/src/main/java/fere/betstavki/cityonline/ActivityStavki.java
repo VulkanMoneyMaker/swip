@@ -1,4 +1,4 @@
-package here.betstavki.cityonline;
+package fere.betstavki.cityonline;
 
 
 import android.content.Intent;
@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ActivityStavki extends AppCompatActivity {
 
