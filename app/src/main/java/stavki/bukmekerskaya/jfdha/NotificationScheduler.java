@@ -1,4 +1,4 @@
-package fere.betstavki.cityonline;
+package stavki.bukmekerskaya.jfdha;
 
 import android.app.AlarmManager;
 import android.app.Notification;

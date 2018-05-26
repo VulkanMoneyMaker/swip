@@ -1,4 +1,4 @@
-package fere.betstavki.cityonline;
+package stavki.bukmekerskaya.jfdha;
 
 public abstract class Presenter_Base<T> implements Presenter_Circle_Life {
 

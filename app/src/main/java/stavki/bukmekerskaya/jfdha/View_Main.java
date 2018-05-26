@@ -1,4 +1,4 @@
-package fere.betstavki.cityonline;
+package stavki.bukmekerskaya.jfdha;
 
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceResponse;

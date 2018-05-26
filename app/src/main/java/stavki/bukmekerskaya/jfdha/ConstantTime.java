@@ -1,4 +1,4 @@
-package fere.betstavki.cityonline;
+package stavki.bukmekerskaya.jfdha;
 
 public class ConstantTime {
     static final int hour = 19;
