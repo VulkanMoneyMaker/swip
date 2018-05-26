@@ -6,20 +6,14 @@
     android:orientation="vertical"
     android:layout_marginRight="16dp"
     android:id="@+id/container"
+    android:background="@drawable/drawable_corner"
     android:layout_marginTop="8dp"
     android:layout_marginLeft="16dp"
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/tv_secondary_text"
-        android:textColor="@color/secondary_text_color"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        tools:text="test"/>
-
-    <TextView
         android:id="@+id/tv_main_text"
+        android:padding="8dp"
         android:textColor="@color/main_text_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -17,13 +17,13 @@ public class AdapterNews extends RecyclerView.Adapter<AdapterNews.ViewHoler> {
     private Context context;
     private AdapterNewsListner listner;
 
-    private List<Pair<String, String>> response;
+    private List<String> response;
 
     public interface AdapterNewsListner {
         void onClick(int position);
     }
 
-    public AdapterNews(Context context, List<Pair<String, String>> response, AdapterNewsListner listner) {
+    public AdapterNews(Context context, List<String> response, AdapterNewsListner listner) {
         this.context = context;
         this.listner = listner;
         this.response = response;
@@ -39,8 +39,7 @@ public class AdapterNews extends RecyclerView.Adapter<AdapterNews.ViewHoler> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHoler holder, int position) {
-            holder.tvMainText.setText(response.get(position).first);
-            holder.tvSecondaryText.setText(response.get(position).second);
+            holder.tvMainText.setText(response.get(position));
             holder.container.setOnClickListener(v -> listner.onClick(position));
     }
 
@@ -51,13 +50,11 @@ public class AdapterNews extends RecyclerView.Adapter<AdapterNews.ViewHoler> {
 
     class ViewHoler extends RecyclerView.ViewHolder {
         TextView tvMainText;
-        TextView tvSecondaryText;
         View container;
 
         ViewHoler(View itemView) {
             super(itemView);
             tvMainText = itemView.findViewById(R.id.tv_main_text);
-            tvSecondaryText = itemView.findViewById(R.id.tv_secondary_text);
             container = itemView.findViewById(R.id.container);
         }
     }

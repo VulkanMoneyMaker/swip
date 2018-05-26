@@ -1,27 +1,24 @@
 package stavki.bukmekerskaya.jfdha;
 
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ActivityNews extends AppCompatActivity {
 
-    TextView tv_toolbar;
-    TextView tv_secondary_text;
-    TextView tv_main_text;
-    TextView tv_large_text;
+    private ImageView mImageContent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
 
-        tv_toolbar = findViewById(R.id.tv_toolbar);
-        tv_secondary_text = findViewById(R.id.tv_secondary_text);
-        tv_main_text = findViewById(R.id.tv_main_text);
-        tv_large_text = findViewById(R.id.tv_large_text_text);
+        mImageContent = findViewById(R.id.image_content);
 
 
         if (getIntent() != null) {
@@ -31,13 +28,15 @@ public class ActivityNews extends AppCompatActivity {
 
     private void setData(int intExtra) {
 
-        String[] main_text = getResources().getStringArray(R.array.main_text);
-        String[] secondary_text = getResources().getStringArray(R.array.secondary_text);
-        String[] large_text = getResources().getStringArray(R.array.large_text);
+        int[] drawableIds = {
+                R.drawable.news_opened_1,
+                R.drawable.news_opened_2,
+                R.drawable.news_opened_3,
+                R.drawable.news_opened_4,
+                R.drawable.news_opened_5
+        };
 
-        tv_toolbar.setText(main_text[intExtra]);
-        tv_main_text.setText(main_text[intExtra]);
-        tv_secondary_text.setText(secondary_text[intExtra]);
-        tv_large_text.setText(large_text[intExtra]);
+        Drawable drawable = ContextCompat.getDrawable(this, drawableIds[intExtra]);
+        mImageContent.setImageDrawable(drawable);
     }
 }

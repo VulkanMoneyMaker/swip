@@ -25,10 +25,9 @@ public class ActivityStavki extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
         AdapterNews.AdapterNewsListner adapterNewsListner = this::openNews;
         String[] main_text = getResources().getStringArray(R.array.main_text);
-        String[] secondary_text = getResources().getStringArray(R.array.secondary_text);
-        ArrayList<Pair<String, String >> resources = new ArrayList<>();
+        ArrayList<String > resources = new ArrayList<>();
         for (int i = 0; i < main_text.length; ++i) {
-            resources.add(new Pair<>(main_text[i], secondary_text[i]));
+            resources.add(main_text[i]);
         }
         adapterNews = new AdapterNews(getApplicationContext(), resources, adapterNewsListner);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
