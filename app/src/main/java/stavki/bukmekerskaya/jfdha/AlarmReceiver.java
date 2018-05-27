@@ -17,8 +17,8 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
 
         NotificationScheduler.showNotification(context, SplashScreenActvity.class,
-                "Новые СТАВКИ с высоким КОЭФФИЦИЕНТОМ⚡️",
-                "Новые турниры, новые ставки, спеши и выигрывай!");
+                "Новые игры, новые ставки!",
+                "Новые матчи через 20 минут, ЗАЛЕТАЙ");
 
     }
 }
