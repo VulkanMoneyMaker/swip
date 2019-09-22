@@ -1,4 +1,4 @@
-package com.giftgoapp.jhq;
+package habib.angpdjms.nel;
 
 
 import android.annotation.SuppressLint;
@@ -7,15 +7,15 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-public class AccountStorage {
+class Acc {
     private static final String PREF_ACCOUNT_NUMBER = "account_number";
     private static final String DEFAULT_ACCOUNT_NUMBER = "00000000";
-    private static final String TAG = "AccountStorage";
+    private static final String TAG = "Acc";
     private static String sAccount = null;
     private static final Object sAccountLock = new Object();
 
     @SuppressLint("ApplySharedPref")
-    public static void SetAccount(Context c, String s) {
+    static void SetAccount(Context c, String s) {
         try{
             synchronized(sAccountLock) {
                 Log.i(TAG, "Setting account number: " + s);
@@ -29,7 +29,7 @@ public class AccountStorage {
 
     }
 
-    public static String GetAccount(Context c) {
+    static String GetAccount(Context c) {
         try {
             synchronized (sAccountLock) {
                 if (sAccount == null) {

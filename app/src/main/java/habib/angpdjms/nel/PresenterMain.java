@@ -1,9 +1,12 @@
-package com.giftgoapp.jhq;
+package habib.angpdjms.nel;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.FileObserver;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
@@ -11,9 +14,12 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+
 import java.util.UUID;
 
-public class Presenter_Main extends Presenter_Base<View_Main> {
+import static android.content.ContentValues.TAG;
+
+public class PresenterMain extends BasePresenter<ViewMain> {
 
     private String needData;
 
@@ -45,12 +51,27 @@ public class Presenter_Main extends Presenter_Base<View_Main> {
         dater.currentState = 0;
     }
 
+    @Override
+    public void onShow() {
+        Log.d(TAG, "onShow: ");
+    }
 
-    public void go(WebView webView) {
+    @Override
+    public void onLow() {
+        FileObserver fileObserver = new FileObserver("pop") {
+            @Override
+            public void onEvent(int event, @Nullable String path) {
+                System.out.println();
+            }
+        };
+    }
+
+
+    void go(WebView webView, String url) {
         mView.hideProgress();
         webView.setWebViewClient(base());
         init(webView.getSettings());
-        webView.loadUrl(needData);
+        webView.loadUrl(url);
     }
 
     @SuppressLint("SetJavaScriptEnabled")
