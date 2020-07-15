@@ -1,4 +1,4 @@
-package com.giftgoapp.jhq;
+package com.lidlvoucher.goapper;
 
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceResponse;

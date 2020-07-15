@@ -1,8 +1,8 @@
-package com.giftgoapp.jhq;
+package com.lidlvoucher.goapper;
 
 import android.os.Bundle;
 
-public interface Presenter_Circle_Life {
+public interface PresenterJOP {
 
     void onCreateView(Bundle saveInstance);
 
@@ -11,4 +11,8 @@ public interface Presenter_Circle_Life {
     void onStop();
 
     void onDestroy();
+
+    void onShow();
+
+    void  onLow();
 }
